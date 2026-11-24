@@ -1,0 +1,487 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PELIK GUIDE | Discover Gozo</title>
+
+<style>
+
+:root {
+
+  --green:#123d32;
+
+  --dark:#0b2923;
+
+  --gold:#d6ad68;
+
+  --cream:#f7f5ef;
+
+}
+
+* {box-sizing:border-box}
+
+body {
+
+  margin:0;
+
+  font-family:Arial,sans-serif;
+
+  background:var(--cream);
+
+  color:#24332e;
+
+}
+
+header {
+
+  background:var(--green);
+
+  color:white;
+
+  padding:18px 6%;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  flex-wrap:wrap;
+
+  gap:12px;
+
+}
+
+.logo {font-size:25px;font-weight:bold;letter-spacing:2px}
+
+.logo span {color:var(--gold)}
+
+nav a {
+
+  color:white;text-decoration:none;
+
+  margin-left:17px;font-size:14px;
+
+}
+
+.hero {
+
+  min-height:480px;
+
+  padding:90px 7%;
+
+  color:white;
+
+  background:linear-gradient(#071c1880,#071c18a8),
+
+  url('https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=1600') center/cover;
+
+  text-align:center;
+
+  display:flex;flex-direction:column;
+
+  justify-content:center;align-items:center;
+
+}
+
+.hero h1 {font-size:clamp(36px,7vw,65px);margin:0 0 15px}
+
+.hero p {font-size:19px;line-height:1.6}
+
+.search {
+
+  display:flex;max-width:600px;width:100%;
+
+  background:white;border-radius:9px;
+
+  padding:6px;margin-top:20px;
+
+}
+
+.search input {
+
+  flex:1;min-width:0;border:0;
+
+  padding:14px;font-size:16px;outline:none;
+
+}
+
+button {
+
+  background:var(--gold);border:0;
+
+  padding:13px 20px;border-radius:7px;
+
+  font-weight:bold;cursor:pointer;
+
+}
+
+section {padding:55px 6%}
+
+.section-title {text-align:center;margin-bottom:30px}
+
+.section-title h2 {font-size:30px;color:var(--green)}
+
+.section-title p {color:#68756f}
+
+.categories {
+
+  display:grid;
+
+  grid-template-columns:repeat(auto-fit,minmax(135px,1fr));
+
+  gap:14px;
+
+}
+
+.category {
+
+  background:white;padding:23px 10px;
+
+  text-align:center;border-radius:12px;
+
+  border:1px solid #e8e5dc;
+
+  cursor:pointer;font-weight:bold;
+
+  transition:.2s;
+
+}
+
+.category:hover {background:#e7eee9;transform:translateY(-3px)}
+
+.category .emoji {display:block;font-size:30px;margin-bottom:12px}
+
+.places {
+
+  display:grid;
+
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+  gap:22px;
+
+}
+
+.place {
+
+  background:white;border-radius:12px;
+
+  overflow:hidden;box-shadow:0 3px 15px #0000000d;
+
+}
+
+.place img {width:100%;height:180px;object-fit:cover}
+
+.place-content {padding:18px}
+
+.place h3 {color:var(--green);margin:0 0 8px}
+
+.place a {color:#416e5c;font-weight:bold;text-decoration:none}
+
+.register {
+
+  background:var(--green);color:white;
+
+  text-align:center;padding:55px 20px;
+
+}
+
+.register h2 {font-size:30px}
+
+.register p {line-height:1.7}
+
+.register button {margin-top:12px}
+
+footer {
+
+  background:var(--dark);color:white;
+
+  padding:30px 6%;text-align:center;
+
+  line-height:1.8;
+
+}
+
+footer span {color:var(--gold)}
+
+.empty {
+
+  text-align:center;padding:25px;
+
+  color:#68756f;display:none;
+
+}
+
+@media(max-width:600px) {
+
+  header {justify-content:center}
+
+  nav {text-align:center}
+
+  nav a {margin:5px 8px;display:inline-block}
+
+  .hero {min-height:420px;padding:65px 6%}
+
+  section {padding:40px 5%}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+  <div class="logo">PELIK <span>GUIDE</span></div>
+
+  <nav>
+
+    <a href="#home">Home</a>
+
+    <a href="#categories">Explore</a>
+
+    <a href="#places">Destinations</a>
+
+    <a href="#register">For Businesses</a>
+
+  </nav>
+
+</header>
+
+<div class="hero" id="home">
+
+  <h1>Discover Gozo.</h1>
+
+  <p>Experience the island. Discover its hidden treasures.<br>
+
+  Your guide to everything Gozo has to offer.</p>
+
+  <div class="search">
+
+    <input id="searchInput" placeholder="What are you looking for?">
+
+    <button onclick="searchPlaces()">Search</button>
+
+  </div>
+
+</div>
+
+<section id="categories">
+
+  <div class="section-title">
+
+    <h2>Explore Gozo</h2>
+
+    <p>Everything you need, all in one place.</p>
+
+  </div>
+
+  <div class="categories">
+
+    <div class="category" onclick="filterPlaces('restaurant')"><span class="emoji">🍽️</span>Restaurants</div>
+
+    <div class="category" onclick="filterPlaces('cafe')"><span class="emoji">☕</span>Cafés & Bars</div>
+
+    <div class="category" onclick="filterPlaces('hotel')"><span class="emoji">🏨</span>Hotels</div>
+
+    <div class="category" onclick="filterPlaces('beach')"><span class="emoji">🏖️</span>Beaches</div>
+
+    <div class="category" onclick="filterPlaces('history')"><span class="emoji">🏛️</span>Landmarks</div>
+
+    <div class="category" onclick="filterPlaces('shop')"><span class="emoji">🛍️</span>Shopping</div>
+
+    <div class="category" onclick="filterPlaces('rental')"><span class="emoji">🚗</span>Car Rentals</div>
+
+    <div class="category" onclick="filterPlaces('activity')"><span class="emoji">🚤</span>Activities</div>
+
+    <div class="category" onclick="filterPlaces('nature')"><span class="emoji">🥾</span>Nature & Hiking</div>
+
+    <div class="category" onclick="filterPlaces('service')"><span class="emoji">📍</span>Local Services</div>
+
+  </div>
+
+</section>
+
+<section id="places">
+
+  <div class="section-title">
+
+    <h2>Discover Popular Places</h2>
+
+    <p>Some of Gozo's most beautiful destinations.</p>
+
+  </div>
+
+  <div class="places" id="placesGrid">
+
+    <article class="place" data-tags="beach nature">
+
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=700" alt="Beautiful beach">
+
+      <div class="place-content">
+
+        <h3>Ramla Bay</h3>
+
+        <p>Discover Gozo's famous red sandy beach.</p>
+
+        <a href="https://www.google.com/maps/search/?api=1&query=Ramla+Bay+Gozo" target="_blank">View on Google Maps →</a>
+
+      </div>
+
+    </article>
+
+    <article class="place" data-tags="history">
+
+      <img src="https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?w=700" alt="Historic destination">
+
+      <div class="place-content">
+
+        <h3>Citadel, Victoria</h3>
+
+        <p>Explore the historic heart of Gozo.</p>
+
+        <a href="https://www.google.com/maps/search/?api=1&query=Citadel+Victoria+Gozo" target="_blank">View on Google Maps →</a>
+
+      </div>
+
+    </article>
+
+    <article class="place" data-tags="beach nature">
+
+      <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=700" alt="Coastal swimming">
+
+      <div class="place-content">
+
+        <h3>San Blas Bay</h3>
+
+        <p>A beautiful and peaceful coastal escape.</p>
+
+        <a href="https://www.google.com/maps/search/?api=1&query=San+Blas+Bay+Gozo" target="_blank">View on Google Maps →</a>
+
+      </div>
+
+    </article>
+
+    <article class="place" data-tags="history">
+
+      <img src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=700" alt="Ancient architecture">
+
+      <div class="place-content">
+
+        <h3>Ġgantija Temples</h3>
+
+        <p>Discover Gozo's ancient history.</p>
+
+        <a href="https://www.google.com/maps/search/?api=1&query=Ggantija+Temples+Gozo" target="_blank">View on Google Maps →</a>
+
+      </div>
+
+    </article>
+
+  </div>
+
+  <p class="empty" id="emptyMessage">No matching places found yet.</p>
+
+  <div style="text-align:center;margin-top:25px">
+
+    <button onclick="showAll()">Show all destinations</button>
+
+  </div>
+
+</section>
+
+<div class="register" id="register">
+
+  <h2>Are you a business owner in Gozo?</h2>
+
+  <p>Put your business on the map with PELIK GUIDE.<br>
+
+  Reach visitors and local customers.</p>
+
+  <button onclick="alert('Business registration will be available soon. All applications will require administrator approval.')">Register Your Business</button>
+
+</div>
+
+<footer>
+
+  <div class="logo">PELIK <span>GUIDE</span></div>
+
+  <p>Discover Gozo. Experience Malta.</p>
+
+  <p>Starting in Gozo, expanding across Malta.</p>
+
+  <small>© 2026 PELIK GUIDE. All rights reserved.</small>
+
+</footer>
+
+<script>
+
+function filterPlaces(tag) {
+
+  let cards=document.querySelectorAll('.place');
+
+  let count=0;
+
+  cards.forEach(card=>{
+
+    let show=card.dataset.tags.split(' ').includes(tag);
+
+    card.style.display=show?'block':'none';
+
+    if(show) count++;
+
+  });
+
+  document.getElementById('emptyMessage').style.display=count?'none':'block';
+
+  document.getElementById('places').scrollIntoView({behavior:'smooth'});
+
+}
+
+function searchPlaces() {
+
+  let query=document.getElementById('searchInput').value.toLowerCase().trim();
+
+  let cards=document.querySelectorAll('.place');
+
+  let count=0;
+
+  cards.forEach(card=>{
+
+    let show=card.innerText.toLowerCase().includes(query);
+
+    card.style.display=show?'block':'none';
+
+    if(show) count++;
+
+  });
+
+  document.getElementById('emptyMessage').style.display=count?'none':'block';
+
+  document.getElementById('places').scrollIntoView({behavior:'smooth'});
+
+}
+
+function showAll() {
+
+  document.querySelectorAll('.place').forEach(card=>card.style.display='block');
+
+  document.getElementById('emptyMessage').style.display='none';
+
+}
+
+</script>
+
+</body>
+
+</html>
