@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gozo Businesses | PELIK GUIDE</title>
+<meta name="description" content="Discover restaurants, accommodation, shops, rentals and local services across Gozo with PELIK GUIDE.">
+<style>
+:root{--green:#123d32;--dark:#0b2923;--gold:#d6ad68;--cream:#f7f5ef;--ink:#24332e;--muted:#68756f}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:var(--cream);color:var(--ink)}
+header{background:var(--green);color:#fff;padding:18px 6%;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.logo{font-size:24px;font-weight:bold;letter-spacing:2px}.logo span{color:var(--gold)}nav a{color:white;text-decoration:none;margin-left:16px;font-size:14px}
+.hero{background:linear-gradient(#071c18bb,#071c18bb),url('https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=1600') center/cover;color:#fff;text-align:center;padding:68px 6%}
+.hero h1{font-size:clamp(32px,6vw,54px);margin:0 0 12px}.hero p{line-height:1.6;max-width:680px;margin:auto}
+main{max-width:1180px;margin:auto;padding:38px 5%}
+.filters{display:grid;grid-template-columns:2fr 1fr;gap:12px;margin-bottom:22px}
+input,select{width:100%;padding:14px;border:1px solid #d8d8cf;border-radius:8px;background:#fff;font-size:16px}
+.categories{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px;margin:24px 0 34px}
+.category{background:white;border:1px solid #e4e1d8;border-radius:10px;padding:17px 12px;text-align:center;cursor:pointer;font-weight:bold;color:var(--green)}
+.category[aria-pressed=true]{background:#e5eee8;border:2px solid var(--green)}
+.category span{display:block;font-size:26px;margin-bottom:8px}
+.sectionhead{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap}
+.sectionhead h2{color:var(--green);margin-bottom:6px}.muted{color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.card{background:white;border-radius:12px;overflow:hidden;box-shadow:0 3px 15px #0000000d}
+.card img{width:100%;height:175px;object-fit:cover;background:#e7e5dc}.cardbody{padding:17px}.card h3{color:var(--green);margin:0 0 7px}
+.pill{display:inline-block;background:#e9eee9;color:#245444;border-radius:20px;padding:5px 9px;font-size:12px;margin:0 5px 7px 0}
+.card a{color:#416e5c;font-weight:bold;text-decoration:none}.card a:hover{text-decoration:underline}
+.empty{background:white;border:1px solid #e4e1d8;border-radius:12px;padding:30px;text-align:center;margin-top:12px}
+.cta{background:var(--green);color:#fff;text-align:center;padding:42px 20px;margin-top:45px;border-radius:12px}
+.cta p{line-height:1.6}.cta a{display:inline-block;background:var(--gold);color:#172b24;padding:12px 18px;border-radius:7px;text-decoration:none;font-weight:bold}
+footer{background:var(--dark);color:white;text-align:center;padding:28px;line-height:1.7}
+@media(max-width:620px){header{justify-content:center}nav{text-align:center}nav a{display:inline-block;margin:6px}.filters{grid-template-columns:1fr}.hero{padding:55px 6%}}
+</style>
+</head>
+<body>
+<header><div class="logo">PELIK <span>GUIDE</span></div><nav><a href="index.html">Home</a><a href="#directory">Businesses</a><a href="#list-business">List your business</a></nav></header>
+<section class="hero"><h1>Find businesses in Gozo.</h1><p>Restaurants, places to stay, shops, rentals, activities and useful local services — discover the island and support local businesses.</p></section>
+<main id="directory">
+  <div class="filters"><input id="search" type="search" aria-label="Search businesses" placeholder="Search by business, service or village"><select id="village" aria-label="Filter by village"><option value="">All Gozo villages</option></select></div>
+  <div class="categories" id="categories" aria-label="Business categories"></div>
+  <div class="sectionhead"><div><h2>Explore Gozo businesses</h2><p class="muted" id="count">Loading directory…</p></div><button id="clear" type="button">Clear filters</button></div>
+  <div class="grid" id="businesses"></div>
+  <div class="empty" id="empty" hidden><h3>We're building this directory.</h3><p>Business profiles will appear here after they have been checked and approved by PELIK GUIDE. We are adding businesses across Gozo.</p></div>
+  <section class="cta" id="list-business"><h2>Own a business in Gozo?</h2><p>Apply to be listed on PELIK GUIDE. Every application is reviewed before publication. Featured placements will be clearly identified and will never replace the full directory.</p><a href="index.html#register">Apply to be listed</a></section>
+</main>
+<footer><div class="logo">PELIK <span>GUIDE</span></div><p>Discover Gozo. Experience Malta.</p><small>© 2026 PELIK GUIDE</small></footer>
+<script>
+const categoryData=[
+["Restaurants & Cafés","🍽️"],["Hotels & Accommodation","🏨"],["Shopping & Retail","🛍️"],["Food Shopping & Supermarkets","🛒"],["Car & Vehicle Rental","🚗"],["Boat Trips & Charters","🚤"],["Taxi & Transfers","🚕"],["Diving & Water Sports","🤿"],["Activities & Tours","🧭"],["Beauty, Fitness & Wellness","💆"],["Health & Medical","🩺"],["Home & Trades Services","🛠️"],["Professional Services","💼"],["Local Products & Farms","🫒"],["Property & Accommodation Services","🏡"]
+];
+let all=[],activeCategory="";
+const categoryBox=document.getElementById("categories");
+categoryData.forEach(([name,emoji])=>{const b=document.createElement("button");b.type="button";b.className="category";b.setAttribute("aria-pressed","false");const s=document.createElement("span");s.textContent=emoji;b.append(s,document.createTextNode(name));b.addEventListener("click",()=>{activeCategory=activeCategory===name?"":name;render();});categoryBox.append(b);});
+function render(){
+ const q=document.getElementById("search").value.toLowerCase().trim(),v=document.getElementById("village").value;
+ const visible=all.filter(x=>x.status==="approved"&&x.published===true&&(!activeCategory||x.category.includes(activeCategory))&&(!v||x.locality===v)&&(!q||[x.name,x.description,x.locality,...x.category].join(" ").toLowerCase().includes(q)));
+ document.querySelectorAll(".category").forEach(b=>{const on=b.textContent.trim().slice(1)===activeCategory;b.setAttribute("aria-pressed",String(on));});
+ const grid=document.getElementById("businesses");grid.replaceChildren();
+ visible.forEach(x=>{
+  const card=document.createElement("article");card.className="card";
+  if(x.imageUrl){const img=document.createElement("img");img.src=x.imageUrl;img.alt=x.name+" business photo";img.loading="lazy";img.onerror=()=>img.remove();card.append(img);}
+  const body=document.createElement("div");body.className="cardbody";
+  const h=document.createElement("h3");h.textContent=x.name;body.append(h);
+  const meta=document.createElement("p");meta.className="muted";meta.textContent=x.locality;body.append(meta);
+  x.category.forEach(n=>{const tag=document.createElement("span");tag.className="pill";tag.textContent=n;body.append(tag);});
+  const p=document.createElement("p");p.textContent=x.description;body.append(p);
+  if(x.featured===true){const tag=document.createElement("span");tag.className="pill";tag.textContent="Featured · Sponsored";body.append(tag);}
+  const map=document.createElement("p"),a=document.createElement("a");a.href=x.mapUrl;a.target="_blank";a.rel="noopener noreferrer";a.textContent="View on Google Maps";map.append(a);body.append(map);
+  if(x.website){const site=document.createElement("a");site.href=x.website;site.target="_blank";site.rel="noopener noreferrer";site.textContent="Visit website";body.append(site);}
+  card.append(body);grid.append(card);
+ });
+ document.getElementById("count").textContent=visible.length+" approved business"+(visible.length===1?"":"es");
+ document.getElementById("empty").hidden=visible.length>0;
+}
+document.getElementById("search").addEventListener("input",render);
+document.getElementById("village").addEventListener("change",render);
+document.getElementById("clear").addEventListener("click",()=>{document.getElementById("search").value="";document.getElementById("village").value="";activeCategory="";render();});
+fetch("data/gozo-businesses.json").then(r=>{if(!r.ok)throw Error("Directory unavailable");return r.json();}).then(data=>{all=data;const villages=[...new Set(data.map(x=>x.locality).filter(Boolean))].sort();const select=document.getElementById("village");villages.forEach(name=>{const o=document.createElement("option");o.value=name;o.textContent=name;select.append(o);});render();}).catch(()=>{document.getElementById("count").textContent="Directory temporarily unavailable";document.getElementById("empty").hidden=false;});
+</script>
+</body></html>
