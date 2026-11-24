@@ -896,5 +896,175 @@
     "featured": false,
     "source": "https://gozodirectory.com/listing-category/shops/",
     "verificationStatus": "needs-business-confirmation"
+  },
+  {
+    "id": "gozo-scooter-rentals-mgarr",
+    "name": "Gozo Scooter Rentals - Mġarr",
+    "category": [
+      "Scooter, Quad & Motorcycle Rental"
+    ],
+    "locality": "Għajnsielem",
+    "address": "Triq ix-Xatt, Għajnsielem, Gozo, Malta",
+    "phone": "+356 9978 0710",
+    "website": null,
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Gozo+Scooter+Rentals+Mgarr",
+    "description": "Scooter and e-bike rental service near the Mġarr ferry terminal.",
+    "source": "Google Maps business result",
+    "verificationStatus": "needs-business-confirmation",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Request a business-approved image or verify commercial reuse rights.",
+    "status": "draft",
+    "published": false,
+    "featured": false
+  },
+  {
+    "id": "outdoor-explorers-mgarr",
+    "name": "Outdoor Explorers Malta Boat Trips and Charters",
+    "category": [
+      "Boat Rental & Charters",
+      "Activities & Attractions"
+    ],
+    "locality": "Għajnsielem",
+    "address": "Martino Garces Street, Għajnsielem, Gozo GSM 2411, Malta",
+    "phone": "+356 9974 1674",
+    "website": null,
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Outdoor+Explorers+Malta+Boat+Trips+Gozo",
+    "description": "Private boat charters and boat trips around Comino and the Gozo coastline, with departures arranged from Mġarr Harbour.",
+    "source": "Google Maps business result",
+    "verificationStatus": "needs-business-confirmation",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Request a business-approved image or verify commercial reuse rights.",
+    "status": "draft",
+    "published": false,
+    "featured": false
+  },
+  {
+    "id": "al-sale-xaghra",
+    "name": "Al Sale",
+    "category": [
+      "Restaurants & Cafés"
+    ],
+    "locality": "Xagħra",
+    "address": "32 Pjazza l-Vitorja, Xagħra, Gozo, Malta",
+    "phone": null,
+    "website": null,
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Al+Sale+Xaghra+Gozo",
+    "description": "Restaurant in Xagħra serving meat and seafood dishes.",
+    "source": "MICHELIN Guide and restaurant directory",
+    "verificationStatus": "needs-business-confirmation",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Request a business-approved image or verify commercial reuse rights.",
+    "status": "draft",
+    "published": false,
+    "featured": false
+  },
+  {
+    "id": "ta-frenc-xaghra",
+    "name": "Ta' Frenċ",
+    "category": [
+      "Restaurants & Cafés"
+    ],
+    "locality": "Xagħra",
+    "address": "Ta' Frenċ, Xagħra, Gozo, Malta",
+    "phone": null,
+    "website": null,
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Ta+Frenc+Restaurant+Xaghra+Gozo",
+    "description": "Mediterranean restaurant in the Xagħra countryside.",
+    "source": "MICHELIN Guide",
+    "verificationStatus": "needs-business-confirmation",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Request a business-approved image or verify commercial reuse rights.",
+    "status": "draft",
+    "published": false,
+    "featured": false
+  },
+  {
+    "id": "tmun-ghajnsielem",
+    "name": "Tmun",
+    "category": [
+      "Restaurants & Cafés"
+    ],
+    "locality": "Għajnsielem",
+    "address": "Mġarr Harbour area, Għajnsielem, Gozo, Malta",
+    "phone": null,
+    "website": null,
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Tmun+Restaurant+Gozo",
+    "description": "Mediterranean restaurant in Għajnsielem.",
+    "source": "MICHELIN Guide",
+    "verificationStatus": "needs-business-confirmation",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Request a business-approved image or verify commercial reuse rights.",
+    "status": "draft",
+    "published": false,
+    "featured": false
+  },
+  {
+    "id": "osteria-scottadito-nadur",
+    "name": "Osteria Scottadito",
+    "category": [
+      "Restaurants & Cafés"
+    ],
+    "locality": "Nadur",
+    "address": "Nadur, Gozo, Malta",
+    "phone": null,
+    "website": null,
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Osteria+Scottadito+Nadur+Gozo",
+    "description": "Italian restaurant in Nadur.",
+    "source": "MICHELIN Guide",
+    "verificationStatus": "needs-business-confirmation",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Request a business-approved image or verify commercial reuse rights.",
+    "status": "draft",
+    "published": false,
+    "featured": false
+  },
+  {
+    "id": "bell-bastion-victoria",
+    "name": "Bell & Bastion",
+    "category": [
+      "Restaurants & Cafés",
+      "Bars, Pubs & Nightlife"
+    ],
+    "locality": "Victoria",
+    "address": "Circolo Gozitano, Pjazza Savina, Victoria, Gozo, Malta",
+    "phone": "+356 7956 5472",
+    "website": null,
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Bell+and+Bastion+Victoria+Gozo",
+    "description": "Rooftop bar and restaurant serving Mediterranean sharing plates and cocktails, with live music and views.",
+    "source": "Malta Business Directory",
+    "verificationStatus": "needs-business-confirmation",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Request a business-approved image or verify commercial reuse rights.",
+    "status": "draft",
+    "published": false,
+    "featured": false
+  },
+  {
+    "id": "boathouse-xlendi",
+    "name": "The Boathouse",
+    "category": [
+      "Restaurants & Cafés"
+    ],
+    "locality": "Munxar",
+    "address": "Xlendi Bay, Munxar, Gozo, Malta",
+    "phone": "+356 9910 0500",
+    "website": null,
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=The+Boathouse+Xlendi+Gozo",
+    "description": "Seafront restaurant in Xlendi serving Mediterranean, seafood and Maltese dishes.",
+    "source": "Malta Business Directory",
+    "verificationStatus": "needs-business-confirmation",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Request a business-approved image or verify commercial reuse rights.",
+    "status": "draft",
+    "published": false,
+    "featured": false
   }
 ]
