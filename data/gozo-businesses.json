@@ -1,0 +1,201 @@
+[
+  {
+    "id": "illogga-xaghra",
+    "name": "Il-Logga Boutique Hotel & Restaurant",
+    "category": [
+      "Hotels & Accommodation",
+      "Restaurants & Cafés"
+    ],
+    "locality": "Xagħra",
+    "address": "16 Church Street, Xagħra, Gozo XRA 1250, Malta",
+    "phone": "+356 7994 4738",
+    "website": "https://illogga.com/",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Il-Logga+Boutique+Hotel+Xaghra+Gozo",
+    "imageUrl": "https://illogga.com/wp-content/uploads/2019/03/logga-nov18-2-122-1024x683.jpg",
+    "imageSource": "Official business website: https://illogga.com/home/",
+    "imageUse": "Official website image; confirm reuse permission before public launch",
+    "description": "Family-run boutique hotel with rooftop pool and an in-house restaurant.",
+    "status": "draft",
+    "published": false,
+    "featured": false
+  },
+  {
+    "id": "mayjo-victoria",
+    "name": "Mayjo Car Rentals & Airport Transfers",
+    "category": [
+      "Car & Vehicle Rental",
+      "Airport Transfers",
+      "Tours"
+    ],
+    "locality": "Victoria",
+    "address": "Fortunato Mizzi Street, Victoria, Gozo VCT 2573, Malta",
+    "phone": "+356 2155 6678",
+    "website": "https://www.mayjocarhire.com/",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Mayjo+Car+Rentals+Victoria+Gozo",
+    "imageUrl": "https://www.mayjocarhire.com/admin/images/popup_images/popupimg1_1000014323.jpg",
+    "imageSource": "Official business website: https://www.mayjocarhire.com/",
+    "imageUse": "Official website image; confirm reuse permission before public launch",
+    "description": "Gozo-based car hire, private airport transfers and tailor-made sightseeing tours.",
+    "status": "draft",
+    "published": false,
+    "featured": false
+  },
+  {
+    "id": "cornucopia-xaghra",
+    "name": "Cornucopia Hotel",
+    "category": [
+      "Hotels & Accommodation",
+      "Restaurants & Cafés"
+    ],
+    "locality": "Xagħra",
+    "address": "10 Gnien Imriek Street, Xagħra, Gozo XRA 1521, Malta",
+    "phone": "+356 2155 6486",
+    "website": "https://www.cornucopiahotel.com/",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Cornucopia+Hotel+Xaghra+Gozo",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Photo needed from hotel's official website or with permission",
+    "description": "Family-run countryside hotel in a converted traditional Gozitan farmhouse.",
+    "status": "draft",
+    "published": false,
+    "featured": false
+  },
+  {
+    "id": "latini-xaghra",
+    "name": "Latini Restaurant",
+    "category": [
+      "Restaurants & Cafés"
+    ],
+    "locality": "Xagħra",
+    "address": "Pjazza Vittorja, Xagħra, Gozo XRA 1012, Malta",
+    "phone": "+356 7920 4663",
+    "website": "https://www.facebook.com/Latini-Wine-Dine-234260829963183/",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Latini+Restaurant+Xaghra+Gozo",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Photo needed from restaurant's official social page or with permission",
+    "description": "Family-run restaurant on Xagħra's main square serving Maltese and Mediterranean food.",
+    "status": "draft",
+    "published": false,
+    "featured": false
+  },
+  {
+    "id": "arkadia-victoria",
+    "name": "Arkadia Commercial Centre",
+    "category": [
+      "Shopping & Retail",
+      "Food Shopping & Supermarkets"
+    ],
+    "locality": "Victoria",
+    "address": "Triq Fortunato Mizzi, Victoria, Gozo VCT 2574, Malta",
+    "phone": "+356 2210 3000",
+    "website": "https://www.arkadiagozo.com/",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Arkadia+Commercial+Centre+Victoria+Gozo",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Photo needed from centre's official website or with permission",
+    "description": "Shopping centre in Victoria with food, fashion and everyday retail.",
+    "status": "draft",
+    "published": false,
+    "featured": false
+  },
+  {
+    "id": "arkadia-foodstore-victoria",
+    "name": "Arkadia Foodstore Gozo",
+    "category": [
+      "Food Shopping & Supermarkets"
+    ],
+    "locality": "Victoria",
+    "address": "Triq Fortunato Mizzi, Victoria, Gozo VCT 2574, Malta",
+    "phone": "+356 2210 3335",
+    "website": "https://www.arkadiagozo.com/",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Arkadia+Foodstore+Gozo",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Photo needed from business's official website or with permission",
+    "description": "Supermarket and grocery store in Victoria.",
+    "status": "draft",
+    "published": false,
+    "featured": false
+  },
+  {
+    "id": "gozo-aqua-sports-marsalforn",
+    "name": "Gozo Aqua Sports",
+    "category": [
+      "Diving & Water Sports",
+      "Activities"
+    ],
+    "locality": "Marsalforn",
+    "address": "Triq Ir-Rabat, Marsalforn, Gozo MFN 9014, Malta",
+    "phone": "+356 2156 3037",
+    "website": "https://www.gozoaquasports.com/",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Gozo+Aqua+Sports+Marsalforn",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Photo needed from dive centre's official website or with permission",
+    "description": "Gozo dive centre offering guided dives, courses and equipment hire.",
+    "status": "draft",
+    "published": false,
+    "featured": false
+  },
+  {
+    "id": "joyride-watersports-qala",
+    "name": "Joyride Watersports Gozo",
+    "category": [
+      "Boat Trips & Charters",
+      "Water Sports",
+      "Equipment Rental"
+    ],
+    "locality": "Qala",
+    "address": "Ħondoq Bay, Qala, Gozo, Malta",
+    "phone": "+356 9924 9251",
+    "website": "https://www.joyridewatersports.com/",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Joyride+Watersports+Hondoq+Gozo",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Photo needed from operator's official website or with permission",
+    "description": "Family-run watersports operator at Ħondoq Bay offering boat hire, trips and water activities.",
+    "status": "draft",
+    "published": false,
+    "featured": false
+  },
+  {
+    "id": "gozo-taxi-service-xewkija",
+    "name": "Gozo Taxi Service",
+    "category": [
+      "Taxi & Transfers",
+      "Transport"
+    ],
+    "locality": "Xewkija",
+    "address": "59 Triq il-Manwala, Xewkija, Gozo, Malta",
+    "phone": "+356 9914 9280",
+    "website": null,
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Gozo+Taxi+Service+Xewkija",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Photo needed from business or with permission",
+    "description": "Gozo-based taxi and private transfer service.",
+    "status": "draft",
+    "published": false,
+    "featured": false
+  },
+  {
+    "id": "greens-supermarket-victoria",
+    "name": "Greens Supermarket Gozo",
+    "category": [
+      "Food Shopping & Supermarkets"
+    ],
+    "locality": "Victoria",
+    "address": "The Duke Shopping Mall, Republic Street, Victoria, Gozo, Malta",
+    "phone": "+356 2779 3500",
+    "website": null,
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Greens+Supermarket+Gozo+Victoria",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Photo needed from business or with permission",
+    "description": "Supermarket located inside The Duke Shopping Mall in Victoria.",
+    "status": "draft",
+    "published": false,
+    "featured": false
+  }
+]
