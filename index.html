@@ -429,6 +429,39 @@ footer span {color:var(--gold)}
 
 <script>
 
+async function loadGozoDirectory() {
+  const grid = document.getElementById('placesGrid');
+  try {
+    const response = await fetch('data/gozo-places.json');
+    if (!response.ok) throw new Error('Directory data unavailable');
+    const places = await response.json();
+    grid.innerHTML = '';
+    places.forEach(place => {
+      const card = document.createElement('article');
+      card.className = 'place';
+      card.dataset.tags = place.tags;
+      const content = document.createElement('div');
+      content.className = 'place-content';
+      const heading = document.createElement('h3');
+      heading.textContent = place.name;
+      const description = document.createElement('p');
+      description.textContent = place.description;
+      const link = document.createElement('a');
+      link.href = place.mapUrl;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.textContent = 'View on Google Maps →';
+      content.append(heading, description, link);
+      card.append(content);
+      grid.append(card);
+    });
+  } catch (error) {
+    console.error('Could not load the Gozo directory:', error);
+  }
+}
+loadGozoDirectory();
+
+
 function filterPlaces(tag) {
 
   let cards=document.querySelectorAll('.place');
