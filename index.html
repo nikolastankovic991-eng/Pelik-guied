@@ -269,13 +269,13 @@ footer span {color:var(--gold)}
 
   Your guide to everything Gozo has to offer.</p>
 
-  <div class="search">
+  <form class="search" role="search" onsubmit="event.preventDefault(); searchPlaces();">
 
-    <input id="searchInput" placeholder="What are you looking for?">
+    <input id="searchInput" type="search" aria-label="Search Gozo places" placeholder="Search beaches, landmarks and more...">
 
-    <button onclick="searchPlaces()">Search</button>
+    <button type="submit">Search</button>
 
-  </div>
+  </form>
 
 </div>
 
