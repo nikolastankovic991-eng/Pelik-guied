@@ -65,12 +65,15 @@ header {
 .logo span {color:var(--gold)}
 
 nav a {
-
   color:white;text-decoration:none;
-
   margin-left:17px;font-size:14px;
-
 }
+nav a:hover, nav a:focus-visible {color:var(--gold)}
+button:focus-visible, a:focus-visible, input:focus-visible {outline:3px solid #d6ad68;outline-offset:3px}
+.search button {white-space:nowrap}
+.place img {background:#e7e5dc}
+.place a:hover {text-decoration:underline}
+.category:focus-visible {outline:3px solid var(--gold);outline-offset:3px}
 
 .hero {
 
@@ -326,7 +329,7 @@ footer span {color:var(--gold)}
 
     <article class="place" data-tags="beach nature">
 
-      <img src="images/ramla-bay.jpg" alt="Ramla Bay, Gozo" loading="lazy">
+      <img src="images/ramla-bay.jpg" alt="Ramla Bay, Gozo" loading="lazy" onerror="this.style.display='none'">
 
       <div class="place-content">
 
@@ -334,7 +337,7 @@ footer span {color:var(--gold)}
 
         <p>Discover Gozo's famous red sandy beach.</p>
 
-        <a href="https://www.google.com/maps/search/?api=1&query=Ramla+Bay+Gozo" target="_blank">View on Google Maps →</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Ramla+Bay+Gozo" target="_blank" rel="noopener noreferrer">View on Google Maps →</a>
 
       </div>
 
@@ -342,7 +345,7 @@ footer span {color:var(--gold)}
 
     <article class="place" data-tags="history">
 
-      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Citadel_on_Gozo.jpg">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Citadel_on_Gozo.jpg" alt="The Citadel in Victoria, Gozo" loading="lazy" onerror="this.style.display='none'">
 
       <div class="place-content">
 
@@ -350,7 +353,7 @@ footer span {color:var(--gold)}
 
         <p>Explore the historic heart of Gozo.</p>
 
-        <a href="https://www.google.com/maps/search/?api=1&query=Citadel+Victoria+Gozo" target="_blank">View on Google Maps →</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Citadel+Victoria+Gozo" target="_blank" rel="noopener noreferrer">View on Google Maps →</a>
 
       </div>
 
@@ -358,7 +361,7 @@ footer span {color:var(--gold)}
 
     <article class="place" data-tags="beach nature">
 
-      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6d/San_Blas_1.JPG">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6d/San_Blas_1.JPG" alt="San Blas Bay, Gozo" loading="lazy" onerror="this.style.display='none'">
 
       <div class="place-content">
 
@@ -366,7 +369,7 @@ footer span {color:var(--gold)}
 
         <p>A beautiful and peaceful coastal escape.</p>
 
-        <a href="https://www.google.com/maps/search/?api=1&query=San+Blas+Bay+Gozo" target="_blank">View on Google Maps →</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=San+Blas+Bay+Gozo" target="_blank" rel="noopener noreferrer">View on Google Maps →</a>
 
       </div>
 
@@ -382,7 +385,7 @@ footer span {color:var(--gold)}
 
         <p>Discover Gozo's ancient history.</p>
 
-        <a href="https://www.google.com/maps/search/?api=1&query=Ggantija+Temples+Gozo" target="_blank">View on Google Maps →</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Ggantija+Temples+Gozo" target="_blank" rel="noopener noreferrer">View on Google Maps →</a>
 
       </div>
 
@@ -458,7 +461,7 @@ function searchPlaces() {
 
   cards.forEach(card=>{
 
-    let show=card.innerText.toLowerCase().includes(query);
+    let show=!query || (card.innerText+' '+card.dataset.tags).toLowerCase().includes(query);
 
     card.style.display=show?'block':'none';
 
