@@ -1,0 +1,142 @@
+[
+  {
+    "name": "Ta’ Ġurdan Lighthouse",
+    "tags": "history nature",
+    "description": "A historic lighthouse with wide countryside and coastal views.",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Ta%E2%80%99%20%C4%A0urdan%20Lighthouse%20Gozo%20Malta",
+    "type": "destination"
+  },
+  {
+    "name": "Cittadella",
+    "tags": "history",
+    "description": "Explore Gozo’s fortified historic centre above Victoria.",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Cittadella%20Gozo%20Malta",
+    "type": "destination"
+  },
+  {
+    "name": "Ġgantija Temples",
+    "tags": "history",
+    "description": "Discover Gozo’s prehistoric temple heritage.",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=%C4%A0gantija%20Temples%20Gozo%20Malta",
+    "type": "destination"
+  },
+  {
+    "name": "Ramla Bay",
+    "tags": "beach nature",
+    "description": "Gozo’s famous red-sand beach.",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Ramla%20Bay%20Gozo%20Malta",
+    "type": "destination"
+  },
+  {
+    "name": "Ta’ Pinu Sanctuary",
+    "tags": "history",
+    "description": "A landmark basilica set in the Gozitan countryside.",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Ta%E2%80%99%20Pinu%20Sanctuary%20Gozo%20Malta",
+    "type": "destination"
+  },
+  {
+    "name": "Dwejra",
+    "tags": "nature",
+    "description": "A dramatic coastal area known for its geological features.",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Dwejra%20Gozo%20Malta",
+    "type": "destination"
+  },
+  {
+    "name": "Marsalforn",
+    "tags": "beach cafe",
+    "description": "A lively seaside resort with restaurants and a promenade.",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Marsalforn%20Gozo%20Malta",
+    "type": "destination"
+  },
+  {
+    "name": "Xlendi",
+    "tags": "beach cafe",
+    "description": "A picturesque bay with waterfront dining.",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Xlendi%20Gozo%20Malta",
+    "type": "destination"
+  },
+  {
+    "name": "St George’s Basilica",
+    "tags": "history",
+    "description": "A richly decorated basilica in Victoria.",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=St%20George%E2%80%99s%20Basilica%20Gozo%20Malta",
+    "type": "destination"
+  },
+  {
+    "name": "Mixta Cave",
+    "tags": "nature",
+    "description": "A scenic cave overlooking Ramla Bay.",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Mixta%20Cave%20Gozo%20Malta",
+    "type": "destination"
+  },
+  {
+    "name": "Mġarr ix-Xini",
+    "tags": "beach nature",
+    "description": "A secluded inlet surrounded by steep valley sides.",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=M%C4%A1arr%20ix-Xini%20Gozo%20Malta",
+    "type": "destination"
+  },
+  {
+    "name": "Ħondoq ir-Rummien",
+    "tags": "beach nature",
+    "description": "A coastal swimming spot with views towards Comino.",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=%C4%A6ondoq%20ir-Rummien%20Gozo%20Malta",
+    "type": "destination"
+  },
+  {
+    "name": "Sanap Cliffs",
+    "tags": "nature",
+    "description": "Clifftop scenery and walking routes.",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Sanap%20Cliffs%20Gozo%20Malta",
+    "type": "destination"
+  },
+  {
+    "name": "Wied il-Għasri",
+    "tags": "nature beach",
+    "description": "A narrow sea inlet framed by high cliffs.",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Wied%20il-G%C4%A7asri%20Gozo%20Malta",
+    "type": "destination"
+  },
+  {
+    "name": "Wied il-Mielaħ",
+    "tags": "nature",
+    "description": "A striking natural coastal arch.",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Wied%20il-Miela%C4%A7%20Gozo%20Malta",
+    "type": "destination"
+  },
+  {
+    "name": "Ta’ Kola Windmill",
+    "tags": "history",
+    "description": "A traditional windmill museum in Xagħra.",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Ta%E2%80%99%20Kola%20Windmill%20Gozo%20Malta",
+    "type": "destination"
+  },
+  {
+    "name": "Il-Lunzjata Valley",
+    "tags": "nature",
+    "description": "A green valley and countryside walking area.",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Il-Lunzjata%20Valley%20Gozo%20Malta",
+    "type": "destination"
+  },
+  {
+    "name": "Tas-Salvatur Hill",
+    "tags": "nature",
+    "description": "A prominent hill above Marsalforn.",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Tas-Salvatur%20Hill%20Gozo%20Malta",
+    "type": "destination"
+  },
+  {
+    "name": "Xwejni Salt Pans",
+    "tags": "nature",
+    "description": "Traditional salt pans along Gozo’s northern coast.",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Xwejni%20Salt%20Pans%20Gozo%20Malta",
+    "type": "destination"
+  },
+  {
+    "name": "Daħlet Qorrot",
+    "tags": "beach nature",
+    "description": "A quiet coastal inlet near Nadur.",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Da%C4%A7let%20Qorrot%20Gozo%20Malta",
+    "type": "destination"
+  }
+]
