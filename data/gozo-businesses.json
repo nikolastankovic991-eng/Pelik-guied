@@ -197,5 +197,265 @@
     "status": "draft",
     "published": false,
     "featured": false
+  },
+  {
+    "id": "eyad-phone-victoria",
+    "name": "Eyad Phone (Celletronic)",
+    "category": [
+      "Phones, Computers & Electronics"
+    ],
+    "locality": "Victoria",
+    "address": "155 Triq it-Tabib Anton Tabone, Victoria, Gozo, Malta",
+    "phone": "+356 2155 5590",
+    "website": null,
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Eyad%20Phone%20(Celletronic)%20Victoria%20Gozo%20Malta",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Request an original photo from the business or obtain reuse permission before publishing.",
+    "description": "Mobile phones, accessories and electronics support in Victoria.",
+    "status": "draft",
+    "published": false,
+    "featured": false,
+    "source": "Google Maps business search; details require direct verification"
+  },
+  {
+    "id": "right-click-victoria",
+    "name": "Right Click Computers & Stationery Gozo",
+    "category": [
+      "Computers, IT & Electronics"
+    ],
+    "locality": "Victoria",
+    "address": "Triq Mary Mejlaq, Victoria, Gozo VCT 2721, Malta",
+    "phone": "+356 2155 5664",
+    "website": null,
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Right%20Click%20Computers%20%26%20Stationery%20Gozo%20Victoria%20Gozo%20Malta",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Request an original photo from the business or obtain reuse permission before publishing.",
+    "description": "Computer sales, repairs, accessories and stationery.",
+    "status": "draft",
+    "published": false,
+    "featured": false,
+    "source": "Google Maps business search; details require direct verification"
+  },
+  {
+    "id": "lidl-victoria",
+    "name": "Lidl Gozo",
+    "category": [
+      "Supermarkets & Food Stores"
+    ],
+    "locality": "Victoria",
+    "address": "Triq San Leonardu, Victoria, Gozo, Malta",
+    "phone": "+356 8006 2777",
+    "website": null,
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Lidl%20Gozo%20Victoria%20Gozo%20Malta",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Request an original photo from the business or obtain reuse permission before publishing.",
+    "description": "Discount supermarket in Victoria.",
+    "status": "draft",
+    "published": false,
+    "featured": false,
+    "source": "Google Maps business search; details require direct verification"
+  },
+  {
+    "id": "castle-pharmacy-victoria",
+    "name": "Castle Pharmacy",
+    "category": [
+      "Pharmacies & Medical"
+    ],
+    "locality": "Victoria",
+    "address": "Pjazza l-Indipendenza, Victoria, Gozo, Malta",
+    "phone": "+356 2155 6970",
+    "website": null,
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Castle%20Pharmacy%20Victoria%20Gozo%20Malta",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Request an original photo from the business or obtain reuse permission before publishing.",
+    "description": "Community pharmacy in central Victoria.",
+    "status": "draft",
+    "published": false,
+    "featured": false,
+    "source": "Google Maps business search; details require direct verification"
+  },
+  {
+    "id": "september-hardware-xaghra",
+    "name": "September Hardware Store",
+    "category": [
+      "Hardware, DIY & Building Supplies"
+    ],
+    "locality": "Xagħra",
+    "address": "September Avenue Street, Xagħra, Gozo, Malta",
+    "phone": "+356 2761 4488",
+    "website": null,
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=September%20Hardware%20Store%20Xag%C4%A7ra%20Gozo%20Malta",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Request an original photo from the business or obtain reuse permission before publishing.",
+    "description": "Hardware and DIY supplies in Xagħra.",
+    "status": "draft",
+    "published": false,
+    "featured": false,
+    "source": "Google Maps business search; details require direct verification"
+  },
+  {
+    "id": "hammerhead-projects-xewkija",
+    "name": "Hammerhead Projects",
+    "category": [
+      "Scooter, Quad & Motorcycle Rental"
+    ],
+    "locality": "Xewkija",
+    "address": "Xewkija, Gozo, Malta",
+    "phone": "+356 9950 7956",
+    "website": null,
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Hammerhead%20Projects%20Xewkija%20Gozo%20Malta",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Request an original photo from the business or obtain reuse permission before publishing.",
+    "description": "Scooter and motorcycle rentals with delivery across Gozo.",
+    "status": "draft",
+    "published": false,
+    "featured": false,
+    "source": "Google Maps business search; details require direct verification"
+  },
+  {
+    "id": "gozo-rides-nadur",
+    "name": "Gozo Rides Quad Hire",
+    "category": [
+      "Scooter, Quad & Motorcycle Rental"
+    ],
+    "locality": "Nadur",
+    "address": "Triq Grunju, Nadur, Gozo NDR 2110, Malta",
+    "phone": "+356 9907 0285",
+    "website": null,
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Gozo%20Rides%20Quad%20Hire%20Nadur%20Gozo%20Malta",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Request an original photo from the business or obtain reuse permission before publishing.",
+    "description": "Quad bike hire and guided quad experiences.",
+    "status": "draft",
+    "published": false,
+    "featured": false,
+    "source": "Google Maps business search; details require direct verification"
+  },
+  {
+    "id": "ebike-mt-mgarr",
+    "name": "Ebike.MT Mġarr Ferry Terminal",
+    "category": [
+      "Bicycle & E-bike Rental"
+    ],
+    "locality": "Għajnsielem",
+    "address": "Triq ix-Xatt, Mġarr, Għajnsielem, Gozo, Malta",
+    "phone": "+356 7900 6063",
+    "website": null,
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Ebike.MT%20M%C4%A1arr%20Ferry%20Terminal%20G%C4%A7ajnsielem%20Gozo%20Malta",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Request an original photo from the business or obtain reuse permission before publishing.",
+    "description": "Electric mountain bike rental near the Gozo ferry terminal.",
+    "status": "draft",
+    "published": false,
+    "featured": false,
+    "source": "Google Maps business search; details require direct verification"
+  },
+  {
+    "id": "casa-vostra-victoria",
+    "name": "Casa Vostra",
+    "category": [
+      "Restaurants & Cafés"
+    ],
+    "locality": "Victoria",
+    "address": "62 Republic Street, Victoria, Gozo VCT 1017, Malta",
+    "phone": "+356 2156 6161",
+    "website": null,
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Casa%20Vostra%20Victoria%20Gozo%20Malta",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Request an original photo from the business or obtain reuse permission before publishing.",
+    "description": "Italian restaurant in central Victoria.",
+    "status": "draft",
+    "published": false,
+    "featured": false,
+    "source": "Google Maps business search; details require direct verification"
+  },
+  {
+    "id": "karamelli-victoria",
+    "name": "Karamelli Brunch Cafe",
+    "category": [
+      "Restaurants & Cafés"
+    ],
+    "locality": "Victoria",
+    "address": "32 Triq ir-Repubblika, Victoria, Gozo, Malta",
+    "phone": "+356 9972 3197",
+    "website": null,
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Karamelli%20Brunch%20Cafe%20Victoria%20Gozo%20Malta",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Request an original photo from the business or obtain reuse permission before publishing.",
+    "description": "Brunch and coffee spot in Victoria.",
+    "status": "draft",
+    "published": false,
+    "featured": false,
+    "source": "Google Maps business search; details require direct verification"
+  },
+  {
+    "id": "horatios-upper-deck-mgarr",
+    "name": "Horatio's Upper Deck",
+    "category": [
+      "Bars, Pubs & Nightlife"
+    ],
+    "locality": "Għajnsielem",
+    "address": "Triq Manoel de Vilhena, Mġarr, Gozo, Malta",
+    "phone": "+356 7947 6959",
+    "website": null,
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Horatio's%20Upper%20Deck%20G%C4%A7ajnsielem%20Gozo%20Malta",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Request an original photo from the business or obtain reuse permission before publishing.",
+    "description": "Harbour-side bar and casual food near the ferry.",
+    "status": "draft",
+    "published": false,
+    "featured": false,
+    "source": "Google Maps business search; details require direct verification"
+  },
+  {
+    "id": "atlantis-diving-marsalforn",
+    "name": "Atlantis Gozo Diving Centre",
+    "category": [
+      "Diving & Water Sports"
+    ],
+    "locality": "Marsalforn",
+    "address": "Triq il-Qolla is-Safra, Marsalforn, Gozo MFN 1405, Malta",
+    "phone": "+356 7956 2888",
+    "website": null,
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Atlantis%20Gozo%20Diving%20Centre%20Marsalforn%20Gozo%20Malta",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Request an original photo from the business or obtain reuse permission before publishing.",
+    "description": "Scuba diving centre offering guided dives and courses.",
+    "status": "draft",
+    "published": false,
+    "featured": false,
+    "source": "Google Maps business search; details require direct verification"
+  },
+  {
+    "id": "lune-noire-victoria",
+    "name": "Lune Noire",
+    "category": [
+      "Hairdressers, Barbers & Beauty"
+    ],
+    "locality": "Victoria",
+    "address": "Capital Heights, Gorg Borg Olivier Street, Victoria, Gozo, Malta",
+    "phone": "+356 2156 1618",
+    "website": null,
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Lune%20Noire%20Victoria%20Gozo%20Malta",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Request an original photo from the business or obtain reuse permission before publishing.",
+    "description": "Hair, beauty and nail salon in Victoria.",
+    "status": "draft",
+    "published": false,
+    "featured": false,
+    "source": "Google Maps business search; details require direct verification"
   }
 ]
