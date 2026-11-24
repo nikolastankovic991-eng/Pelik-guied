@@ -23,9 +23,9 @@
     "id": "mayjo-victoria",
     "name": "Mayjo Car Rentals & Airport Transfers",
     "category": [
-      "Car & Vehicle Rental",
-      "Airport Transfers",
-      "Tours"
+      "Car Rental",
+      "Taxi, Transfers & Minibus",
+      "Tours, Guides & Excursions"
     ],
     "locality": "Victoria",
     "address": "Fortunato Mizzi Street, Victoria, Gozo VCT 2573, Malta",
@@ -84,7 +84,7 @@
     "name": "Arkadia Commercial Centre",
     "category": [
       "Shopping & Retail",
-      "Food Shopping & Supermarkets"
+      "Supermarkets & Food Stores"
     ],
     "locality": "Victoria",
     "address": "Triq Fortunato Mizzi, Victoria, Gozo VCT 2574, Malta",
@@ -103,7 +103,7 @@
     "id": "arkadia-foodstore-victoria",
     "name": "Arkadia Foodstore Gozo",
     "category": [
-      "Food Shopping & Supermarkets"
+      "Supermarkets & Food Stores"
     ],
     "locality": "Victoria",
     "address": "Triq Fortunato Mizzi, Victoria, Gozo VCT 2574, Malta",
@@ -123,7 +123,7 @@
     "name": "Gozo Aqua Sports",
     "category": [
       "Diving & Water Sports",
-      "Activities"
+      "Activities & Attractions"
     ],
     "locality": "Marsalforn",
     "address": "Triq Ir-Rabat, Marsalforn, Gozo MFN 9014, Malta",
@@ -142,9 +142,8 @@
     "id": "joyride-watersports-qala",
     "name": "Joyride Watersports Gozo",
     "category": [
-      "Boat Trips & Charters",
-      "Water Sports",
-      "Equipment Rental"
+      "Boat Rental & Charters",
+      "Diving & Water Sports"
     ],
     "locality": "Qala",
     "address": "Ħondoq Bay, Qala, Gozo, Malta",
@@ -163,8 +162,7 @@
     "id": "gozo-taxi-service-xewkija",
     "name": "Gozo Taxi Service",
     "category": [
-      "Taxi & Transfers",
-      "Transport"
+      "Taxi, Transfers & Minibus"
     ],
     "locality": "Xewkija",
     "address": "59 Triq il-Manwala, Xewkija, Gozo, Malta",
@@ -183,7 +181,7 @@
     "id": "greens-supermarket-victoria",
     "name": "Greens Supermarket Gozo",
     "category": [
-      "Food Shopping & Supermarkets"
+      "Supermarkets & Food Stores"
     ],
     "locality": "Victoria",
     "address": "The Duke Shopping Mall, Republic Street, Victoria, Gozo, Malta",
@@ -202,7 +200,7 @@
     "id": "eyad-phone-victoria",
     "name": "Eyad Phone (Celletronic)",
     "category": [
-      "Phones, Computers & Electronics"
+      "Computers, IT & Electronics"
     ],
     "locality": "Victoria",
     "address": "155 Triq it-Tabib Anton Tabone, Victoria, Gozo, Malta",
@@ -483,7 +481,7 @@
     "id": "eagle-garage-qala",
     "name": "Eagle Garage",
     "category": [
-      "Car & Vehicle Rental"
+      "Car Rental"
     ],
     "locality": "Qala",
     "address": "Triq It-Telgha, Qala, Gozo, Malta",
@@ -651,7 +649,7 @@
     "id": "a-e-mintoff-ghasri",
     "name": "A & E Mintoff Co. Ltd.",
     "category": [
-      "Car & Vehicle Rental"
+      "Car Rental"
     ],
     "locality": "Għasri",
     "address": "Għasri, Gozo, Malta",
