@@ -55,7 +55,7 @@ categoryData.forEach(([name,emoji])=>{const b=document.createElement("button");b
 function render(){
  const q=document.getElementById("search").value.toLowerCase().trim(),v=document.getElementById("village").value;
  const visible=all.filter(x=>x.status==="approved"&&x.published===true&&(!activeCategory||x.category.includes(activeCategory))&&(!v||x.locality===v)&&(!q||[x.name,x.description,x.locality,...x.category].join(" ").toLowerCase().includes(q)));
- document.querySelectorAll(".category").forEach(b=>{const on=b.textContent.trim().slice(1)===activeCategory;b.setAttribute("aria-pressed",String(on));});
+ document.querySelectorAll(".category").forEach(b=>{const on=b.lastChild.textContent===activeCategory;b.setAttribute("aria-pressed",String(on));});
  const grid=document.getElementById("businesses");grid.replaceChildren();
  visible.forEach(x=>{
   const card=document.createElement("article");card.className="card";
