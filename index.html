@@ -428,7 +428,7 @@ footer span {color:var(--gold)}
   <p>Discover Gozo. Experience Malta.</p>
 
   <p>Starting in Gozo, expanding across Malta.</p>
-  <p class="photo-credit">Hero photograph: Stefano Trezzi / Wikimedia Commons · CC BY-SA 3.0</p>
+  <p class="photo-credit">Hero photograph: Stefano Trezzi · <a href="https://commons.wikimedia.org/wiki/File:GozoRamla.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a></p>
 
   <small>© 2026 PELIK GUIDE. All rights reserved.</small>
 
@@ -470,7 +470,16 @@ async function loadGozoDirectory() {
       if (place.imageCredit) {
         const credit = document.createElement('p');
         credit.className = 'photo-credit';
-        credit.textContent = place.imageCredit;
+        if (place.imageCreditUrl) {
+          const creditLink = document.createElement('a');
+          creditLink.href = place.imageCreditUrl;
+          creditLink.target = '_blank';
+          creditLink.rel = 'noopener noreferrer';
+          creditLink.textContent = place.imageCredit;
+          credit.append(creditLink);
+        } else {
+          credit.textContent = place.imageCredit;
+        }
         content.append(credit);
       }
       card.append(content);
