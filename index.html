@@ -242,6 +242,60 @@ footer span {color:var(--gold)}
 
 }
 
+
+/* Gozo Guide by PELIK — refreshed mobile-first visual system */
+:root{--green:#073d34;--dark:#062b26;--gold:#d6ad68;--cream:#f6f3eb;--ink:#1f302b;--muted:#6c7973}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{background:var(--cream);padding-bottom:0}
+header{position:sticky;top:0;z-index:20;background:rgba(7,61,52,.97);backdrop-filter:blur(12px);padding:15px 5%;box-shadow:0 5px 22px #071c1820}
+.logo{font-size:20px;letter-spacing:1.4px}
+nav a{font-weight:700;letter-spacing:.15px}
+.hero{min-height:510px;border-radius:0 0 28px 28px;background-position:center 48%;padding:76px 6%}
+.hero:before{content:"YOUR ISLAND, ONE GUIDE";display:inline-block;color:#f3d79d;border:1px solid #ffffff70;border-radius:30px;padding:8px 15px;font-size:11px;font-weight:800;letter-spacing:2px;margin-bottom:18px}
+.hero h1{max-width:760px;text-shadow:0 3px 18px #0007}
+.hero p{max-width:620px;margin:0 auto;color:#fff;font-size:18px}
+.search{box-shadow:0 12px 35px #001c1740;border-radius:14px;padding:7px}
+.search input{border-radius:10px}
+.search button{border-radius:10px;background:var(--gold);color:#1b3029}
+section{padding:58px 6%}
+.section-title h2{font-size:clamp(25px,4vw,34px);letter-spacing:-.5px}
+.section-title p{font-size:15px}
+.categories{grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:13px}
+.category{border-radius:16px;min-height:126px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:8px;padding:18px 12px;box-shadow:0 5px 18px #102c2210;transition:transform .2s,box-shadow .2s}
+.category:hover{background:#fff;box-shadow:0 10px 25px #102c2220;transform:translateY(-4px)}
+.category .emoji{font-size:32px;margin:0}
+.places{gap:20px}
+.place{border-radius:17px;box-shadow:0 7px 24px #102c2212;transition:transform .2s,box-shadow .2s}
+.place:hover{transform:translateY(-3px);box-shadow:0 12px 28px #102c2220}
+.place img{height:190px}
+.place-content{padding:19px}
+.place h3{font-size:19px}
+.place a{display:inline-block;margin-top:5px}
+.register{margin:12px 5% 55px;border-radius:22px;background:linear-gradient(135deg,#073d34,#0d5949);padding:46px 22px}
+.register button{background:var(--gold);padding:14px 22px;border-radius:11px}
+footer{padding-bottom:35px}
+.photo-credit a{color:#f1d39a}
+.mobile-nav{display:none}
+@media(max-width:600px){
+ body{padding-bottom:76px}
+ header{justify-content:space-between;padding:13px 17px}
+ .logo{font-size:17px;letter-spacing:1px}
+ header nav{display:none}
+ .hero{min-height:440px;padding:55px 20px;border-radius:0 0 24px 24px}
+ .hero h1{font-size:42px}
+ .hero p{font-size:16px}
+ section{padding:40px 17px}
+ .categories{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .category{min-height:112px;padding:14px 8px;font-size:14px}
+ .category .emoji{font-size:29px}
+ .places{grid-template-columns:1fr;gap:15px}
+ .place img{height:205px}
+ .register{margin:5px 15px 35px;padding:35px 20px}
+ .mobile-nav{position:fixed;z-index:50;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-top:1px solid #e5e2d8;padding:8px 6px calc(8px + env(safe-area-inset-bottom));box-shadow:0 -5px 22px #102c2214}
+ .mobile-nav a{color:#52625b;text-decoration:none;text-align:center;font-size:11px;font-weight:700;padding:4px 2px}
+ .mobile-nav a span{display:block;font-size:20px;margin-bottom:3px}
+}
+
 </style>
 
 </head>
@@ -433,6 +487,7 @@ footer span {color:var(--gold)}
   <small>© 2026 Gozo Guide by PELIK. All rights reserved.</small>
 
 </footer>
+<nav class="mobile-nav" aria-label="Quick navigation"><a href="#home"><span>⌂</span>Home</a><a href="#categories"><span>⌕</span>Explore</a><a href="businesses.html"><span>♡</span>Businesses</a><a href="#register"><span>＋</span>List yours</a></nav>
 
 <script>
 
