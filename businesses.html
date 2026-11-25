@@ -76,6 +76,15 @@ function render(){
 document.getElementById("search").addEventListener("input",render);
 document.getElementById("village").addEventListener("change",render);
 document.getElementById("clear").addEventListener("click",()=>{document.getElementById("search").value="";document.getElementById("village").value="";activeCategory="";render();});
-fetch("data/gozo-businesses.json").then(r=>{if(!r.ok)throw Error("Directory unavailable");return r.json();}).then(data=>{all=data;const villages=[...new Set(data.map(x=>x.locality).filter(Boolean))].sort();const select=document.getElementById("village");villages.forEach(name=>{const o=document.createElement("option");o.value=name;o.textContent=name;select.append(o);});render();}).catch(()=>{document.getElementById("count").textContent="Directory temporarily unavailable";document.getElementById("empty").hidden=false;});
+const db=window.supabase.createClient(window.PELIK_SUPABASE_URL,window.PELIK_SUPABASE_KEY);
+db.from("businesses").select("id,business_name,category,village,address,website,description,image_url,status,published,featured")
+ .eq("status","approved").eq("published",true).order("featured",{ascending:false})
+ .then(({data,error})=>{
+  if(error)throw error;
+  all=(data||[]).map(x=>({name:x.business_name,category:[x.category],locality:x.village||"",description:x.description||"",imageUrl:x.image_url||"",website:x.website||"",featured:x.featured===true,mapUrl:"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent([x.business_name,x.address,x.village,"Gozo Malta"].filter(Boolean).join(" "))}));
+  const villages=[...new Set(all.map(x=>x.locality).filter(Boolean))].sort();
+  const select=document.getElementById("village");villages.forEach(name=>{const o=document.createElement("option");o.value=name;o.textContent=name;select.append(o);});
+  render();
+ }).catch(error=>{console.error("Directory load failed",error);document.getElementById("count").textContent="Directory temporarily unavailable";document.getElementById("empty").hidden=false;});
 </script>
 </body></html>
