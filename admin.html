@@ -56,15 +56,20 @@ function addEditField(form,labelText,key,value,area=false){
 }
 async function saveDraftEdits(row,form){
  const payload={};
- ['business_name','category','village','address','phone','email','website','description','image_url'].forEach(k=>payload[k]=form.elements[k].value.trim()||null);
+ ['business_name','category','village','address','phone','email','website','description','image_url','verification_source','verification_url','verification_notes'].forEach(k=>payload[k]=form.elements[k].value.trim()||null);
  if(!payload.business_name||!payload.category){say('Business name and category are required.');return;}
  payload.updated_at=new Date().toISOString();
  const {error}=await db.from('businesses').update(payload).eq('id',row.id).eq('status','draft').eq('published',false);
  if(error){say('Could not save changes: '+error.message);return;}
  say(row.business_name+' details updated.');await loadDrafts();
 }
-async function verifyDraft(row){
- const {error}=await db.from('businesses').update({verified_at:new Date().toISOString(),verified_by:currentAdminId,updated_at:new Date().toISOString()}).eq('id',row.id).eq('status','draft').eq('published',false);
+async function verifyDraft(row,form){
+ const source=(form?.elements.verification_source?.value||row.verification_source||'').trim();
+ const sourceUrl=(form?.elements.verification_url?.value||row.verification_url||'').trim();
+ const notes=(form?.elements.verification_notes?.value||row.verification_notes||'').trim();
+ if(!source){say('Enter the source used to check this business before marking it verified.');return;}
+ if(sourceUrl&&!/^https?:\\/\\//i.test(sourceUrl)){say('The source URL must begin with http:// or https://.');return;}
+ const {error}=await db.from('businesses').update({verification_source:source,verification_url:sourceUrl||null,verification_notes:notes||null,verified_at:new Date().toISOString(),verified_by:currentAdminId,updated_at:new Date().toISOString()}).eq('id',row.id).eq('status','draft').eq('published',false);
  if(error){say('Could not record verification: '+error.message);return;}
  say(row.business_name+' marked as verified. It is still private.');await loadDrafts();
 }
@@ -86,16 +91,17 @@ async function loadDrafts(){
    const details=el('p','meta',[row.village,row.address,row.phone,row.website].filter(Boolean).join(' · '));
    const desc=el('p','',row.description||'No description supplied.');
    card.append(title,status,verified,details,desc);
+   if(row.verification_source){const sourceLine=el('p','meta','Verification source: '+row.verification_source+(row.verified_at?' · checked '+new Date(row.verified_at).toLocaleDateString():''));card.append(sourceLine);}
    const actions=el('div','actions');
    const edit=el('button','secondary','Edit details');edit.type='button';
    edit.addEventListener('click',()=>{
     const existing=card.querySelector('form.edit-form');if(existing){existing.remove();edit.textContent='Edit details';return;}
     const form=el('form','edit-form');form.style.cssText='margin-top:14px;padding:14px;background:#f7f5ef;border-radius:8px';
-    [['business_name','Business name'],['category','Category'],['village','Village'],['address','Address'],['phone','Phone'],['email','Email'],['website','Website'],['description','Description'],['image_url','Photo URL']].forEach(([key,label])=>addEditField(form,label,key,row[key],key==='description'));
+    [['business_name','Business name'],['category','Category'],['village','Village'],['address','Address'],['phone','Phone'],['email','Email'],['website','Website'],['description','Description'],['image_url','Photo URL'],['verification_source','Verification source (required before marking verified)'],['verification_url','Verification source URL'],['verification_notes','Verification notes']].forEach(([key,label])=>addEditField(form,label,key,row[key],['description','verification_notes'].includes(key)));
     const save=el('button','primary','Save changes');save.type='submit';const cancel=el('button','secondary','Cancel');cancel.type='button';cancel.addEventListener('click',()=>form.remove());form.append(save,cancel);
     form.addEventListener('submit',e=>{e.preventDefault();saveDraftEdits(row,form);});card.append(form);edit.textContent='Close editor';
    });
-   const verify=el('button','secondary',row.verified_at?'Verify again':'Mark details verified');verify.type='button';verify.addEventListener('click',()=>verifyDraft(row));
+   const verify=el('button','secondary',row.verified_at?'Verify again':'Mark details verified');verify.type='button';verify.addEventListener('click',()=>verifyDraft(row,card.querySelector('form.edit-form')));
    const approve=el('button','approve','Approve & publish');approve.addEventListener('click',()=>publishDraft(row));
    actions.append(edit,verify,approve);card.append(actions);section.append(card);
   });
