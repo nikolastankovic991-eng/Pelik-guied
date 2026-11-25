@@ -26,9 +26,10 @@
     "description": "Gozo’s famous red-sand beach.",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=Ramla%20Bay%20Gozo%20Malta",
     "type": "destination",
-    "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Ramla_Bay.jpg",
+    "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/GozoRamla.jpg",
     "imageAlt": "Ramla Bay, Gozo, Malta",
-    "imageCredit": "Photo: William Shewring · Public domain"
+    "imageCredit": "Photo: Stefano Trezzi · CC BY-SA 3.0",
+    "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:GozoRamla.jpg"
   },
   {
     "name": "Ta’ Pinu Sanctuary",
@@ -42,10 +43,7 @@
     "tags": "nature",
     "description": "A dramatic coastal area known for its geological features.",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=Dwejra%20Gozo%20Malta",
-    "type": "destination",
-    "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Dwejra%2C_Gozo.jpg",
-    "imageAlt": "Dwejra coastal landscape, Gozo",
-    "imageCredit": "Photo: Bellina 09 / Wikimedia Commons · CC BY-SA 4.0"
+    "type": "destination"
   },
   {
     "name": "Marsalforn",
