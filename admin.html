@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin | PELIK GUIDE</title>
+<style>
+:root{--green:#123d32;--gold:#d6ad68;--cream:#f7f5ef;--ink:#24332e}*{box-sizing:border-box}body{margin:0;background:var(--cream);font-family:Arial,sans-serif;color:var(--ink)}
+header{background:var(--green);color:#fff;padding:18px 5%;display:flex;justify-content:space-between;align-items:center}.logo{font-size:22px;font-weight:bold;letter-spacing:2px}.logo span{color:var(--gold)}header a{color:white}
+main{max-width:1050px;margin:30px auto;padding:0 16px 50px}.panel{background:white;border:1px solid #e4e1d8;border-radius:12px;padding:22px;margin-bottom:18px}
+h1,h2{color:var(--green)}label{display:block;font-weight:bold;margin:12px 0 6px}input{width:100%;padding:13px;border:1px solid #ccc;border-radius:8px;font-size:16px}
+button{border:0;border-radius:7px;padding:11px 15px;font-weight:bold;cursor:pointer;margin:4px}.primary{background:var(--gold)}.approve{background:#dcefe0;color:#17532b}.reject{background:#f8e1df;color:#8a231b}.secondary{background:#e9eee9;color:#234b3c}
+#notice{padding:12px;border-radius:8px;background:#edf2ed;display:none;margin:12px 0}.submission{border:1px solid #e5e2d9;border-radius:10px;padding:16px;margin:12px 0}.submission h3{margin:0 0 8px;color:var(--green)}.meta{color:#68756f;font-size:14px;line-height:1.5}.actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}.hidden{display:none}.pill{display:inline-block;background:#f3eee2;padding:4px 9px;border-radius:20px;font-size:12px}
+</style></head><body>
+<header><div class="logo">PELIK <span>GUIDE</span> · ADMIN</div><a href="index.html">View public site</a></header>
+<main>
+<section class="panel" id="loginPanel"><h1>Administrator sign in</h1><p>This area is private. Sign in with the administrator account already registered in Supabase.</p>
+<form id="loginForm"><label for="email">Email</label><input id="email" type="email" autocomplete="username" required><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required><button class="primary" type="submit">Sign in</button></form></section>
+<section class="panel hidden" id="dashboard"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><div><h1>Business applications</h1><p class="meta" id="signedIn"></p></div><button class="secondary" id="signOut">Sign out</button></div>
+<div id="notice" role="status"></div><div id="list"></div></section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script>
+<script>
+const db=window.supabase.createClient(window.PELIK_SUPABASE_URL,window.PELIK_SUPABASE_KEY);
+const loginPanel=document.getElementById('loginPanel'),dashboard=document.getElementById('dashboard'),notice=document.getElementById('notice'),list=document.getElementById('list');
+function say(t){notice.textContent=t;notice.style.display='block'}
+function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n}
+async function checkSession(){
+ const {data:{session}}=await db.auth.getSession();
+ if(!session)return;
+ const {data:admin,error}=await db.from('admin_users').select('user_id').eq('user_id',session.user.id).maybeSingle();
+ if(error||!admin){await db.auth.signOut();say('This account is not authorised as a PELIK GUIDE administrator.');return;}
+ loginPanel.classList.add('hidden');dashboard.classList.remove('hidden');document.getElementById('signedIn').textContent='Signed in as '+session.user.email;await loadSubmissions();
+}
+async function loadSubmissions(){
+ list.replaceChildren(el('p','meta','Loading applications…'));
+ const {data,error}=await db.from('business_submissions').select('*').order('created_at',{ascending:false});
+ if(error){list.replaceChildren(el('p','', 'Could not load applications: '+error.message));return;}
+ list.replaceChildren();
+ if(!data.length){list.append(el('p','meta','No business applications yet.'));return;}
+ data.forEach(row=>{
+  const card=el('article','submission'),title=el('h3','',row.business_name),status=el('span','pill',row.status),details=el('p','meta',[row.category,row.village,row.address,row.phone,row.email,row.website].filter(Boolean).join(' · ')),desc=el('p','',row.description||'No description supplied.');
+  card.append(title,status,details,desc);
+  if(row.image_url){const link=el('a','');link.href=row.image_url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='View submitted photo';card.append(link);}
+  const actions=el('div','actions');
+  if(row.status==='pending'){
+   const approve=el('button','approve','Approve & publish');approve.addEventListener('click',()=>approveSubmission(row));
+   const reject=el('button','reject','Reject');reject.addEventListener('click',()=>rejectSubmission(row));
+   actions.append(approve,reject);
+  }
+  card.append(actions);list.append(card);
+ });
+}
+async function approveSubmission(row){
+ if(!confirm('Approve and publish '+row.business_name+'? This will make the listing visible in the public directory.'))return;
+ const business={business_name:row.business_name,category:row.category,village:row.village,address:row.address,phone:row.phone,email:row.email,website:row.website,description:row.description,image_url:row.image_url,status:'approved',published:true,featured:false};
+ const {error:insertError}=await db.from('businesses').insert(business);
+ if(insertError){say('Could not publish listing: '+insertError.message);return;}
+ const {error:updateError}=await db.from('business_submissions').update({status:'approved',published:true}).eq('id',row.id);
+ if(updateError){say('The listing was published, but the application status could not be updated. Please contact support. '+updateError.message);return;}
+ say(row.business_name+' approved and published.');await loadSubmissions();
+}
+async function rejectSubmission(row){
+ if(!confirm('Reject the application from '+row.business_name+'?'))return;
+ const {error}=await db.from('business_submissions').update({status:'rejected',published:false}).eq('id',row.id);
+ if(error){say('Could not reject application: '+error.message);return;}
+ say(row.business_name+' rejected.');await loadSubmissions();
+}
+document.getElementById('loginForm').addEventListener('submit',async e=>{
+ e.preventDefault();const button=e.submitter;button.disabled=true;
+ const {error}=await db.auth.signInWithPassword({email:document.getElementById('email').value.trim(),password:document.getElementById('password').value});
+ button.disabled=false;if(error){say('Sign in failed. Check your email and password.');return;}notice.style.display='none';await checkSession();
+});
+document.getElementById('signOut').addEventListener('click',async()=>{await db.auth.signOut();dashboard.classList.add('hidden');loginPanel.classList.remove('hidden');});
+checkSession();
+</script></body></html>
