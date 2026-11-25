@@ -140,6 +140,7 @@ function render(){
   if(x.featured===true){const tag=document.createElement("span");tag.className="pill";tag.textContent="Featured · Sponsored";body.append(tag);}
   const map=document.createElement("p"),a=document.createElement("a");a.href=x.mapUrl;a.target="_blank";a.rel="noopener noreferrer";a.textContent="View on Google Maps";map.append(a);body.append(map);
   if(x.website){const site=document.createElement("a");site.href=x.website;site.target="_blank";site.rel="noopener noreferrer";site.textContent="Visit website";body.append(site);}
+  const request=document.createElement("p"),claim=document.createElement("a");claim.href="claim-business.html?id="+encodeURIComponent(x.id);claim.textContent="Claim or correct this listing";request.append(claim);body.append(request);
   card.append(body);grid.append(card);
  });
  document.getElementById("count").textContent=visible.length+" approved business"+(visible.length===1?"":"es");
@@ -153,7 +154,7 @@ db.from("businesses").select("id,business_name,category,village,address,website,
  .eq("status","approved").eq("published",true).order("featured",{ascending:false})
  .then(({data,error})=>{
   if(error)throw error;
-  all=(data||[]).map(x=>({name:x.business_name,category:[x.category],group:groupByCategory[x.category]||"Professional & Local Services",status:x.status,published:x.published,locality:x.village||"",description:x.description||"",imageUrl:x.image_url||"",website:x.website||"",featured:x.featured===true,mapUrl:"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent([x.business_name,x.address,x.village,"Gozo Malta"].filter(Boolean).join(" "))}));
+  all=(data||[]).map(x=>({id:x.id,name:x.business_name,category:[x.category],group:groupByCategory[x.category]||"Professional & Local Services",status:x.status,published:x.published,locality:x.village||"",description:x.description||"",imageUrl:x.image_url||"",website:x.website||"",featured:x.featured===true,mapUrl:"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent([x.business_name,x.address,x.village,"Gozo Malta"].filter(Boolean).join(" "))}));
   const villages=[...new Set(all.map(x=>x.locality).filter(Boolean))].sort();
   const select=document.getElementById("village");villages.forEach(name=>{const o=document.createElement("option");o.value=name;o.textContent=name;select.append(o);});
   render();
