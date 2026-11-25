@@ -244,6 +244,7 @@ footer span {color:var(--gold)}
 
 
 /* Gozo Guide by PELIK — refreshed mobile-first visual system */
+.category{color:var(--green);text-decoration:none}.category:hover{text-decoration:none}
 :root{--green:#073d34;--dark:#062b26;--gold:#d6ad68;--cream:#f6f3eb;--ink:#1f302b;--muted:#6c7973}
 html{scroll-behavior:smooth;scroll-padding-top:90px}
 body{background:var(--cream);padding-bottom:0}
@@ -345,35 +346,20 @@ footer{padding-bottom:35px}
 
     <h2>Explore Gozo</h2>
 
-    <p>Everything you need, all in one place.</p>
+    <p>8 easy ways to explore the island. Choose a category to discover more.</p>
 
   </div>
 
   <div class="categories">
-
-    <div class="category" onclick="filterPlaces('restaurant')"><span class="emoji">🍽️</span>Restaurants</div>
-
-    <div class="category" onclick="filterPlaces('cafe')"><span class="emoji">☕</span>Cafés & Bars</div>
-
-    <div class="category" onclick="filterPlaces('hotel')"><span class="emoji">🏨</span>Hotels</div>
-
-    <div class="category" onclick="filterPlaces('beach')"><span class="emoji">🏖️</span>Beaches</div>
-
-    <div class="category" onclick="filterPlaces('history')"><span class="emoji">🏛️</span>Landmarks</div>
-
-    <div class="category" onclick="filterPlaces('shop')"><span class="emoji">🛍️</span>Shopping</div>
-
-    <div class="category" onclick="filterPlaces('rental')"><span class="emoji">🚗</span>Car Rentals</div>
-
-    <div class="category" onclick="filterPlaces('activity')"><span class="emoji">🚤</span>Activities</div>
-
-    <div class="category" onclick="filterPlaces('nature')"><span class="emoji">🥾</span>Nature & Hiking</div>
-
-    <div class="category" onclick="filterPlaces('service')"><span class="emoji">📍</span>Local Services</div>
-
-  </div>
-
-</section>
+    <a class="category" href="businesses.html?group=Eat%20%26%20Drink"><span class="emoji">🍽️</span>Eat & Drink</a>
+    <a class="category" href="businesses.html?group=Accommodation"><span class="emoji">🏨</span>Accommodation</a>
+    <a class="category" href="businesses.html?group=Places%20%26%20Activities"><span class="emoji">🏝️</span>Places & Activities</a>
+    <a class="category" href="businesses.html?group=Transport%20%26%20Rentals"><span class="emoji">🚗</span>Transport & Rentals</a>
+    <a class="category" href="businesses.html?group=Shopping"><span class="emoji">🛍️</span>Shopping</a>
+    <a class="category" href="businesses.html?group=Health%20%26%20Wellness"><span class="emoji">💆</span>Health & Wellness</a>
+    <a class="category" href="businesses.html?group=Home%20%26%20Property"><span class="emoji">🏡</span>Home & Property</a>
+    <a class="category" href="businesses.html?group=Professional%20%26%20Local%20Services"><span class="emoji">🛠️</span>Professional & Local Services</a>
+  </div></section>
 
 <section id="places">
 
