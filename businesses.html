@@ -75,6 +75,7 @@ footer{padding-bottom:35px}
  .mobile-nav a span{display:block;font-size:20px;margin-bottom:3px}
 }
 
+.subcategories{display:flex;flex-wrap:wrap;gap:9px;margin:-14px 0 26px}.subcategories[hidden]{display:none}.subfilter{background:#fff;border:1px solid #d8d8cf;border-radius:22px;padding:9px 14px;color:var(--green);cursor:pointer}.subfilter[aria-pressed=true]{background:var(--green);color:#fff}.category{font:inherit;font-weight:bold;cursor:pointer}
 </style>
 </head>
 <body>
@@ -82,7 +83,7 @@ footer{padding-bottom:35px}
 <section class="hero"><h1>Find businesses in Gozo.</h1><p>Restaurants, places to stay, shops, rentals, activities and useful local services — discover the island and support local businesses.</p></section>
 <main id="directory">
   <div class="filters"><input id="search" type="search" aria-label="Search businesses" placeholder="Search by business, service or village"><select id="village" aria-label="Filter by village"><option value="">All Gozo villages</option></select></div>
-  <div class="categories" id="categories" aria-label="Business categories"></div>
+  <div class="categories" id="categories" aria-label="Main business categories"></div><div class="subcategories" id="subcategories" aria-label="Subcategories" hidden></div>
   <div class="sectionhead"><div><h2>Explore Gozo businesses</h2><p class="muted" id="count">Loading directory…</p></div><button id="clear" type="button">Clear filters</button></div>
   <div class="grid" id="businesses"></div>
   <div class="empty" id="empty" hidden><h3>We're building this directory.</h3><p>Business profiles will appear here after they have been checked and approved by Gozo Guide by PELIK. We are adding businesses across Gozo.</p></div>
@@ -91,16 +92,42 @@ footer{padding-bottom:35px}
 <footer><div class="logo">GOZO <span>GUIDE</span> BY PELIK</div><p>Discover Gozo. Experience Malta.</p><small>© 2026 Gozo Guide by PELIK</small></footer>
 <nav class="mobile-nav" aria-label="Quick navigation"><a href="index.html"><span>⌂</span>Home</a><a href="index.html#categories"><span>⌕</span>Explore</a><a href="#directory"><span>♡</span>Businesses</a><a href="#list-business"><span>＋</span>List yours</a></nav>
 <script>
-const categoryData=[
-["Restaurants & Cafés","🍽️"],["Bars, Pubs & Nightlife","🍸"],["Hotels & Accommodation","🏨"],["Guesthouses, B&Bs & Farmhouses","🏡"],["Holiday Apartments & Villas","🛏️"],["Shopping & Retail","🛍️"],["Clothing, Shoes & Accessories","👕"],["Phone Shops & Mobile Accessories","📱"],["Computers, IT & Electronics","💻"],["Supermarkets & Food Stores","🛒"],["Bakeries, Butchers & Fishmongers","🥖"],["Pharmacies & Medical","💊"],["Doctors, Dentists & Clinics","🩺"],["Hairdressers, Barbers & Beauty","💇"],["Gyms, Sports & Wellness","🏋️"],["Car Rental","🚗"],["Scooter, Quad & Motorcycle Rental","🛵"],["Bicycle & E-bike Rental","🚲"],["Boat Rental & Charters","⛵"],["Taxi, Transfers & Minibus","🚕"],["Diving & Water Sports","🤿"],["Tours, Guides & Excursions","🧭"],["Activities & Attractions","🎟️"],["Hardware, DIY & Building Supplies","🔧"],["Home, Garden & Furniture","🪴"],["Repairs, Trades & Maintenance","🛠️"],["Cleaning & Laundry","🧹"],["Pets & Veterinary","🐾"],["Education & Childcare","📚"],["Professional & Business Services","💼"],["Property & Real Estate","🏠"],["Local Products, Farms & Crafts","🫒"],["Arts, Culture & Entertainment","🎨"],["Wedding & Event Services","💐"],["Community & Public Services","🏛️"]
-];
+const categoryGroups=[["Eat & Drink","🍽️",["Restaurants & Cafés","Bars, Pubs & Nightlife","Bakeries, Butchers & Fishmongers","Supermarkets & Food Stores"]],["Accommodation","🏨",["Hotels & Accommodation","Guesthouses, B&Bs & Farmhouses","Holiday Apartments & Villas"]],["Places & Activities","🏝️",["Diving & Water Sports","Tours, Guides & Excursions","Activities & Attractions","Arts, Culture & Entertainment"]],["Transport & Rentals","🚗",["Car Rental","Scooter, Quad & Motorcycle Rental","Bicycle & E-bike Rental","Boat Rental & Charters","Taxi, Transfers & Minibus"]],["Shopping","🛍️",["Shopping & Retail","Clothing, Shoes & Accessories","Phone Shops & Mobile Accessories","Computers, IT & Electronics","Local Products, Farms & Crafts"]],["Health & Wellness","💆",["Pharmacies & Medical","Doctors, Dentists & Clinics","Hairdressers, Barbers & Beauty","Gyms, Sports & Wellness","Pets & Veterinary"]],["Home & Property","🏡",["Property & Real Estate","Hardware, DIY & Building Supplies","Home, Garden & Furniture","Repairs, Trades & Maintenance","Cleaning & Laundry"]],["Professional & Local Services","🛠️",["Professional & Business Services","Education & Childcare","Wedding & Event Services","Community & Public Services","Other local service"]]];
+const groupByCategory=Object.fromEntries(categoryGroups.flatMap(([name,,children])=>children.map(child=>[child,name])));
 let all=[],activeCategory="";
 const categoryBox=document.getElementById("categories");
-categoryData.forEach(([name,emoji])=>{const b=document.createElement("button");b.type="button";b.className="category";b.setAttribute("aria-pressed","false");const s=document.createElement("span");s.textContent=emoji;b.append(s,document.createTextNode(name));b.addEventListener("click",()=>{activeCategory=activeCategory===name?"":name;render();});categoryBox.append(b);});
+
+const subcategoryBox=document.getElementById("subcategories");
+const initialGroup=new URLSearchParams(location.search).get("group");
+if(categoryGroups.some(([name])=>name===initialGroup))activeCategory=initialGroup;
+categoryGroups.forEach(([name,emoji,children])=>{
+ const b=document.createElement("button");b.type="button";b.className="category";b.dataset.group=name;b.setAttribute("aria-pressed","false");
+ const s=document.createElement("span");s.textContent=emoji;b.append(s,document.createTextNode(name));
+ b.addEventListener("click",()=>{activeCategory=activeCategory===name?"":name;activeSubcategory="";render();});
+ categoryBox.append(b);
+});
+let activeSubcategory="";
+function renderSubcategories(){
+ subcategoryBox.replaceChildren();
+ const group=categoryGroups.find(([name])=>name===activeCategory);
+ if(!group){subcategoryBox.hidden=true;return;}
+ subcategoryBox.hidden=false;
+ const allButton=document.createElement("button");allButton.type="button";allButton.textContent="All "+activeCategory;
+ allButton.className="subfilter";allButton.setAttribute("aria-pressed",String(!activeSubcategory));
+ allButton.addEventListener("click",()=>{activeSubcategory="";render();});subcategoryBox.append(allButton);
+ group[2].forEach(name=>{
+  const b=document.createElement("button");b.type="button";b.className="subfilter";b.textContent=name;
+  b.setAttribute("aria-pressed",String(activeSubcategory===name));
+  b.addEventListener("click",()=>{activeSubcategory=activeSubcategory===name?"":name;render();});
+  subcategoryBox.append(b);
+ });
+}
+
 function render(){
  const q=document.getElementById("search").value.toLowerCase().trim(),v=document.getElementById("village").value;
- const visible=all.filter(x=>x.status==="approved"&&x.published===true&&(!activeCategory||x.category.includes(activeCategory))&&(!v||x.locality===v)&&(!q||[x.name,x.description,x.locality,...x.category].join(" ").toLowerCase().includes(q)));
- document.querySelectorAll(".category").forEach(b=>{const on=b.lastChild.textContent===activeCategory;b.setAttribute("aria-pressed",String(on));});
+ const visible=all.filter(x=>x.status==="approved"&&x.published===true&&(!activeCategory||x.group===activeCategory)&&(!activeSubcategory||x.category.includes(activeSubcategory))&&(!v||x.locality===v)&&(!q||[x.name,x.description,x.locality,...x.category].join(" ").toLowerCase().includes(q)));
+ document.querySelectorAll(".category").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.group===activeCategory)));
+ renderSubcategories();
  const grid=document.getElementById("businesses");grid.replaceChildren();
  visible.forEach(x=>{
   const card=document.createElement("article");card.className="card";
@@ -120,13 +147,13 @@ function render(){
 }
 document.getElementById("search").addEventListener("input",render);
 document.getElementById("village").addEventListener("change",render);
-document.getElementById("clear").addEventListener("click",()=>{document.getElementById("search").value="";document.getElementById("village").value="";activeCategory="";render();});
+document.getElementById("clear").addEventListener("click",()=>{document.getElementById("search").value="";document.getElementById("village").value="";activeCategory="";activeSubcategory="";render();});
 const db=window.supabase.createClient(window.PELIK_SUPABASE_URL,window.PELIK_SUPABASE_KEY);
 db.from("businesses").select("id,business_name,category,village,address,website,description,image_url,status,published,featured")
  .eq("status","approved").eq("published",true).order("featured",{ascending:false})
  .then(({data,error})=>{
   if(error)throw error;
-  all=(data||[]).map(x=>({name:x.business_name,category:[x.category],locality:x.village||"",description:x.description||"",imageUrl:x.image_url||"",website:x.website||"",featured:x.featured===true,mapUrl:"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent([x.business_name,x.address,x.village,"Gozo Malta"].filter(Boolean).join(" "))}));
+  all=(data||[]).map(x=>({name:x.business_name,category:[x.category],group:groupByCategory[x.category]||"Professional & Local Services",status:x.status,published:x.published,locality:x.village||"",description:x.description||"",imageUrl:x.image_url||"",website:x.website||"",featured:x.featured===true,mapUrl:"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent([x.business_name,x.address,x.village,"Gozo Malta"].filter(Boolean).join(" "))}));
   const villages=[...new Set(all.map(x=>x.locality).filter(Boolean))].sort();
   const select=document.getElementById("village");villages.forEach(name=>{const o=document.createElement("option");o.value=name;o.textContent=name;select.append(o);});
   render();
