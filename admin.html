@@ -68,7 +68,7 @@ async function verifyDraft(row,form){
  const sourceUrl=(form?.elements.verification_url?.value||row.verification_url||'').trim();
  const notes=(form?.elements.verification_notes?.value||row.verification_notes||'').trim();
  if(!source){say('Enter the source used to check this business before marking it verified.');return;}
- if(sourceUrl&&!/^https?:\\/\\//i.test(sourceUrl)){say('The source URL must begin with http:// or https://.');return;}
+ if(sourceUrl){try{const parsed=new URL(sourceUrl);if(!['http:','https:'].includes(parsed.protocol))throw new Error('Invalid protocol');}catch{say('Enter a valid source URL beginning with http:// or https://.');return;}}
  const {error}=await db.from('businesses').update({verification_source:source,verification_url:sourceUrl||null,verification_notes:notes||null,verified_at:new Date().toISOString(),verified_by:currentAdminId,updated_at:new Date().toISOString()}).eq('id',row.id).eq('status','draft').eq('published',false);
  if(error){say('Could not record verification: '+error.message);return;}
  say(row.business_name+' marked as verified. It is still private.');await loadDrafts();
