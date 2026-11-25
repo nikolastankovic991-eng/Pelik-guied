@@ -70,7 +70,12 @@ nav a {
 }
 nav a:hover, nav a:focus-visible {color:var(--gold)}
 button:focus-visible, a:focus-visible, input:focus-visible {outline:3px solid #d6ad68;outline-offset:3px}
-.search button {white-space:nowrap}
+.search button {white-space:nowrap;flex:0 0 auto}
+.search input {width:100%;min-width:0}
+.search input::placeholder {color:#8b918d;opacity:1}
+.place img {display:block;width:100%;height:180px;object-fit:cover}
+.photo-credit {font-size:11px;color:#68756f;margin-top:8px}
+@media(max-width:420px){.search{gap:4px}.search input{padding:12px 9px;font-size:14px}.search button{padding:12px 13px;font-size:14px}.hero p{font-size:17px}}
 .place img {background:#e7e5dc}
 .place a:hover {text-decoration:underline}
 .category:focus-visible {outline:3px solid var(--gold);outline-offset:3px}
@@ -85,7 +90,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {outline:3px solid #d
 
   background:linear-gradient(#071c1880,#071c18a8),
 
-  url('https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=1600') center/cover;
+  url('https://commons.wikimedia.org/wiki/Special:FilePath/GozoRamla.jpg') center/cover;
 
   text-align:center;
 
@@ -423,6 +428,7 @@ footer span {color:var(--gold)}
   <p>Discover Gozo. Experience Malta.</p>
 
   <p>Starting in Gozo, expanding across Malta.</p>
+  <p class="photo-credit">Hero photograph: Stefano Trezzi / Wikimedia Commons · CC BY-SA 3.0</p>
 
   <small>© 2026 PELIK GUIDE. All rights reserved.</small>
 
@@ -441,6 +447,14 @@ async function loadGozoDirectory() {
       const card = document.createElement('article');
       card.className = 'place';
       card.dataset.tags = place.tags;
+      if (place.imageUrl) {
+        const image = document.createElement('img');
+        image.src = place.imageUrl;
+        image.alt = place.imageAlt || place.name + ', Gozo';
+        image.loading = 'lazy';
+        image.onerror = () => image.remove();
+        card.append(image);
+      }
       const content = document.createElement('div');
       content.className = 'place-content';
       const heading = document.createElement('h3');
@@ -453,6 +467,12 @@ async function loadGozoDirectory() {
       link.rel = 'noopener noreferrer';
       link.textContent = 'View on Google Maps →';
       content.append(heading, description, link);
+      if (place.imageCredit) {
+        const credit = document.createElement('p');
+        credit.className = 'photo-credit';
+        credit.textContent = place.imageCredit;
+        content.append(credit);
+      }
       card.append(content);
       grid.append(card);
     });
