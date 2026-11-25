@@ -1,35 +1,46 @@
-# PELIK GUIDE — secure admin setup
+# PELIK GUIDE — live Supabase setup notes
 
-The public Gozo directory is currently a static website backed by JSON. The business cards are deliberately hidden unless a record is approved and published.
+## Existing live database
 
-## Backend decision
+The connected Supabase project currently uses these public tables:
 
-The planned backend is Supabase:
-- PostgreSQL database for business listings and applications
-- Supabase Auth for private administrator sign-in
-- Row Level Security (RLS) so visitors only see approved and published listings
-- Admin-only permissions for approval, rejection, publication and Featured/Premium status
+- `admin_users`: administrator user IDs linked to `auth.users`.
+- `business_submissions`: business applications.
+- `businesses`: approved directory listings.
 
-The admin area must not use a password hard-coded in HTML or JavaScript. Never put a Supabase service-role key in the website.
+RLS is enabled on all three tables. The live website uses these tables and their existing columns.
 
-## Initial setup
+## Public and administrator permissions
 
-1. Create a Supabase project at https://supabase.com.
-2. Open the project's SQL Editor.
-3. Run the SQL in `supabase/schema.sql`.
-4. Create the owner account in Supabase Authentication.
-5. Add that account's user UUID to `public.user_roles` with role `admin` using the SQL Editor.
-6. Keep the project URL and anon/publishable key available for the frontend configuration. Do not share or publish the service-role key.
+The intended access model is:
 
-## Important publication rules
+- Visitors may INSERT a business application. They cannot SELECT private applications.
+- Visitors may SELECT businesses only when `status = 'approved'` and `published = true`.
+- Signed-in users may read their own administrator row, as constrained by RLS.
+- Only users whose auth UUID exists in `admin_users` may review/update submissions and manage public businesses.
 
-- New submissions start as `pending` and `is_published = false`.
-- Only an admin can approve, reject, suspend or publish a listing.
-- Only an admin can set Featured/Premium or sponsored status.
-- Paid status never bypasses approval.
-- A listing can only be public when its status is approved and it is published.
-- Business photos require permission or a suitable licence before publication.
+The connected project has been granted the table privileges required for these RLS policies to work. The policies remain the row-level security boundary.
 
-## Current status
+## Website files
 
-This repository does not yet contain Supabase credentials, a connected database, a live application form, or a working admin dashboard. The SQL file prepares the secure database rules; the next implementation step is connecting the project and building the authenticated admin interface. Existing JSON records remain draft starter leads and are not automatically imported or published.
+- `supabase-config.js`: public project URL and publishable key only.
+- `submit-business.html`: application form inserts pending/unpublished/not-featured rows.
+- `admin.html`: password sign-in, verifies the admin row, then offers approve/reject actions.
+- `businesses.html`: displays only approved and published businesses from Supabase.
+
+## Do not do this
+
+- Do not add a service-role key to browser code.
+- Do not expose private submission records publicly.
+- Do not allow a business applicant to set approved, published, or featured values.
+- Do not run the older draft `supabase/schema.sql` on the live project without a deliberate migration: it describes a different schema (`user_roles` and `business_listings`) and is not the live table structure.
+
+## Before launch
+
+1. Confirm the site is deployed and note its exact URL.
+2. Add that URL to Supabase Authentication URL Configuration and redirect allow-list.
+3. Confirm the administrator has a working email/password sign-in method.
+4. Submit a test business application.
+5. Sign in at `admin.html`, approve the test record, and confirm it appears on `businesses.html`.
+6. Remove the test listing after verification.
+7. Confirm image ownership/licensing and business details before publishing real listings.
