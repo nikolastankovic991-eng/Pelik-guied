@@ -15,12 +15,12 @@ button{border:0;border-radius:7px;padding:11px 15px;font-weight:bold;cursor:poin
 <section class="panel" id="loginPanel"><h1>Administrator sign in</h1><p>This area is private. Sign in with the administrator account already registered in Supabase.</p>
 <form id="loginForm"><label for="email">Email</label><input id="email" type="email" autocomplete="username" required><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required><button class="primary" type="submit">Sign in</button></form></section>
 <section class="panel hidden" id="dashboard"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><div><h1>Business applications</h1><p class="meta" id="signedIn"></p></div><button class="secondary" id="signOut">Sign out</button></div>
-<h2>Researched directory candidates</h2><p class="meta">These are independently researched businesses. They remain private drafts until you approve them.</p><div id="draftList"></div><hr style="border:0;border-top:1px solid #e5e2d9;margin:24px 0"><h2>Business applications</h2><div id="list"></div></section>
+<h2>Researched directory candidates</h2><p class="meta">These are independently researched businesses. They remain private drafts until you approve them.</p><div id="draftList"></div><hr style="border:0;border-top:1px solid #e5e2d9;margin:24px 0"><h2>Business claim & correction requests</h2><p class="meta">Requests from owners or representatives to claim, correct or remove a public listing.</p><div id="claimRequests"></div><hr style="border:0;border-top:1px solid #e5e2d9;margin:24px 0"><h2>Business applications</h2><div id="list"></div></section>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script>
 <script>
 const db=window.supabase.createClient(window.PELIK_SUPABASE_URL,window.PELIK_SUPABASE_KEY);let currentAdminId=null;
-const loginPanel=document.getElementById('loginPanel'),dashboard=document.getElementById('dashboard'),notice=document.getElementById('notice'),list=document.getElementById('list'),draftList=document.getElementById('draftList');
+const loginPanel=document.getElementById('loginPanel'),dashboard=document.getElementById('dashboard'),notice=document.getElementById('notice'),list=document.getElementById('list'),draftList=document.getElementById('draftList'),claimRequests=document.getElementById('claimRequests');
 function say(t){notice.textContent=t;notice.style.display='block'}
 function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n}
 async function checkSession(){
@@ -28,7 +28,7 @@ async function checkSession(){
  if(!session)return;
  const {data:admin,error}=await db.from('admin_users').select('user_id').eq('user_id',session.user.id).maybeSingle();
  if(error||!admin){await db.auth.signOut();say('This account is not authorised as a Gozo Guide by PELIK administrator.');return;}currentAdminId=session.user.id;
- loginPanel.classList.add('hidden');dashboard.classList.remove('hidden');document.getElementById('signedIn').textContent='Signed in as '+session.user.email;await loadSubmissions();await loadDrafts();
+ loginPanel.classList.add('hidden');dashboard.classList.remove('hidden');document.getElementById('signedIn').textContent='Signed in as '+session.user.email;await loadSubmissions();await loadDrafts();await loadClaimRequests();
 }
 async function loadSubmissions(){
  list.replaceChildren(el('p','meta','Loading applications…'));
@@ -48,6 +48,37 @@ async function loadSubmissions(){
   }
   card.append(actions);list.append(card);
  });
+}
+async function loadClaimRequests(){
+ claimRequests.replaceChildren(el('p','meta','Loading claim and correction requests…'));
+ const {data,error}=await db.from('business_claim_requests').select('*').order('created_at',{ascending:false});
+ if(error){claimRequests.replaceChildren(el('p','','Could not load requests: '+error.message));return;}
+ claimRequests.replaceChildren();
+ if(!data.length){claimRequests.append(el('p','meta','No business claim or correction requests yet.'));return;}
+ const pending=data.filter(r=>r.status==='pending'||r.status==='reviewing').length;
+ claimRequests.append(el('p','meta',data.length+' total requests · '+pending+' awaiting action.'));
+ data.forEach(row=>{
+  const card=el('article','submission'),title=el('h3','',row.business_name),status=el('span','pill',row.status);
+  const type=el('p','meta','Request: '+row.request_type+' · Received '+new Date(row.created_at).toLocaleString());
+  const contact=el('p','meta',[row.requester_name,row.requester_email,row.requester_phone].filter(Boolean).join(' · '));
+  const message=el('p','',row.message);
+  card.append(title,status,type,contact,message);
+  if(row.admin_notes)card.append(el('p','meta','Admin notes: '+row.admin_notes));
+  const actions=el('div','actions');
+  if(row.status==='pending'||row.status==='reviewing'){
+   [['reviewing','Mark reviewing','secondary'],['resolved','Mark resolved','approve'],['rejected','Reject request','reject']].forEach(([statusValue,label,style])=>{
+    const button=el('button',style,label);button.type='button';button.addEventListener('click',()=>updateClaimRequest(row,statusValue));actions.append(button);
+   });
+  }
+  card.append(actions);claimRequests.append(card);
+ });
+}
+async function updateClaimRequest(row,nextStatus){
+ const notes=prompt('Optional internal note for this request:',row.admin_notes||'');
+ if(notes===null)return;
+ const {error}=await db.from('business_claim_requests').update({status:nextStatus,admin_notes:notes.trim()||null,reviewed_at:new Date().toISOString(),reviewed_by:currentAdminId}).eq('id',row.id);
+ if(error){say('Could not update request: '+error.message);return;}
+ say('Request for '+row.business_name+' updated to '+nextStatus+'.');await loadClaimRequests();
 }
 function addEditField(form,labelText,key,value,area=false){
  const label=el('label','',labelText);const input=area?el('textarea',''):el('input','');
