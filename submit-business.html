@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>List your business | PELIK GUIDE</title>
+<style>
+:root{--green:#123d32;--gold:#d6ad68;--cream:#f7f5ef;--ink:#24332e}*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,sans-serif}
+header{background:var(--green);color:white;padding:18px 6%;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:23px;font-weight:bold;letter-spacing:2px}.logo span{color:var(--gold)}header a{color:white;text-decoration:none}
+main{max-width:760px;margin:35px auto;padding:0 18px 45px}
+.panel{background:white;border:1px solid #e6e2d8;border-radius:14px;padding:26px;box-shadow:0 5px 20px #0000000a}
+h1{color:var(--green);margin-top:0}p{line-height:1.6}.note{background:#edf2ed;border-radius:8px;padding:12px;font-size:14px}
+label{display:block;font-weight:bold;margin:16px 0 6px}input,select,textarea{width:100%;padding:13px;border:1px solid #cfcfc6;border-radius:8px;font:inherit;background:white}
+textarea{min-height:110px;resize:vertical}.grid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+button{margin-top:20px;background:var(--gold);border:0;border-radius:8px;padding:14px 20px;font-weight:bold;font-size:16px;cursor:pointer;width:100%}
+button:disabled{opacity:.6;cursor:wait}#message{margin-top:15px;padding:12px;border-radius:8px;display:none}#message.ok{display:block;background:#e7f3e9;color:#17532b}#message.err{display:block;background:#fae9e7;color:#8a231b}
+small{color:#66736d}@media(max-width:560px){.grid{grid-template-columns:1fr}.panel{padding:20px}}
+</style>
+</head>
+<body>
+<header><div class="logo">PELIK <span>GUIDE</span></div><a href="index.html">← Back to guide</a></header>
+<main><div class="panel">
+<h1>List your business on PELIK GUIDE</h1>
+<p>Reach visitors and local customers across Gozo. Submit your details below and our team will review your application.</p>
+<div class="note"><strong>How approval works:</strong> Submitting this form does not publish your business. Every application stays pending until the PELIK GUIDE administrator reviews and approves it.</div>
+<form id="application">
+<label for="business_name">Business name *</label><input id="business_name" maxlength="150" required>
+<div class="grid">
+<div><label for="category">Category *</label><select id="category" required><option value="">Choose category</option><option>Restaurants & Cafés</option><option>Bars, Pubs & Nightlife</option><option>Hotels & Accommodation</option><option>Shopping & Retail</option><option>Car Rental</option><option>Boat Rental & Charters</option><option>Activities & Attractions</option><option>Hairdressers, Barbers & Beauty</option><option>Pharmacies & Medical</option><option>Other local service</option></select></div>
+<div><label for="village">Village</label><select id="village"><option value="">Choose village</option><option>Victoria</option><option>Xagħra</option><option>Nadur</option><option>Qala</option><option>Għajnsielem</option><option>Xewkija</option><option>Żebbuġ</option><option>Għarb</option><option>Għasri</option><option>Munxar</option><option>Fontana</option><option>Kerċem</option><option>San Lawrenz</option><option>Sannat</option><option>Marsalforn</option><option>Xlendi</option></select></div>
+</div>
+<label for="address">Address</label><input id="address" maxlength="250">
+<div class="grid"><div><label for="phone">Phone</label><input id="phone" type="tel" maxlength="40"></div><div><label for="email">Contact email</label><input id="email" type="email" maxlength="254"></div></div>
+<label for="website">Website or social page</label><input id="website" type="url" maxlength="500" placeholder="https://">
+<label for="image_url">Business photo URL (optional)</label><input id="image_url" type="url" maxlength="1000" placeholder="https://">
+<label for="description">Short description</label><textarea id="description" maxlength="1200" placeholder="Tell visitors what your business offers"></textarea>
+<small>Only submit information you are authorised to share. Please use a photo you own or have permission to use.</small>
+<button id="submit" type="submit">Submit for review</button><div id="message" role="status"></div>
+</form></div></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script>
+<script>
+const client=window.supabase.createClient(window.PELIK_SUPABASE_URL,window.PELIK_SUPABASE_KEY);
+const form=document.getElementById('application'),btn=document.getElementById('submit'),msg=document.getElementById('message');
+form.addEventListener('submit',async e=>{
+ e.preventDefault();btn.disabled=true;btn.textContent='Submitting…';msg.className='';msg.style.display='none';
+ const value=id=>document.getElementById(id).value.trim();
+ const payload={business_name:value('business_name'),category:value('category'),village:value('village')||null,address:value('address')||null,phone:value('phone')||null,email:value('email')||null,website:value('website')||null,image_url:value('image_url')||null,description:value('description')||null,status:'pending',published:false,featured:false};
+ if(payload.website&&!/^https?:\/\//i.test(payload.website)){msg.className='err';msg.textContent='Please enter a website beginning with https:// or http://';msg.style.display='block';btn.disabled=false;btn.textContent='Submit for review';return;}
+ if(payload.image_url&&!/^https?:\/\//i.test(payload.image_url)){msg.className='err';msg.textContent='Please enter a photo URL beginning with https:// or http://';msg.style.display='block';btn.disabled=false;btn.textContent='Submit for review';return;}
+ const {error}=await client.from('business_submissions').insert(payload);
+ if(error){msg.className='err';msg.textContent='We could not submit your application just now. Please check the details and try again. ('+error.message+')';}
+ else{msg.className='ok';msg.textContent='Thank you! Your application has been received and is pending administrator review. It is not public yet.';form.reset();}
+ msg.style.display='block';btn.disabled=false;btn.textContent='Submit for review';
+});
+</script></body></html>
