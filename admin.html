@@ -7,7 +7,7 @@ header{background:var(--green);color:#fff;padding:18px 5%;display:flex;justify-c
 main{max-width:1050px;margin:30px auto;padding:0 16px 50px}.panel{background:white;border:1px solid #e4e1d8;border-radius:12px;padding:22px;margin-bottom:18px}
 h1,h2{color:var(--green)}label{display:block;font-weight:bold;margin:12px 0 6px}input{width:100%;padding:13px;border:1px solid #ccc;border-radius:8px;font-size:16px}
 button{border:0;border-radius:7px;padding:11px 15px;font-weight:bold;cursor:pointer;margin:4px}.primary{background:var(--gold)}.approve{background:#dcefe0;color:#17532b}.reject{background:#f8e1df;color:#8a231b}.secondary{background:#e9eee9;color:#234b3c}
-#notice{padding:12px;border-radius:8px;background:#edf2ed;display:none;margin:12px 0}.submission{border:1px solid #e5e2d9;border-radius:10px;padding:16px;margin:12px 0}.submission h3{margin:0 0 8px;color:var(--green)}.meta{color:#68756f;font-size:14px;line-height:1.5}.actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}.hidden{display:none}.pill{display:inline-block;background:#f3eee2;padding:4px 9px;border-radius:20px;font-size:12px}
+#notice{padding:12px;border-radius:8px;background:#edf2ed;display:none;margin:12px 0}.submission{border:1px solid #e5e2d9;border-radius:10px;padding:16px;margin:12px 0}.submission h3{margin:0 0 8px;color:var(--green)}.group-heading{font-size:19px;margin:24px 0 8px;padding-bottom:8px;border-bottom:2px solid #e5e2d9}.meta{color:#68756f;font-size:14px;line-height:1.5}.actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}.hidden{display:none}.pill{display:inline-block;background:#f3eee2;padding:4px 9px;border-radius:20px;font-size:12px}
 </style></head><body>
 <header><div class="logo">GOZO <span>GUIDE</span> BY PELIK · ADMIN</div><a href="index.html">View public site</a></header>
 <main>
@@ -55,14 +55,22 @@ async function loadDrafts(){
  if(error){draftList.replaceChildren(el('p','','Could not load candidates: '+error.message));return;}
  draftList.replaceChildren();
  if(!data.length){draftList.append(el('p','meta','No researched candidates waiting for review.'));return;}
- data.forEach(row=>{
-  const card=el('article','submission'),title=el('h3','',row.business_name),status=el('span','pill','Private draft');
-  const details=el('p','meta',[row.category,row.village,row.address,row.phone,row.website].filter(Boolean).join(' · '));
-  const desc=el('p','',row.description||'No description supplied.');
-  card.append(title,status,details,desc);
-  const actions=el('div','actions');
-  const approve=el('button','approve','Approve & publish');approve.addEventListener('click',()=>publishDraft(row));
-  actions.append(approve);card.append(actions);draftList.append(card);
+ const groups=new Map();
+ data.forEach(row=>{const key=row.category||'Other candidates';if(!groups.has(key))groups.set(key,[]);groups.get(key).push(row);});
+ draftList.append(el('p','meta',data.length+' private candidates · '+groups.size+' categories. Nothing is public until you approve it.'));
+ groups.forEach((rows,category)=>{
+  const section=el('section','candidate-group');
+  section.append(el('h3','group-heading',category+' ('+rows.length+')'));
+  rows.forEach(row=>{
+   const card=el('article','submission'),title=el('h3','',row.business_name),status=el('span','pill','Private draft');
+   const details=el('p','meta',[row.village,row.address,row.phone,row.website].filter(Boolean).join(' · '));
+   const desc=el('p','',row.description||'No description supplied.');
+   card.append(title,status,details,desc);
+   const actions=el('div','actions');
+   const approve=el('button','approve','Approve & publish');approve.addEventListener('click',()=>publishDraft(row));
+   actions.append(approve);card.append(actions);section.append(card);
+  });
+  draftList.append(section);
  });
 }
 async function publishDraft(row){
