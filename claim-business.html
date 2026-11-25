@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Claim or correct a listing | Gozo Guide by PELIK</title>
+<meta name="description" content="Request a correction, claim a business listing or ask for a listing to be removed from Gozo Guide by PELIK.">
+<style>
+:root{--green:#123d32;--gold:#d6ad68;--cream:#f7f5ef;--ink:#24332e;--muted:#68756f}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);font-family:Arial,sans-serif;color:var(--ink)}
+header{background:var(--green);color:#fff;padding:18px 5%;display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+.logo{font-size:20px;font-weight:bold;letter-spacing:1px}.logo span{color:var(--gold)}header a{color:white}
+main{max-width:700px;margin:28px auto;padding:0 16px 55px}.panel{background:#fff;border:1px solid #e4e1d8;border-radius:14px;padding:22px}
+h1,h2{color:var(--green)}p{line-height:1.55}.muted{color:var(--muted);font-size:14px}
+label{display:block;font-weight:bold;margin:14px 0 6px}
+input,select,textarea{display:block;width:100%;padding:13px;border:1px solid #d5d5cc;border-radius:9px;background:#fff;font:inherit;font-size:16px}
+textarea{min-height:130px;resize:vertical}
+button{margin-top:18px;border:0;border-radius:9px;padding:14px 18px;background:var(--gold);color:#20352d;font-weight:bold;font-size:16px;cursor:pointer}
+#notice{display:none;margin-top:16px;padding:13px;border-radius:9px;background:#e9eee9;line-height:1.5}
+.business{padding:12px;background:var(--cream);border-radius:9px;font-weight:bold}
+footer{text-align:center;color:var(--muted);padding:22px}
+</style>
+</head>
+<body>
+<header><div class="logo">GOZO <span>GUIDE</span> BY PELIK</div><a href="businesses.html">Back to directory</a></header>
+<main><section class="panel">
+<h1>Claim or update a business listing</h1>
+<p>If you own or represent this business, you can request a listing claim, send corrected details, or ask us to remove the listing. Every request is reviewed by the Gozo Guide by PELIK team.</p>
+<p class="business" id="businessName">Loading business…</p>
+<form id="requestForm">
+<label for="type">What would you like to request?</label>
+<select id="type" required><option value="claim">I represent this business and want to claim the listing</option><option value="correction">Request a correction to the listing</option><option value="removal">Request removal of the listing</option></select>
+<label for="name">Your name</label><input id="name" maxlength="120" autocomplete="name" required>
+<label for="email">Your email</label><input id="email" type="email" maxlength="254" autocomplete="email" required>
+<label for="phone">Phone (optional)</label><input id="phone" type="tel" maxlength="40" autocomplete="tel">
+<label for="message">Message and details</label><textarea id="message" maxlength="3000" required placeholder="Tell us how you are connected to the business and what needs to change."></textarea>
+<p class="muted">We will use these details only to review and respond to your request. Submitting a request does not automatically change, transfer or remove a listing. Please do not include passwords, identity document numbers or other sensitive information.</p>
+<button id="submit" type="submit">Send request</button>
+</form>
+<div id="notice" role="status" aria-live="polite"></div>
+</section></main>
+<footer>© 2026 Gozo Guide by PELIK</footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script>
+<script>
+const db=window.supabase.createClient(window.PELIK_SUPABASE_URL,window.PELIK_SUPABASE_KEY);
+const params=new URLSearchParams(location.search),businessId=params.get('id');
+const businessName=document.getElementById('businessName'),form=document.getElementById('requestForm'),notice=document.getElementById('notice'),submit=document.getElementById('submit');
+let business=null;
+function show(message){notice.textContent=message;notice.style.display='block';}
+async function init(){
+ if(!businessId){businessName.textContent='No business selected';form.hidden=true;show('Please return to the directory and choose a business listing.');return;}
+ const {data,error}=await db.from('businesses').select('id,business_name').eq('id',businessId).eq('status','approved').eq('published',true).maybeSingle();
+ if(error||!data){businessName.textContent='Listing not found';form.hidden=true;show('This listing could not be found. It may no longer be public.');return;}
+ business=data;businessName.textContent=data.business_name;
+}
+form.addEventListener('submit',async event=>{
+ event.preventDefault();if(!business)return;
+ submit.disabled=true;submit.textContent='Sending…';
+ const payload={business_id:business.id,business_name:business.business_name,request_type:document.getElementById('type').value,requester_name:document.getElementById('name').value.trim(),requester_email:document.getElementById('email').value.trim(),requester_phone:document.getElementById('phone').value.trim()||null,message:document.getElementById('message').value.trim()};
+ if(!payload.requester_name||!payload.requester_email||!payload.message){show('Please complete your name, email and message.');submit.disabled=false;submit.textContent='Send request';return;}
+ const {error}=await db.from('business_claim_requests').insert(payload);
+ submit.disabled=false;submit.textContent='Send request';
+ if(error){show('We could not send your request. Please try again later.');return;}
+ form.reset();show('Thank you. Your request has been received and is awaiting review. No change has been made to the public listing yet.');
+});
+init();
+</script>
+</body></html>
