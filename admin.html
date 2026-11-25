@@ -7,7 +7,7 @@ header{background:var(--green);color:#fff;padding:18px 5%;display:flex;justify-c
 main{max-width:1050px;margin:30px auto;padding:0 16px 50px}.panel{background:white;border:1px solid #e4e1d8;border-radius:12px;padding:22px;margin-bottom:18px}
 h1,h2{color:var(--green)}label{display:block;font-weight:bold;margin:12px 0 6px}input{width:100%;padding:13px;border:1px solid #ccc;border-radius:8px;font-size:16px}
 button{border:0;border-radius:7px;padding:11px 15px;font-weight:bold;cursor:pointer;margin:4px}.primary{background:var(--gold)}.approve{background:#dcefe0;color:#17532b}.reject{background:#f8e1df;color:#8a231b}.secondary{background:#e9eee9;color:#234b3c}
-#notice{padding:12px;border-radius:8px;background:#edf2ed;display:none;margin:12px 0}.submission{border:1px solid #e5e2d9;border-radius:10px;padding:16px;margin:12px 0}.submission h3{margin:0 0 8px;color:var(--green)}.group-heading{font-size:19px;margin:24px 0 8px;padding-bottom:8px;border-bottom:2px solid #e5e2d9}.meta{color:#68756f;font-size:14px;line-height:1.5}.actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}.hidden{display:none}.pill{display:inline-block;background:#f3eee2;padding:4px 9px;border-radius:20px;font-size:12px}
+#notice{padding:12px;border-radius:8px;background:#edf2ed;display:none;margin:12px 0}.submission{border:1px solid #e5e2d9;border-radius:10px;padding:16px;margin:12px 0}.submission h3{margin:0 0 8px;color:var(--green)}.group-heading{font-size:19px;margin:24px 0 8px;padding-bottom:8px;border-bottom:2px solid #e5e2d9}.edit-form input,.edit-form textarea{font-size:16px}.meta{color:#68756f;font-size:14px;line-height:1.5}.actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}.hidden{display:none}.pill{display:inline-block;background:#f3eee2;padding:4px 9px;border-radius:20px;font-size:12px}
 </style></head><body>
 <header><div class="logo">GOZO <span>GUIDE</span> BY PELIK · ADMIN</div><a href="index.html">View public site</a></header>
 <main>
@@ -19,7 +19,7 @@ button{border:0;border-radius:7px;padding:11px 15px;font-weight:bold;cursor:poin
 </main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script>
 <script>
-const db=window.supabase.createClient(window.PELIK_SUPABASE_URL,window.PELIK_SUPABASE_KEY);
+const db=window.supabase.createClient(window.PELIK_SUPABASE_URL,window.PELIK_SUPABASE_KEY);let currentAdminId=null;
 const loginPanel=document.getElementById('loginPanel'),dashboard=document.getElementById('dashboard'),notice=document.getElementById('notice'),list=document.getElementById('list'),draftList=document.getElementById('draftList');
 function say(t){notice.textContent=t;notice.style.display='block'}
 function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n}
@@ -27,7 +27,7 @@ async function checkSession(){
  const {data:{session}}=await db.auth.getSession();
  if(!session)return;
  const {data:admin,error}=await db.from('admin_users').select('user_id').eq('user_id',session.user.id).maybeSingle();
- if(error||!admin){await db.auth.signOut();say('This account is not authorised as a Gozo Guide by PELIK administrator.');return;}
+ if(error||!admin){await db.auth.signOut();say('This account is not authorised as a Gozo Guide by PELIK administrator.');return;}currentAdminId=session.user.id;
  loginPanel.classList.add('hidden');dashboard.classList.remove('hidden');document.getElementById('signedIn').textContent='Signed in as '+session.user.email;await loadSubmissions();await loadDrafts();
 }
 async function loadSubmissions(){
@@ -49,6 +49,25 @@ async function loadSubmissions(){
   card.append(actions);list.append(card);
  });
 }
+function addEditField(form,labelText,key,value,area=false){
+ const label=el('label','',labelText);const input=area?el('textarea',''):el('input','');
+ input.name=key;input.value=value||'';input.style.cssText='display:block;width:100%;padding:10px;border:1px solid #ccc;border-radius:7px;margin:5px 0 12px;font:inherit;min-height:'+(area?'90px':'42px');
+ label.append(input);form.append(label);
+}
+async function saveDraftEdits(row,form){
+ const payload={};
+ ['business_name','category','village','address','phone','email','website','description','image_url'].forEach(k=>payload[k]=form.elements[k].value.trim()||null);
+ if(!payload.business_name||!payload.category){say('Business name and category are required.');return;}
+ payload.updated_at=new Date().toISOString();
+ const {error}=await db.from('businesses').update(payload).eq('id',row.id).eq('status','draft').eq('published',false);
+ if(error){say('Could not save changes: '+error.message);return;}
+ say(row.business_name+' details updated.');await loadDrafts();
+}
+async function verifyDraft(row){
+ const {error}=await db.from('businesses').update({verified_at:new Date().toISOString(),verified_by:currentAdminId,updated_at:new Date().toISOString()}).eq('id',row.id).eq('status','draft').eq('published',false);
+ if(error){say('Could not record verification: '+error.message);return;}
+ say(row.business_name+' marked as verified. It is still private.');await loadDrafts();
+}
 async function loadDrafts(){
  draftList.replaceChildren(el('p','meta','Loading researched candidates…'));
  const {data,error}=await db.from('businesses').select('*').eq('status','draft').eq('published',false).order('created_at',{ascending:false});
@@ -63,12 +82,22 @@ async function loadDrafts(){
   section.append(el('h3','group-heading',category+' ('+rows.length+')'));
   rows.forEach(row=>{
    const card=el('article','submission'),title=el('h3','',row.business_name),status=el('span','pill','Private draft');
+   const verified=el('span','pill',row.verified_at?'Verified '+new Date(row.verified_at).toLocaleDateString():'Not yet verified');
    const details=el('p','meta',[row.village,row.address,row.phone,row.website].filter(Boolean).join(' · '));
    const desc=el('p','',row.description||'No description supplied.');
-   card.append(title,status,details,desc);
+   card.append(title,status,verified,details,desc);
    const actions=el('div','actions');
+   const edit=el('button','secondary','Edit details');edit.type='button';
+   edit.addEventListener('click',()=>{
+    const existing=card.querySelector('form.edit-form');if(existing){existing.remove();edit.textContent='Edit details';return;}
+    const form=el('form','edit-form');form.style.cssText='margin-top:14px;padding:14px;background:#f7f5ef;border-radius:8px';
+    [['business_name','Business name'],['category','Category'],['village','Village'],['address','Address'],['phone','Phone'],['email','Email'],['website','Website'],['description','Description'],['image_url','Photo URL']].forEach(([key,label])=>addEditField(form,label,key,row[key],key==='description'));
+    const save=el('button','primary','Save changes');save.type='submit';const cancel=el('button','secondary','Cancel');cancel.type='button';cancel.addEventListener('click',()=>form.remove());form.append(save,cancel);
+    form.addEventListener('submit',e=>{e.preventDefault();saveDraftEdits(row,form);});card.append(form);edit.textContent='Close editor';
+   });
+   const verify=el('button','secondary',row.verified_at?'Verify again':'Mark details verified');verify.type='button';verify.addEventListener('click',()=>verifyDraft(row));
    const approve=el('button','approve','Approve & publish');approve.addEventListener('click',()=>publishDraft(row));
-   actions.append(approve);card.append(actions);section.append(card);
+   actions.append(edit,verify,approve);card.append(actions);section.append(card);
   });
   draftList.append(section);
  });
