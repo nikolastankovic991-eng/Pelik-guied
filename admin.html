@@ -11,10 +11,11 @@ button{border:0;border-radius:7px;padding:11px 15px;font-weight:bold;cursor:poin
 </style></head><body>
 <header><div class="logo">PELIK <span>GUIDE</span> · ADMIN</div><a href="index.html">View public site</a></header>
 <main>
+<div id="notice" role="status"></div>
 <section class="panel" id="loginPanel"><h1>Administrator sign in</h1><p>This area is private. Sign in with the administrator account already registered in Supabase.</p>
 <form id="loginForm"><label for="email">Email</label><input id="email" type="email" autocomplete="username" required><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required><button class="primary" type="submit">Sign in</button></form></section>
 <section class="panel hidden" id="dashboard"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><div><h1>Business applications</h1><p class="meta" id="signedIn"></p></div><button class="secondary" id="signOut">Sign out</button></div>
-<div id="notice" role="status"></div><div id="list"></div></section>
+<div id="list"></div></section>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script>
 <script>
