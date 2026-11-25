@@ -15,12 +15,12 @@ button{border:0;border-radius:7px;padding:11px 15px;font-weight:bold;cursor:poin
 <section class="panel" id="loginPanel"><h1>Administrator sign in</h1><p>This area is private. Sign in with the administrator account already registered in Supabase.</p>
 <form id="loginForm"><label for="email">Email</label><input id="email" type="email" autocomplete="username" required><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required><button class="primary" type="submit">Sign in</button></form></section>
 <section class="panel hidden" id="dashboard"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><div><h1>Business applications</h1><p class="meta" id="signedIn"></p></div><button class="secondary" id="signOut">Sign out</button></div>
-<div id="list"></div></section>
+<h2>Researched directory candidates</h2><p class="meta">These are independently researched businesses. They remain private drafts until you approve them.</p><div id="draftList"></div><hr style="border:0;border-top:1px solid #e5e2d9;margin:24px 0"><h2>Business applications</h2><div id="list"></div></section>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script>
 <script>
 const db=window.supabase.createClient(window.PELIK_SUPABASE_URL,window.PELIK_SUPABASE_KEY);
-const loginPanel=document.getElementById('loginPanel'),dashboard=document.getElementById('dashboard'),notice=document.getElementById('notice'),list=document.getElementById('list');
+const loginPanel=document.getElementById('loginPanel'),dashboard=document.getElementById('dashboard'),notice=document.getElementById('notice'),list=document.getElementById('list'),draftList=document.getElementById('draftList');
 function say(t){notice.textContent=t;notice.style.display='block'}
 function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n}
 async function checkSession(){
@@ -28,7 +28,7 @@ async function checkSession(){
  if(!session)return;
  const {data:admin,error}=await db.from('admin_users').select('user_id').eq('user_id',session.user.id).maybeSingle();
  if(error||!admin){await db.auth.signOut();say('This account is not authorised as a Gozo Guide by PELIK administrator.');return;}
- loginPanel.classList.add('hidden');dashboard.classList.remove('hidden');document.getElementById('signedIn').textContent='Signed in as '+session.user.email;await loadSubmissions();
+ loginPanel.classList.add('hidden');dashboard.classList.remove('hidden');document.getElementById('signedIn').textContent='Signed in as '+session.user.email;await loadSubmissions();await loadDrafts();
 }
 async function loadSubmissions(){
  list.replaceChildren(el('p','meta','Loading applications…'));
@@ -48,6 +48,28 @@ async function loadSubmissions(){
   }
   card.append(actions);list.append(card);
  });
+}
+async function loadDrafts(){
+ draftList.replaceChildren(el('p','meta','Loading researched candidates…'));
+ const {data,error}=await db.from('businesses').select('*').eq('status','draft').eq('published',false).order('created_at',{ascending:false});
+ if(error){draftList.replaceChildren(el('p','','Could not load candidates: '+error.message));return;}
+ draftList.replaceChildren();
+ if(!data.length){draftList.append(el('p','meta','No researched candidates waiting for review.'));return;}
+ data.forEach(row=>{
+  const card=el('article','submission'),title=el('h3','',row.business_name),status=el('span','pill','Private draft');
+  const details=el('p','meta',[row.category,row.village,row.address,row.phone,row.website].filter(Boolean).join(' · '));
+  const desc=el('p','',row.description||'No description supplied.');
+  card.append(title,status,details,desc);
+  const actions=el('div','actions');
+  const approve=el('button','approve','Approve & publish');approve.addEventListener('click',()=>publishDraft(row));
+  actions.append(approve);card.append(actions);draftList.append(card);
+ });
+}
+async function publishDraft(row){
+ if(!confirm('Approve and publish '+row.business_name+'? It will become visible in the public directory.'))return;
+ const {error}=await db.from('businesses').update({status:'approved',published:true}).eq('id',row.id).eq('status','draft').eq('published',false);
+ if(error){say('Could not publish candidate: '+error.message);return;}
+ say(row.business_name+' approved and published.');await loadDrafts();
 }
 async function approveSubmission(row){
  if(!confirm('Approve and publish '+row.business_name+'? This will make the listing visible in the public directory.'))return;
