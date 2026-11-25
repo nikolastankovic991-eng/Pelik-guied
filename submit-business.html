@@ -36,8 +36,8 @@ small{color:#66736d}@media(max-width:560px){.grid{grid-template-columns:1fr}.pan
 <label for="image_url">Business photo URL (optional)</label><input id="image_url" type="url" maxlength="1000" placeholder="https://">
 <label for="description">Short description</label><textarea id="description" maxlength="1200" placeholder="Tell visitors what your business offers"></textarea>
 <small>Only submit information you are authorised to share. Please use a photo you own or have permission to use.</small>
-<button id="submit" type="submit">Submit for review</button><div id="message" role="status"></div>
-</form></div></main>
+<label style="display:flex;gap:10px;align-items:flex-start;font-weight:normal;margin-top:18px"><input type="checkbox" required style="width:auto;margin-top:4px"><span>I have read the <a href="privacy.html" target="_blank" rel="noopener noreferrer">Privacy Notice</a> and understand that my application details will be used to review this listing.</span></label><button id="submit" type="submit">Submit for review</button><div id="message" role="status"></div>
+<p class="muted" style="margin-top:16px"><a href="privacy.html">Privacy Notice</a> · <a href="terms.html">Terms of Use</a></p></form></div></main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script>
 <script>
 const client=window.supabase.createClient(window.PELIK_SUPABASE_URL,window.PELIK_SUPABASE_KEY);
