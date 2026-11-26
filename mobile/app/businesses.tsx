@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, Image, Linking, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { ActivityIndicator, FlatList, Image, Linking, Pressable, RefreshControl, StyleSheet, Text, TextInput, View } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { supabase } from "../lib/supabase";
 import { groups } from "../data/categories";
@@ -23,7 +23,7 @@ export default function Businesses() {
   const [error, setError] = useState("");
   const [query, setQuery] = useState("");
   const [group, setGroup] = useState(params.group || "");
-  const [reload, setReload] = useState(0);
+  const [reload, setReload] = useState(0);\n  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => { setGroup(params.group || ""); }, [params.group]);
 
@@ -100,7 +100,7 @@ export default function Businesses() {
         <View style={s.state}>
           <Text style={s.emptyTitle}>Directory temporarily unavailable</Text>
           <Text style={s.stateText}>{error}</Text>
-          <Pressable onPress={() => setReload(value => value + 1)} style={s.retry}><Text style={s.retryText}>Try again</Text></Pressable>
+          <Pressable accessibilityRole="button" onPress={() => setReload(value => value + 1)} style={s.retry}><Text style={s.retryText}>Try again</Text></Pressable>
         </View>
       ) : (
         <FlatList
@@ -111,7 +111,7 @@ export default function Businesses() {
             <View style={s.state}>
               <Text style={s.emptyTitle}>{rows.length ? "No matches found" : "Be the first to discover local listings"}</Text>
               <Text style={s.stateText}>{rows.length ? "Try another search or category." : "New businesses appear here after they have been reviewed and approved."}</Text>
-              {query || group ? <Pressable onPress={() => { setQuery(""); setGroup(""); }} style={s.retry}><Text style={s.retryText}>Clear filters</Text></Pressable> : null}
+              {query || group ? <Pressable accessibilityRole="button" onPress={() => { setQuery(""); setGroup(""); }} style={s.retry}><Text style={s.retryText}>Clear filters</Text></Pressable> : null}
             </View>
           }
           renderItem={({ item }) => (
