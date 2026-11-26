@@ -6,7 +6,7 @@ const icon = (symbol: string) => () => <Text style={{ fontSize: 17 }}>{symbol}</
 
 export default function RootLayout() {
   return <>
-    <StatusBar style="light" backgroundColor="#073D34" />
+    <StatusBar style="light" />
     <Tabs screenOptions={{
       headerStyle: { backgroundColor: "#073D34" },
       headerTintColor: "#fff",
