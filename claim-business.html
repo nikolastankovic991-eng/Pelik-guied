@@ -61,12 +61,23 @@ form.addEventListener('submit',async event=>{
  submit.disabled=true;submit.textContent='Sending…';
  const payload={business_id:business.id,business_name:business.business_name,request_type:document.getElementById('type').value,requester_name:document.getElementById('name').value.trim(),requester_email:document.getElementById('email').value.trim(),requester_phone:document.getElementById('phone').value.trim()||null,message:document.getElementById('message').value.trim()};
  if(!payload.requester_name||!payload.requester_email||!payload.message){show('Please complete your name, email and message.');submit.disabled=false;submit.textContent='Send request';return;}
- const {error}=await db.from('business_claim_requests').insert(payload);
- submit.disabled=false;submit.textContent='Send request';
- if(error){show('We could not send your request. Please try again later.');return;}
- form.reset();show('Thank you. Your request has been received and is awaiting review. No change has been made to the public listing yet.');
+ try{
+  const {error}=await db.from('business_claim_requests').insert(payload);
+  if(error)throw error;
+  form.reset();show('Thank you. Your request has been received and is awaiting review. No change has been made to the public listing yet.');
+ }catch(error){
+  console.error('Business listing request failed:',error);
+  show('We could not send your request just now. Please check your connection and try again.');
+ }finally{
+  submit.disabled=false;submit.textContent='Send request';
+ }
 });
-init();
+init().catch(error=>{
+ console.error('Could not load selected business:',error);
+ businessName.textContent='Listing temporarily unavailable';
+ form.hidden=true;
+ show('We could not load this listing right now. Please return to the directory and try again.');
+});
 </script>
 
 <script>
