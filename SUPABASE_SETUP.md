@@ -6,7 +6,8 @@ The connected Supabase project currently uses these public tables:
 
 - `admin_users`: administrator user IDs linked to `auth.users`.
 - `business_submissions`: business applications.
-- `businesses`: approved directory listings.
+- `businesses`: directory records, including private drafts.
+- `business_claim_requests`: public claim, correction and removal requests.
 
 RLS is enabled on all three tables. The live website uses these tables and their existing columns.
 
@@ -14,10 +15,11 @@ RLS is enabled on all three tables. The live website uses these tables and their
 
 The intended access model is:
 
-- Visitors may INSERT a business application. They cannot SELECT private applications.
+- Visitors may INSERT a business application using only the approved public category list; every application must be pending, unpublished and unfeatured. They cannot SELECT private applications.
+- Visitors may INSERT a claim/correction/removal request only for a business that is already approved and published; they cannot read or update those requests.
 - Visitors may SELECT businesses only when `status = 'approved'` and `published = true`.
 - Signed-in users may read their own administrator row, as constrained by RLS.
-- Only users whose auth UUID exists in `admin_users` may review/update submissions and manage public businesses.
+- Only users whose auth UUID exists in `admin_users` may review/update submissions, manage businesses, and read/update claim requests.
 
 The connected project has been granted the table privileges required for these RLS policies to work. The policies remain the row-level security boundary.
 
@@ -27,6 +29,7 @@ The connected project has been granted the table privileges required for these R
 - `submit-business.html`: application form inserts pending/unpublished/not-featured rows.
 - `admin.html`: password sign-in, verifies the admin row, then offers approve/reject actions.
 - `businesses.html`: displays only approved and published businesses from Supabase.
+- `claim-business.html`: creates requests for existing approved and published listings; requests stay pending until an administrator reviews them.
 
 ## Do not do this
 
@@ -44,3 +47,5 @@ The connected project has been granted the table privileges required for these R
 5. Sign in at `admin.html`, approve the test record, and confirm it appears on `businesses.html`.
 6. Remove the test listing after verification.
 7. Confirm image ownership/licensing and business details before publishing real listings.
+8. Enable Supabase leaked-password protection for administrator sign-in.
+9. Keep the public category list in `mobile/data/categories.ts`, `submit-business.html` and the `business_submissions` RLS policy in sync.
