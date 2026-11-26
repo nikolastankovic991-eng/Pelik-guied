@@ -24,6 +24,7 @@ From this folder:
 
 ```bash
 npm install
+npm run validate:content
 npm run typecheck
 npm run doctor
 npx expo start
