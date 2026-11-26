@@ -1,25 +1,5 @@
 [
   {
-    "id": "illogga-xaghra",
-    "name": "Il-Logga Boutique Hotel & Restaurant",
-    "category": [
-      "Hotels & Accommodation",
-      "Restaurants & Cafés"
-    ],
-    "locality": "Xagħra",
-    "address": "16 Church Street, Xagħra, Gozo XRA 1250, Malta",
-    "phone": "+356 7994 4738",
-    "website": "https://illogga.com/",
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Il-Logga+Boutique+Hotel+Xaghra+Gozo",
-    "imageUrl": "https://illogga.com/wp-content/uploads/2019/03/logga-nov18-2-122-1024x683.jpg",
-    "imageSource": "Official business website: https://illogga.com/home/",
-    "imageUse": "Official website image; confirm reuse permission before public launch",
-    "description": "Family-run boutique hotel with rooftop pool and an in-house restaurant.",
-    "status": "draft",
-    "published": false,
-    "featured": false
-  },
-  {
     "id": "mayjo-victoria",
     "name": "Mayjo Car Rentals & Airport Transfers",
     "category": [
@@ -36,26 +16,6 @@
     "imageSource": "Official business website: https://www.mayjocarhire.com/",
     "imageUse": "Official website image; confirm reuse permission before public launch",
     "description": "Gozo-based car hire, private airport transfers and tailor-made sightseeing tours.",
-    "status": "draft",
-    "published": false,
-    "featured": false
-  },
-  {
-    "id": "cornucopia-xaghra",
-    "name": "Cornucopia Hotel",
-    "category": [
-      "Hotels & Accommodation",
-      "Restaurants & Cafés"
-    ],
-    "locality": "Xagħra",
-    "address": "10 Gnien Imriek Street, Xagħra, Gozo XRA 1521, Malta",
-    "phone": "+356 2155 6486",
-    "website": "https://www.cornucopiahotel.com/",
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Cornucopia+Hotel+Xaghra+Gozo",
-    "imageUrl": null,
-    "imageSource": null,
-    "imageUse": "Photo needed from hotel's official website or with permission",
-    "description": "Family-run countryside hotel in a converted traditional Gozitan farmhouse.",
     "status": "draft",
     "published": false,
     "featured": false
@@ -562,27 +522,6 @@
     "verificationStatus": "needs-business-confirmation"
   },
   {
-    "id": "blossom-farmhouses-ghasri",
-    "name": "Blossom Farmhouses",
-    "category": [
-      "Hotels & Accommodation"
-    ],
-    "locality": "Għasri",
-    "address": "Għasri, Gozo, Malta",
-    "phone": "+356 7710 8004",
-    "website": null,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Blossom+Farmhouses+Ghasri+Gozo",
-    "imageUrl": null,
-    "imageSource": null,
-    "imageUse": "Use business-supplied photo or confirm commercial reuse permission.",
-    "description": "Holiday farmhouse accommodation in Għasri; contact the owner for availability.",
-    "status": "draft",
-    "published": false,
-    "featured": false,
-    "source": "https://www.gozoadvertiser.com/",
-    "verificationStatus": "needs-business-confirmation"
-  },
-  {
     "id": "ctown-nadur",
     "name": "C Town Supermarket",
     "category": [
@@ -618,27 +557,6 @@
     "imageSource": null,
     "imageUse": "Use business-supplied photo or confirm commercial reuse permission.",
     "description": "Rooftop restaurant overlooking Mġarr Harbour, serving contemporary Mediterranean dining.",
-    "status": "draft",
-    "published": false,
-    "featured": false,
-    "source": "https://www.gozoadvertiser.com/",
-    "verificationStatus": "needs-business-confirmation"
-  },
-  {
-    "id": "39-st-george-victoria",
-    "name": "39 St. George",
-    "category": [
-      "Hotels & Accommodation"
-    ],
-    "locality": "Victoria",
-    "address": "St George's Square, Victoria, Gozo, Malta",
-    "phone": "+356 9966 9972",
-    "website": null,
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=39+St+George+Victoria+Gozo",
-    "imageUrl": null,
-    "imageSource": null,
-    "imageUse": "Use business-supplied photo or confirm commercial reuse permission.",
-    "description": "Accommodation listing in Victoria; confirm property details directly.",
     "status": "draft",
     "published": false,
     "featured": false,
