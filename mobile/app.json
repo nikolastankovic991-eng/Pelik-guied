@@ -1,0 +1,25 @@
+{
+  "expo": {
+    "name": "Gozo Guide by PELIK",
+    "slug": "gozo-guide-by-pelik",
+    "scheme": "gozoguidepelik",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.pelik.gozoguide"
+    },
+    "android": {
+      "package": "com.pelik.gozoguide",
+      "adaptiveIcon": {
+        "backgroundColor": "#073D34"
+      }
+    },
+    "plugins": ["expo-router"],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
