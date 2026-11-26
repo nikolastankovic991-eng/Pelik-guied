@@ -31,3 +31,7 @@ jobs:
         run: npm run typecheck
       - name: Expo dependency check
         run: npx expo-doctor
+      - name: Bundle iOS JavaScript
+        run: npx expo export --platform ios --output-dir /tmp/gozo-guide-ios-export
+      - name: Bundle Android JavaScript
+        run: npx expo export --platform android --output-dir /tmp/gozo-guide-android-export
