@@ -3,9 +3,9 @@
 This is the separate native mobile app project. The existing public website remains in place.
 
 ## App features currently implemented
-- Home screen with Gozo Guide branding and category navigation
-- Gozo destination feed using the existing destination dataset, with search, photo credits and Google Maps links
-- Live business directory from Supabase, showing approved and published records only
+- Home screen with Gozo Guide branding, accessible category navigation, app icon and native splash configuration
+- Gozo destination feed with search, beach/history/nature filters, photo credits, Google Maps links and safe image fallbacks
+- Live business directory from Supabase, showing approved and published records only, with search, category filters, refresh and safe contact links
 - Business search and category filters
 - Google Maps links for business locations
 - Free business application form with category and village selection
