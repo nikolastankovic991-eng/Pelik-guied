@@ -25,6 +25,8 @@ export default function Businesses() {
   const [group, setGroup] = useState(params.group || "");
   const [reload, setReload] = useState(0);
 
+  useEffect(() => { setGroup(params.group || ""); }, [params.group]);
+
   useEffect(() => {
     let active = true;
     async function load() {
