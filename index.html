@@ -360,7 +360,8 @@ footer{padding-bottom:35px}
 
   <div class="categories">
     <a class="category" href="businesses.html?group=Eat%20%26%20Drink"><span class="emoji">🍽️</span>Eat & Drink</a>
-    <a class="category" href="businesses.html?group=Places%20%26%20Activities"><span class="emoji">🏝️</span>Places & Activities</a>
+    <a class="category" href="#places"><span class="emoji">🏖️🥾</span>Beaches & Hiking Trails</a>
+    <a class="category" href="businesses.html?group=Places%20%26%20Activities"><span class="emoji">🏝️</span>Activities & Attractions</a>
     <a class="category" href="businesses.html?group=Transport%20%26%20Rentals"><span class="emoji">🚗</span>Transport & Rentals</a>
     <a class="category" href="businesses.html?group=Shopping"><span class="emoji">🛍️</span>Shopping</a>
     <a class="category" href="businesses.html?group=Health%20%26%20Wellness"><span class="emoji">💆</span>Health & Wellness</a>
@@ -374,10 +375,15 @@ footer{padding-bottom:35px}
 
     <h2>Discover Popular Places</h2>
 
-    <p>Some of Gozo's most beautiful destinations.</p>
+    <p>Explore Gozo’s beaches, coastal walks and countryside hiking trails.</p>
 
   </div>
 
+  <div class="place-filters" role="group" aria-label="Filter beaches and hiking trails" style="display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin:0 0 24px">
+    <button type="button" onclick="filterPlaceType('all')" aria-pressed="true">All</button>
+    <button type="button" onclick="filterPlaceType('beach')" aria-pressed="false">🏖️ Beaches</button>
+    <button type="button" onclick="filterPlaceType('hiking')" aria-pressed="false">🥾 Hiking Trails</button>
+  </div>
   <div class="places" id="placesGrid">
     <p class="loading-message">Loading Gozo destinations...</p>
   </div>
@@ -484,6 +490,27 @@ loadGozoDirectory();
 
 function normalizeSearchText(value) {
   return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+}
+
+function filterPlaceType(type) {
+  const cards = [...document.querySelectorAll('.place')];
+  let count = 0;
+  cards.forEach(card => {
+    const tags = card.dataset.tags.split(' ');
+    const show = type === 'all' || tags.includes(type);
+    card.style.display = show ? 'block' : 'none';
+    if (show) count++;
+  });
+  document.querySelectorAll('.place-filters button').forEach(button => {
+    const label = button.textContent.trim();
+    button.setAttribute('aria-pressed', String(
+      (type === 'all' && label === 'All') ||
+      (type === 'beach' && label.includes('Beaches')) ||
+      (type === 'hiking' && label.includes('Hiking'))
+    ));
+  });
+  document.getElementById('emptyMessage').style.display = count ? 'none' : 'block';
+  document.getElementById('places').scrollIntoView({behavior:'smooth'});
 }
 
 function filterPlaces(tag) {
