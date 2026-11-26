@@ -11,6 +11,10 @@ The connected Supabase project currently uses these public tables:
 
 RLS is enabled on all four tables. The live website uses these tables and their existing columns.
 
+## Current data state
+
+As checked on 26 November 2026, the database contains 53 private draft candidates, zero approved/published public listings, zero business applications and zero claim requests. The public directory is therefore intentionally empty until the administrator approves and publishes businesses.
+
 ## Public and administrator permissions
 
 The intended access model is:
