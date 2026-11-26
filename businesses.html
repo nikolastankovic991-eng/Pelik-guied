@@ -91,7 +91,7 @@ footer{padding-bottom:35px}
   <div class="sectionhead"><div><h2>Explore Gozo businesses</h2><p class="muted" id="count">Loading directory…</p></div><button id="clear" type="button">Clear filters</button></div>
   <div class="grid" id="businesses"></div>
   <div class="empty" id="empty" hidden><h3>We're building this directory.</h3><p>Business profiles will appear here after they have been checked and approved by Gozo Guide by PELIK. We are adding businesses across Gozo.</p></div>
-  <section class="cta" id="list-business"><h2>Own a business in Gozo?</h2><p>Apply to be listed on Gozo Guide by PELIK. Every application is reviewed before publication. Featured placements will be clearly identified and will never replace the full directory.</p><a href="submit-business.html">Apply to be listed</a></section>
+  <section class="cta" id="list-business"><h2>Own a business in Gozo?</h2><p>Listing your business is completely free. There are no listing fees, subscriptions or paid placements. Every application is reviewed before publication.</p><a href="submit-business.html">Apply to be listed</a></section>
 </main>
 <footer><div class="logo">GOZO <span>GUIDE</span> BY PELIK</div><p>Discover Gozo. Experience Malta.</p><p><a href="privacy.html" style="color:inherit">Privacy Notice</a> · <a href="terms.html" style="color:inherit">Terms of Use</a></p><small>© 2026 Gozo Guide by PELIK</small></footer>
 <nav class="mobile-nav" aria-label="Quick navigation"><a href="index.html"><span>⌂</span>Home</a><a href="index.html#categories"><span>⌕</span>Explore</a><a href="#directory"><span>♡</span>Businesses</a><a href="#list-business"><span>＋</span>List yours</a></nav>
@@ -143,7 +143,6 @@ function render(){
   const meta=document.createElement("p");meta.className="muted";meta.textContent=x.locality;body.append(meta);
   x.category.forEach(n=>{const tag=document.createElement("span");tag.className="pill";tag.textContent=n;body.append(tag);});
   const p=document.createElement("p");p.textContent=x.description;body.append(p);
-  if(x.featured===true){const tag=document.createElement("span");tag.className="pill";tag.textContent="Featured · Sponsored";body.append(tag);}
   const map=document.createElement("p"),a=document.createElement("a");a.href=x.mapUrl;a.target="_blank";a.rel="noopener noreferrer";a.textContent="View on Google Maps";map.append(a);body.append(map);
   if(x.website){const site=document.createElement("a");site.href=x.website;site.target="_blank";site.rel="noopener noreferrer";site.textContent="Visit website";body.append(site);}
   const request=document.createElement("p"),claim=document.createElement("a");claim.href="claim-business.html?id="+encodeURIComponent(x.id);claim.textContent="Claim or correct this listing";request.append(claim);body.append(request);
@@ -164,11 +163,11 @@ document.getElementById("search").addEventListener("input",render);
 document.getElementById("village").addEventListener("change",render);
 document.getElementById("clear").addEventListener("click",()=>{document.getElementById("search").value="";document.getElementById("village").value="";activeCategory="";activeSubcategory="";render();});
 const db=window.supabase.createClient(window.PELIK_SUPABASE_URL,window.PELIK_SUPABASE_KEY);
-db.from("businesses").select("id,business_name,category,village,address,website,description,image_url,status,published,featured")
- .eq("status","approved").eq("published",true).order("featured",{ascending:false})
+db.from("businesses").select("id,business_name,category,village,address,website,description,image_url,status,published")
+ .eq("status","approved").eq("published",true).order("business_name",{ascending:true})
  .then(({data,error})=>{
   if(error)throw error;
-  all=(data||[]).map(x=>({id:x.id,name:x.business_name,category:[x.category],group:groupByCategory[x.category]||"Professional & Local Services",status:x.status,published:x.published,locality:x.village||"",description:x.description||"",imageUrl:x.image_url||"",website:x.website||"",featured:x.featured===true,mapUrl:"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent([x.business_name,x.address,x.village,"Gozo Malta"].filter(Boolean).join(" "))}));
+  all=(data||[]).map(x=>({id:x.id,name:x.business_name,category:[x.category],group:groupByCategory[x.category]||"Professional & Local Services",status:x.status,published:x.published,locality:x.village||"",description:x.description||"",imageUrl:x.image_url||"",website:x.website||"",mapUrl:"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent([x.business_name,x.address,x.village,"Gozo Malta"].filter(Boolean).join(" "))}));
   const villages=[...new Set(all.map(x=>x.locality).filter(Boolean))].sort();
   const select=document.getElementById("village");villages.forEach(name=>{const o=document.createElement("option");o.value=name;o.textContent=name;select.append(o);});
   render();
