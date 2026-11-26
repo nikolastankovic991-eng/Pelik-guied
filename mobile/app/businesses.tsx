@@ -4,7 +4,7 @@ import { useLocalSearchParams } from "expo-router";
 import { supabase } from "../lib/supabase";
 import { groups } from "../data/categories";
 
-function isHttpUrl(value?: string) {
+function isHttpUrl(value?: string | null) {
   if (!value) return false;
   try {
     const parsed = new URL(value.trim());
