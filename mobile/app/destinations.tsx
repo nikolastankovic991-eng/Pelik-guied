@@ -12,7 +12,21 @@ type Place = {
   tags?: string;
 };
 
-function isHttpUrl(value?: string) {\n  if (!value) return false;\n  try { const url = new URL(value); return url.protocol === "https:" || url.protocol === "http:"; } catch { return false; }\n}\n\nasync function openExternal(url?: string) {\n  if (!isHttpUrl(url)) { Alert.alert("Link unavailable", "This link is not valid."); return; }\n  try {\n    const supported = await Linking.canOpenURL(url!);\n    if (!supported) throw new Error("Unsupported link");\n    await Linking.openURL(url!);\n  } catch { Alert.alert("Could not open link", "Please try again or check your device connection."); }\n}\n\nconst placesUrl = "https://nikolastankovic991-eng.github.io/Pelik-guied/data/gozo-places.json";
+function isHttpUrl(value?: string) {
+  if (!value) return false;
+  try { const url = new URL(value); return url.protocol === "https:" || url.protocol === "http:"; } catch { return false; }
+}
+
+async function openExternal(url?: string) {
+  if (!isHttpUrl(url)) { Alert.alert("Link unavailable", "This link is not valid."); return; }
+  try {
+    const supported = await Linking.canOpenURL(url!);
+    if (!supported) throw new Error("Unsupported link");
+    await Linking.openURL(url!);
+  } catch { Alert.alert("Could not open link", "Please try again or check your device connection."); }
+}
+
+const placesUrl = "https://nikolastankovic991-eng.github.io/Pelik-guied/data/gozo-places.json";
 
 export default function Destinations() {
   const [places, setPlaces] = useState<Place[]>([]);
