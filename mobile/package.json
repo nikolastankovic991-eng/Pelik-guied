@@ -10,7 +10,8 @@
     "web": "expo start --web",
     "doctor": "npx expo-doctor",
     "typecheck": "tsc --noEmit",
-    "validate:content": "node scripts/validate-content.mjs"
+    "validate:content": "node scripts/validate-content.mjs",
+    "validate:web": "node scripts/validate-web.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.99.0",
