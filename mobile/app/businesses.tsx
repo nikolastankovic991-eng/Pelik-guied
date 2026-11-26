@@ -23,7 +23,8 @@ export default function Businesses() {
   const [error, setError] = useState("");
   const [query, setQuery] = useState("");
   const [group, setGroup] = useState(params.group || "");
-  const [reload, setReload] = useState(0);\n  const [refreshing, setRefreshing] = useState(false);
+  const [reload, setReload] = useState(0);
+  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => { setGroup(params.group || ""); }, [params.group]);
 
