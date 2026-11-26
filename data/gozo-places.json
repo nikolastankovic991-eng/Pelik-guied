@@ -71,10 +71,10 @@
     "description": "A lively seaside resort with restaurants and a promenade.",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=Marsalforn%20Gozo%20Malta",
     "type": "destination",
-    "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Marsalforn_in_Gozo_-1.jpg",
+    "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Panorama_of_Marsalforn,_Gozo.jpg",
     "imageAlt": "Marsalforn seaside village in Gozo",
-    "imageCredit": "Photo: HasanK · CC BY-SA 4.0",
-    "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Marsalforn_in_Gozo_-1.jpg"
+    "imageCredit": "Photo: Diepizza · CC BY-SA 4.0",
+    "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Panorama_of_Marsalforn,_Gozo.jpg"
   },
   {
     "name": "Xlendi",
