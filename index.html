@@ -299,6 +299,10 @@ footer{padding-bottom:35px}
 
 </style>
 
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#073d34">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Gozo Guide">
 </head>
 
 <body>
@@ -525,6 +529,12 @@ function showAll() {
 
 </script>
 
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js").catch(error => console.warn("Offline support unavailable:", error)));
+}
+</script>
 </body>
 
 </html>
