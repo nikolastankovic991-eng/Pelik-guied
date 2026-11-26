@@ -2,7 +2,11 @@
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Privacy Notice | Gozo Guide by PELIK</title>
 <style>
 :root{--green:#123d32;--gold:#d6ad68;--cream:#f7f5ef;--ink:#24332e;--muted:#68756f}*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,sans-serif;line-height:1.65}header{background:var(--green);color:#fff;padding:18px 5%;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.logo{font-weight:bold;letter-spacing:1px}.logo span{color:var(--gold)}a{color:#28634f}header a{color:white}main{max-width:850px;margin:28px auto;padding:0 16px 50px}.panel{background:white;border:1px solid #e4e1d8;border-radius:14px;padding:24px}h1,h2{color:var(--green)}.notice{background:#fff2d8;border-left:4px solid var(--gold);padding:14px;margin:16px 0;border-radius:6px}.muted{color:var(--muted)}li{margin:7px 0}footer{text-align:center;padding:22px;color:var(--muted)}
-</style></head><body>
+</style>  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#073d34">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Gozo Guide">
+</head><body>
 <header><div class="logo">GOZO <span>GUIDE</span> BY PELIK</div><a href="index.html">Back to guide</a></header>
 <main><article class="panel"><h1>Privacy Notice</h1><p class="muted">Draft for review · Last updated: 25 November 2026</p>
 <div class="notice"><strong>Before public launch:</strong> The operator's full legal name, business/contact address, privacy contact email, final retention periods and hosting/data-transfer details must be confirmed and this notice updated. Do not treat this draft as confirmation that every legal requirement has been completed.</div>
@@ -17,4 +21,10 @@
 <p>You may also lodge a complaint with Malta's Information and Data Protection Commissioner (IDPC): <a href="https://idpc.org.mt/" target="_blank" rel="noopener noreferrer">idpc.org.mt</a>. See the Commissioner's <a href="https://idpc.org.mt/for-individuals/your-rights/" target="_blank" rel="noopener noreferrer">guidance on your rights</a>.</p>
 <h2>9. Cookies and external links</h2><p>This site may load third-party scripts or services needed for its functions. Their operation may involve technical data or cookies governed by the relevant provider's terms. External websites, including map and business websites, have their own privacy practices. A full cookie and third-party-resource review is still required before launch.</p>
 <h2>10. Security and changes</h2><p>Reasonable technical and organisational measures should be used to protect information. No internet transmission or storage system can be guaranteed completely secure. This notice may be updated as the service changes; the latest version and date will be published here.</p>
-</article></main><footer>© 2026 Gozo Guide by PELIK · <a href="terms.html">Terms of Use</a></footer></body></html>
+</article></main><footer>© 2026 Gozo Guide by PELIK · <a href="terms.html">Terms of Use</a></footer>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js").catch(error => console.warn("Offline support unavailable:", error)));
+}
+</script>
+</body></html>
