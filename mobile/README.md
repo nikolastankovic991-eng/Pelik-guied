@@ -4,7 +4,7 @@ This is the separate native mobile app project. The existing public website rema
 
 ## App features currently implemented
 - Home screen with Gozo Guide branding and category navigation
-- Gozo destination feed using the existing destination dataset, with photo credits and Google Maps links
+- Gozo destination feed using the existing destination dataset, with search, photo credits and Google Maps links
 - Live business directory from Supabase, showing approved and published records only
 - Business search and category filters
 - Google Maps links for business locations
@@ -17,7 +17,7 @@ This is the separate native mobile app project. The existing public website rema
 - Expo SDK 58.1 / React Native 0.88
 - Expo Router file-based navigation
 - Supabase public client key only; never place a service-role key in this app
-- GitHub Actions runs TypeScript and Expo Doctor checks on mobile changes
+- GitHub Actions validates destination records and runs TypeScript and Expo Doctor checks on mobile changes
 
 ## Run locally
 From this folder:
