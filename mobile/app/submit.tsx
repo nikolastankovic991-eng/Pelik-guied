@@ -14,6 +14,7 @@ export default function Submit() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [website, setWebsite] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const [description, setDescription] = useState("");
   const [consent, setConsent] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -47,6 +48,10 @@ export default function Submit() {
       Alert.alert("Check website", "Please include https:// or http:// at the beginning of the website address.");
       return;
     }
+    if (imageUrl.trim() && !/^https?:\/\//i.test(imageUrl.trim())) {
+      Alert.alert("Check photo link", "Please enter a photo URL beginning with https:// or http://.");
+      return;
+    }
     if (!consent) {
       Alert.alert("Consent required", "Please confirm that you have read the privacy notice before submitting.");
       return;
@@ -66,6 +71,7 @@ export default function Submit() {
         phone: phone.trim() || null,
         email: email.trim() || null,
         website: website.trim() || null,
+        image_url: imageUrl.trim() || null,
         description: description.trim() || null,
         status: "pending",
         published: false,
@@ -73,7 +79,7 @@ export default function Submit() {
       });
       if (error) throw error;
       Alert.alert("Application received", "Your free application is pending administrator review. It will not appear publicly unless it is approved and published.");
-      setName(""); setCategory(""); setVillage(""); setAddress(""); setPhone(""); setEmail(""); setWebsite(""); setDescription(""); setConsent(false);
+      setName(""); setCategory(""); setVillage(""); setAddress(""); setPhone(""); setEmail(""); setWebsite(""); setImageUrl(""); setDescription(""); setConsent(false);
     } catch (error) {
       const message = error instanceof Error ? error.message : "Please try again later.";
       Alert.alert("Could not submit", message);
@@ -117,6 +123,7 @@ export default function Submit() {
       {field("Phone", phone, setPhone, "Business phone number")}
       {field("Email", email, setEmail, "Business email")}
       {field("Website", website, setWebsite, "https://")}
+      {field("Photo URL (optional)", imageUrl, setImageUrl, "Link to a photo you have permission to use")}
       {field("Description", description, setDescription, "Tell visitors about your business", true)}
 
       <Pressable onPress={() => setConsent(value => !value)} style={s.consentRow} accessibilityRole="checkbox" accessibilityState={{ checked: consent }}>
