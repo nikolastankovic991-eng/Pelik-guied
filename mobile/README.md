@@ -14,7 +14,7 @@ This is the separate native mobile app project. The existing public website rema
 
 ## Technical setup
 - Expo SDK 58.1 / React Native 0.88
-- Expo Router file-based navigation
+- Expo Router file-based navigation and SDK 58 development client
 - Supabase public client key only; never place a service-role key in this app
 - GitHub Actions validates destination data, checks for client-side secret keys, audits production dependencies, runs TypeScript and Expo Doctor checks, and bundles JavaScript for iOS and Android
 - The current npm audit reports three moderate advisories in Expo build/fingerprint tooling; the production audit gate fails on high/critical issues. Do not force a downgrade to an older Expo SDK just to silence tooling-only advisories.
