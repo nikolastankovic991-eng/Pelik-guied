@@ -23,6 +23,8 @@ export default function Submit() {
     <View>
       <Text style={s.label}>{label}</Text>
       <TextInput
+        accessibilityLabel={label}
+        maxLength={label === "Business name *" ? 120 : label === "Address" ? 180 : label === "Phone" ? 40 : label === "Email" ? 254 : label === "Website" || label === "Photo URL (optional)" ? 2048 : 1000}
         value={value}
         onChangeText={set}
         placeholder={placeholder}
