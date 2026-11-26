@@ -37,6 +37,7 @@ type Business = {
   village: string | null;
   address: string | null;
   phone: string | null;
+  email: string | null;
   website: string | null;
   description: string | null;
   image_url: string | null;
@@ -153,7 +154,7 @@ export default function Businesses() {
                 {item.description ? <Text style={s.desc}>{item.description}</Text> : null}
                 <View style={s.actions}>
                   {item.phone && item.phone.replace(/[^+0-9]/g, "").length >= 5 ? <Pressable accessibilityRole="link" accessibilityLabel={`Call ${item.business_name}`} onPress={() => openExternal("tel:" + item.phone!.replace(/[^+0-9]/g, ""), "the phone number")}><Text style={s.link}>Call</Text></Pressable> : null}
-                  {item.email && /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(item.email.trim()) ? <Pressable accessibilityRole="link" accessibilityLabel={`Email ${item.business_name}`} onPress={() => openExternal("mailto:" + item.email!.trim(), "the email address")}><Text style={s.link}>Email</Text></Pressable> : null}
+                  {item.email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(item.email.trim()) ? <Pressable accessibilityRole="link" accessibilityLabel={`Email ${item.business_name}`} onPress={() => openExternal("mailto:" + item.email!.trim(), "the email address")}><Text style={s.link}>Email</Text></Pressable> : null}
                   {isHttpUrl(item.website) ? <Pressable accessibilityRole="link" accessibilityLabel={`Visit ${item.business_name} website`} onPress={() => openExternal(item.website!.trim(), "the website")}><Text style={s.link}>Website</Text></Pressable> : null}
                   <Pressable accessibilityRole="link" accessibilityLabel={`Find ${item.business_name} on Google Maps`} onPress={() => openExternal("https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent([item.business_name, item.address, item.village, "Gozo Malta"].filter(Boolean).join(" ")), "Google Maps")}><Text style={s.link}>Google Maps ↗</Text></Pressable>
                 </View>
