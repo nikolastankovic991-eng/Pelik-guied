@@ -4,7 +4,11 @@
     "tags": "history nature",
     "description": "A historic lighthouse with wide countryside and coastal views.",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=Ta%E2%80%99%20%C4%A0urdan%20Lighthouse%20Gozo%20Malta",
-    "type": "destination"
+    "type": "destination",
+    "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Giordan_Lighthouse_and_surrounding_buildings.JPG",
+    "imageAlt": "Ta’ Ġurdan Lighthouse and surrounding buildings in Għasri, Gozo",
+    "imageCredit": "Photo: Wusel007 · CC BY-SA 3.0",
+    "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Giordan_Lighthouse_and_surrounding_buildings.JPG"
   },
   {
     "name": "Cittadella",
