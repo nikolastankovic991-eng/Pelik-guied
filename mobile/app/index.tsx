@@ -10,8 +10,7 @@ export default function Home() {
   return <ScrollView contentContainerStyle={s.page}>
     <View style={s.hero}>
       <Text style={s.kicker}>DISCOVER GOZO</Text>
-      <Text style={s.heroTitle}>Discover Gozo.{"
-"}Experience more.</Text>
+      <Text style={s.heroTitle}>Discover Gozo.{"\n"}Experience more.</Text>
       <Text style={s.heroText}>Your free guide to the island's best places, local businesses and experiences.</Text>
       <Link href="/destinations" asChild><Pressable accessibilityRole="button" accessibilityLabel="Explore Gozo destinations" style={s.goldButton}><Text style={s.goldText}>Explore Gozo  →</Text></Pressable></Link>
     </View>
