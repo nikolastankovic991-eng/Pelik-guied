@@ -33,6 +33,8 @@ jobs:
           node -e 'const a=require("/tmp/npm-audit.json"); for (const [name, v] of Object.entries(a.vulnerabilities || {})) { const via=(v.via || []).map(x => typeof x === "string" ? x : x.title + " [" + x.range + "] " + x.url).join(" | "); console.log(name + ": " + v.severity + "; direct=" + v.isDirect + "; range=" + v.range + "; via=" + via + "; fix=" + JSON.stringify(v.fixAvailable)); }'
       - name: Validate destination content
         run: npm run validate:content
+      - name: Validate website JavaScript
+        run: npm run validate:web
       - name: TypeScript check
         run: npm run typecheck
       - name: Expo dependency check
