@@ -129,9 +129,12 @@ function renderSubcategories(){
  });
 }
 
+function normalizeSearchText(value){
+ return String(value||"").normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLowerCase().trim();
+}
 function render(){
- const q=document.getElementById("search").value.toLowerCase().trim(),v=document.getElementById("village").value;
- const visible=all.filter(x=>x.status==="approved"&&x.published===true&&x.category[0]!=="Hotels & Accommodation"&&x.category[0]!=="Guesthouses, B&Bs & Farmhouses"&&x.category[0]!=="Holiday Apartments & Villas"&&(!activeCategory||x.group===activeCategory)&&(!activeSubcategory||x.category.includes(activeSubcategory))&&(!v||x.locality===v)&&(!q||[x.name,x.description,x.locality,...x.category].join(" ").toLowerCase().includes(q)));
+ const q=normalizeSearchText(document.getElementById("search").value),v=document.getElementById("village").value;
+ const visible=all.filter(x=>x.status==="approved"&&x.published===true&&x.category[0]!=="Hotels & Accommodation"&&x.category[0]!=="Guesthouses, B&Bs & Farmhouses"&&x.category[0]!=="Holiday Apartments & Villas"&&(!activeCategory||x.group===activeCategory)&&(!activeSubcategory||x.category.includes(activeSubcategory))&&(!v||x.locality===v)&&(!q||normalizeSearchText([x.name,x.description,x.locality,...x.category].join(" ")).includes(q)));
  document.querySelectorAll(".category").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.group===activeCategory)));
  renderSubcategories();
  const grid=document.getElementById("businesses");grid.replaceChildren();
