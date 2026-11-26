@@ -171,7 +171,7 @@ async function publishDraft(row){
 async function approveSubmission(row){
  if(!publicCategories.has(row.category)){say('This category is not approved for the public directory. The application cannot be published.');return;}
  if(!confirm('Approve and publish '+row.business_name+'? This will make the listing visible in the public directory.'))return;
- const {data:businessId,error}=await db.rpc('admin_approve_business_submission',{p_submission_id:row.id});
+ const {error}=await db.rpc('admin_approve_business_submission',{p_submission_id:row.id});
  if(error){say('Could not approve this application: '+error.message);return;}
  say(row.business_name+' approved and published.');await loadSubmissions();
 }
