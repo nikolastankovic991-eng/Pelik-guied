@@ -1,4 +1,4 @@
-const CACHE_NAME = "gozo-guide-shell-v4";
+const CACHE_NAME = "gozo-guide-shell-v5";
 const APP_SHELL = [
   "./",
   "./index.html",
