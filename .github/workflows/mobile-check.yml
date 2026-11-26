@@ -4,10 +4,34 @@ on:
   push:
     paths:
       - "mobile/**"
+      - "index.html"
+      - "businesses.html"
+      - "submit-business.html"
+      - "claim-business.html"
+      - "admin.html"
+      - "privacy.html"
+      - "terms.html"
+      - "manifest.webmanifest"
+      - "service-worker.js"
+      - "data/**"
+      - "icons/**"
+      - "SUPABASE_SETUP.md"
       - ".github/workflows/mobile-check.yml"
   pull_request:
     paths:
       - "mobile/**"
+      - "index.html"
+      - "businesses.html"
+      - "submit-business.html"
+      - "claim-business.html"
+      - "admin.html"
+      - "privacy.html"
+      - "terms.html"
+      - "manifest.webmanifest"
+      - "service-worker.js"
+      - "data/**"
+      - "icons/**"
+      - "SUPABASE_SETUP.md"
       - ".github/workflows/mobile-check.yml"
 
 jobs:
