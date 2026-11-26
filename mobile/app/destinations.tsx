@@ -31,7 +31,8 @@ const placesUrl = "https://nikolastankovic991-eng.github.io/Pelik-guied/data/goz
 export default function Destinations() {
   const [places, setPlaces] = useState<Place[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");\n  const [query, setQuery] = useState("");
+  const [error, setError] = useState("");
+  const [query, setQuery] = useState("");
 
   const loadPlaces = useCallback(async () => {
     setLoading(true);
@@ -40,7 +41,7 @@ export default function Destinations() {
       const response = await fetch(placesUrl);
       if (!response.ok) throw new Error("Destination feed unavailable");
       const data: unknown = await response.json();
-      if (!Array.isArray(data)) throw new Error("Unexpected destination data");
+      if (!Array.isArray(data) || !data.every((item) => item && typeof item === "object" && typeof item.name === "string" && typeof item.description === "string")) throw new Error("Unexpected destination data");
       setPlaces(data as Place[]);
     } catch {
       setPlaces([]);
@@ -58,7 +59,9 @@ export default function Destinations() {
     return <View style={s.center}><ActivityIndicator color="#073D34" size="large" /><Text style={s.desc}>Loading Gozo destinations…</Text></View>;
   }
 
-  const filteredPlaces = places.filter((place) => [place.name, place.description, place.tags || ""].join(" ").toLowerCase().includes(query.trim().toLowerCase()));\n\n  if (error && !places.length) {
+  const filteredPlaces = places.filter((place) => [place.name, place.description, place.tags || ""].join(" ").toLowerCase().includes(query.trim().toLowerCase()));
+
+  if (error && !places.length) {
     return (
       <View style={s.center}>
         <Text style={s.title}>Destinations temporarily unavailable</Text>
@@ -98,7 +101,11 @@ export default function Destinations() {
 const s = StyleSheet.create({
   list: { padding: 14, paddingBottom: 30 },
   center: { flex: 1, alignItems: "center", justifyContent: "center", gap: 10, padding: 28 },
-  intro: { color: "#56645C", lineHeight: 21, marginBottom: 14 },\n  search: { backgroundColor: "#fff", padding: 14, borderRadius: 12, marginBottom: 14, color: "#24332E" },\n  empty: { alignItems: "center", padding: 28, gap: 8 },\n  emptyTitle: { color: "#073D34", fontWeight: "800", fontSize: 17 },\n  emptyText: { color: "#65736B", textAlign: "center" },
+  intro: { color: "#56645C", lineHeight: 21, marginBottom: 14 },
+  search: { backgroundColor: "#fff", padding: 14, borderRadius: 12, marginBottom: 14, color: "#24332E" },
+  empty: { alignItems: "center", padding: 28, gap: 8 },
+  emptyTitle: { color: "#073D34", fontWeight: "800", fontSize: 17 },
+  emptyText: { color: "#65736B", textAlign: "center" },
   card: { backgroundColor: "#fff", borderRadius: 18, overflow: "hidden", marginBottom: 15 },
   image: { width: "100%", height: 190, backgroundColor: "#E4E7E2" },
   imagePlaceholder: { width: "100%", height: 130, backgroundColor: "#073D34", alignItems: "center", justifyContent: "center" },
