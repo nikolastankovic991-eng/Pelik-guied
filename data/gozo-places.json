@@ -109,7 +109,11 @@
     "tags": "beach nature",
     "description": "A coastal swimming spot with views towards Comino.",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=%C4%A6ondoq%20ir-Rummien%20Gozo%20Malta",
-    "type": "destination"
+    "type": "destination",
+    "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Off_Hondoq_ir-Rummien.jpg",
+    "imageAlt": "Coastal inlet at Ħondoq ir-Rummien, Gozo",
+    "imageCredit": "Photo: Marika Caruana · CC BY-SA 4.0",
+    "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Off_Hondoq_ir-Rummien.jpg"
   },
   {
     "name": "Sanap Cliffs",
@@ -138,7 +142,11 @@
     "tags": "nature",
     "description": "A striking natural coastal arch.",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=Wied%20il-Miela%C4%A7%20Gozo%20Malta",
-    "type": "destination"
+    "type": "destination",
+    "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Wied_il-Mielah.jpg",
+    "imageAlt": "Wied il-Mielaħ natural coastal arch in Gozo",
+    "imageCredit": "Photo: Bellina 09 · CC BY-SA 4.0",
+    "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Wied_il-Mielah.jpg"
   },
   {
     "name": "Ta’ Kola Windmill",
@@ -163,7 +171,11 @@
     "tags": "nature",
     "description": "A prominent hill above Marsalforn.",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=Tas-Salvatur%20Hill%20Gozo%20Malta",
-    "type": "destination"
+    "type": "destination",
+    "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Tas-Salvatur.jpg",
+    "imageAlt": "Tas-Salvatur Hill in Gozo",
+    "imageCredit": "Photo: Sudika · CC BY-SA 3.0",
+    "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Tas-Salvatur.jpg"
   },
   {
     "name": "Xwejni Salt Pans",
@@ -181,7 +193,11 @@
     "tags": "beach nature",
     "description": "A quiet coastal inlet near Nadur.",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=Da%C4%A7let%20Qorrot%20Gozo%20Malta",
-    "type": "destination"
+    "type": "destination",
+    "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/GozoDahletQorrot.jpg",
+    "imageAlt": "Daħlet Qorrot bay in Gozo",
+    "imageCredit": "Photo: Stefano Trezzi · CC BY-SA 3.0",
+    "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:GozoDahletQorrot.jpg"
   },
   {
     "name": "San Blas Bay",
