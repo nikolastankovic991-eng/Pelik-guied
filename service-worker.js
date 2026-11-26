@@ -41,7 +41,7 @@ self.addEventListener("fetch", event => {
     return;
   }
 
-  if (url.pathname.endsWith(".json") || url.pathname.endsWith(".webmanifest") || url.pathname.endsWith(".svg")) {
+  if (url.pathname.endsWith(".json") || url.pathname.endsWith(".webmanifest") || url.pathname.endsWith(".svg") || url.pathname.endsWith(".png")) {
     event.respondWith(
       caches.match(request).then(cached => cached || fetch(request).then(response => {
         if (response.ok) caches.open(CACHE_NAME).then(cache => cache.put(request, response.clone()));
