@@ -24,6 +24,15 @@ button{border:0;border-radius:7px;padding:11px 15px;font-weight:bold;cursor:poin
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script>
 <script>
 const db=window.supabase.createClient(window.PELIK_SUPABASE_URL,window.PELIK_SUPABASE_KEY);let currentAdminId=null;
+const publicCategories=new Set([
+ 'Restaurants & Cafés','Bars, Pubs & Nightlife','Bakeries, Butchers & Fishmongers','Supermarkets & Food Stores',
+ 'Diving & Water Sports','Tours, Guides & Excursions','Activities & Attractions','Arts, Culture & Entertainment',
+ 'Car Rental','Scooter, Quad & Motorcycle Rental','Bicycle & E-bike Rental','Boat Rental & Charters','Taxi, Transfers & Minibus',
+ 'Shopping & Retail','Clothing, Shoes & Accessories','Phone Shops & Mobile Accessories','Computers, IT & Electronics','Local Products, Farms & Crafts',
+ 'Pharmacies & Medical','Doctors, Dentists & Clinics','Hairdressers, Barbers & Beauty','Gyms, Sports & Wellness','Pets & Veterinary',
+ 'Property & Real Estate','Hardware, DIY & Building Supplies','Home, Garden & Furniture','Repairs, Trades & Maintenance','Cleaning & Laundry',
+ 'Professional & Business Services','Education & Childcare','Wedding & Event Services','Community & Public Services','Other local service'
+]);
 const loginPanel=document.getElementById('loginPanel'),dashboard=document.getElementById('dashboard'),notice=document.getElementById('notice'),list=document.getElementById('list'),draftList=document.getElementById('draftList'),claimRequests=document.getElementById('claimRequests');
 function say(t){notice.textContent=t;notice.style.display='block'}
 function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n}
