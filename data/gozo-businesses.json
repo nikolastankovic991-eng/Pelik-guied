@@ -984,5 +984,89 @@
     "status": "draft",
     "published": false,
     "featured": false
+  },
+  {
+    "id": "ta-dirjanu-victoria",
+    "name": "Ta’ Dirjanu Supermarket",
+    "category": [
+      "Supermarkets & Food Stores"
+    ],
+    "locality": "Victoria",
+    "address": "St George Fief, Victoria, Gozo, Malta",
+    "phone": "+356 2156 5927",
+    "website": null,
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Ta%27+Dirjanu+Supermarket+St+George+Fief+Victoria+Gozo",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Use a business-supplied photo or confirm commercial reuse permission.",
+    "description": "Ta’ Dirjanu Supermarket branch in Victoria.",
+    "source": "Google Maps business listing; verify details with the business before publication.",
+    "verificationStatus": "needs-business-confirmation",
+    "status": "draft",
+    "published": false,
+    "featured": false
+  },
+  {
+    "id": "ta-dirjanu-ghajnsielem",
+    "name": "Ta’ Dirjanu Supermarket",
+    "category": [
+      "Supermarkets & Food Stores"
+    ],
+    "locality": "Għajnsielem",
+    "address": "Triq l-Imġarr, Għajnsielem GSM 9017, Gozo, Malta",
+    "phone": "+356 2156 5927",
+    "website": null,
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Ta%27+Dirjanu+Supermarket+Triq+l-Imgarr+Ghajnsielem+Gozo",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Use a business-supplied photo or confirm commercial reuse permission.",
+    "description": "Ta’ Dirjanu Supermarket branch in Għajnsielem.",
+    "source": "Google Maps business listing; verify details with the business before publication.",
+    "verificationStatus": "needs-business-confirmation",
+    "status": "draft",
+    "published": false,
+    "featured": false
+  },
+  {
+    "id": "ta-dirjanu-marsalforn",
+    "name": "Ta’ Dirjanu Supermarket",
+    "category": [
+      "Supermarkets & Food Stores"
+    ],
+    "locality": "Marsalforn",
+    "address": "Triq il-Qbajjar, Żebbuġ, Gozo, Malta",
+    "phone": "+356 2156 5927",
+    "website": null,
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Ta%27+Dirjanu+Supermarket+Marsalforn+Gozo",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Use a business-supplied photo or confirm commercial reuse permission.",
+    "description": "Ta’ Dirjanu food store branch in the Marsalforn area.",
+    "source": "Google Maps business listing; verify details with the business before publication.",
+    "verificationStatus": "needs-business-confirmation",
+    "status": "draft",
+    "published": false,
+    "featured": false
+  },
+  {
+    "id": "ta-dirjanu-express-xewkija",
+    "name": "Ta’ Dirjanu Express",
+    "category": [
+      "Supermarkets & Food Stores"
+    ],
+    "locality": "Xewkija",
+    "address": "27M3+PR6, Xewkija, Gozo, Malta",
+    "phone": null,
+    "website": null,
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Ta%27+Dirjanu+Express+Xewkija+Gozo",
+    "imageUrl": null,
+    "imageSource": null,
+    "imageUse": "Use a business-supplied photo or confirm commercial reuse permission.",
+    "description": "Ta’ Dirjanu Express grocery store branch in Xewkija.",
+    "source": "Google Maps business listing; verify details with the business before publication.",
+    "verificationStatus": "needs-business-confirmation",
+    "status": "draft",
+    "published": false,
+    "featured": false
   }
 ]
