@@ -32,6 +32,8 @@ if (!Array.isArray(places) || places.length === 0) {
       }
     }
     if (place.imageUrl && (!place.imageUrl.includes("upload.wikimedia.org/wikipedia/commons/thumb/") || !place.imageUrl.includes("/800px-"))) errors.push(`${place.name}: imageUrl must use an optimized 800px Wikimedia thumbnail.`);
+    if (place.imageCredit && !/(CC BY-SA|CC0|Public domain)/i.test(place.imageCredit)) errors.push(`${place.name}: photo credit must state a commercial-use-compatible licence.`);
+    if (place.imageCredit && /CC BY-NC|NonCommercial/i.test(place.imageCredit)) errors.push(`${place.name}: non-commercial-only images are not permitted.`);
     if (place.mapUrl && !place.mapUrl.includes("google.com/maps")) errors.push(`${place.name}: mapUrl must point to Google Maps.`)
     if (place.imageCreditUrl && !place.imageCreditUrl.includes("commons.wikimedia.org")) errors.push(`${place.name}: photo credit link must point to Wikimedia Commons.`);
   }
