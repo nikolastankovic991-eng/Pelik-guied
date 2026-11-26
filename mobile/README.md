@@ -17,7 +17,7 @@ This is the separate native mobile app project. The existing public website rema
 - Expo SDK 58.1 / React Native 0.88
 - Expo Router file-based navigation
 - Supabase public client key only; never place a service-role key in this app
-- GitHub Actions validates destination records and runs TypeScript and Expo Doctor checks on mobile changes
+- GitHub Actions validates destination data, checks for client-side secret keys, audits production dependencies, runs TypeScript and Expo Doctor checks, and bundles JavaScript for iOS and Android
 
 ## Run locally
 From this folder:
