@@ -24,6 +24,12 @@ async function openExternal(url: string, label: string) {
   }
 }
 
+function BusinessPhoto({ url, name }: { url: string | null; name: string }) {
+  const [failed, setFailed] = useState(false);
+  if (!isHttpUrl(url) || failed) return <View style={s.imagePlaceholder}><Text style={s.placeholderText}>GOZO GUIDE</Text></View>;
+  return <Image source={{ uri: url!.trim() }} style={s.image} accessibilityLabel={name} onError={() => setFailed(true)} />;
+}
+
 type Business = {
   id: string;
   business_name: string;
@@ -140,7 +146,7 @@ export default function Businesses() {
           }
           renderItem={({ item }) => (
             <View style={s.card}>
-              {isHttpUrl(item.image_url) ? <Image source={{ uri: item.image_url!.trim() }} style={s.image} accessibilityLabel={item.business_name} /> : null}
+              <BusinessPhoto url={item.image_url} name={item.business_name} />
               <View style={s.cardBody}>
                 <Text style={s.title}>{item.business_name}</Text>
                 <Text style={s.meta}>{item.category} · {item.village || "Gozo"}</Text>
@@ -171,7 +177,7 @@ const s = StyleSheet.create({
   activeText: { color: "#fff" },
   results: { paddingBottom: 24, paddingTop: 3 },
   card: { backgroundColor: "#fff", borderRadius: 15, overflow: "hidden", marginBottom: 12 },
-  image: { width: "100%", height: 170, backgroundColor: "#E4E7E2" },
+  image: { width: "100%", height: 170, backgroundColor: "#E4E7E2" },\n  imagePlaceholder: { width: "100%", height: 100, backgroundColor: "#E9EEE9", alignItems: "center", justifyContent: "center" },\n  placeholderText: { color: "#7B887F", fontWeight: "800", letterSpacing: 2, fontSize: 12 },
   cardBody: { padding: 16 },
   title: { fontSize: 18, fontWeight: "800", color: "#073D34" },
   meta: { color: "#718078", fontSize: 12, marginTop: 4 },
