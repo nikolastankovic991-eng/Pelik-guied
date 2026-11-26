@@ -62,7 +62,6 @@ export default function Businesses() {
       if (!active) return;
       if (requestError) {
         setError("We couldn't load the business directory. Please check your connection and try again.");
-        setRows([]);
       } else {
         setRows((data || []) as Business[]);
       }
@@ -71,7 +70,6 @@ export default function Businesses() {
     load().catch(() => {
       if (active) {
         setError("We couldn't load the business directory. Please try again.");
-        setRows([]);
         setLoading(false);
       }
     });
@@ -127,6 +125,7 @@ export default function Businesses() {
         <FlatList
           data={filtered}
           keyExtractor={item => item.id}
+          refreshControl={<RefreshControl refreshing={refreshing || (loading && rows.length > 0)} onRefresh={() => { setRefreshing(true); setReload(value => value + 1); }} tintColor="#073D34" />}
           contentContainerStyle={filtered.length ? s.results : s.emptyList}
           ListEmptyComponent={
             <View style={s.state}>
