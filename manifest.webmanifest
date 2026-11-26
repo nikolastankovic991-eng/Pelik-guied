@@ -1,0 +1,19 @@
+{
+  "name": "Gozo Guide by PELIK",
+  "short_name": "Gozo Guide",
+  "description": "Discover Gozo. Experience more.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f3eb",
+  "theme_color": "#073d34",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "./icons/gozo-guide.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
