@@ -1,8 +1,28 @@
 import { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, Image, Linking, Pressable, RefreshControl, StyleSheet, Text, TextInput, View } from "react-native";
+import { ActivityIndicator, Alert, FlatList, Image, Linking, Pressable, RefreshControl, StyleSheet, Text, TextInput, View } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { supabase } from "../lib/supabase";
 import { groups } from "../data/categories";
+
+function isHttpUrl(value?: string) {
+  if (!value) return false;
+  try {
+    const parsed = new URL(value.trim());
+    return parsed.protocol === "https:" || parsed.protocol === "http:";
+  } catch {
+    return false;
+  }
+}
+
+async function openExternal(url: string, label: string) {
+  try {
+    const supported = await Linking.canOpenURL(url);
+    if (!supported) throw new Error("Unsupported URL");
+    await Linking.openURL(url);
+  } catch {
+    Alert.alert("Could not open link", `Please try again to open ${label}.`);
+  }
+}
 
 type Business = {
   id: string;
@@ -117,15 +137,15 @@ export default function Businesses() {
           }
           renderItem={({ item }) => (
             <View style={s.card}>
-              {item.image_url ? <Image source={{ uri: item.image_url }} style={s.image} accessibilityLabel={item.business_name} /> : null}
+              {isHttpUrl(item.image_url) ? <Image source={{ uri: item.image_url!.trim() }} style={s.image} accessibilityLabel={item.business_name} /> : null}
               <View style={s.cardBody}>
                 <Text style={s.title}>{item.business_name}</Text>
                 <Text style={s.meta}>{item.category} · {item.village || "Gozo"}</Text>
                 {item.description ? <Text style={s.desc}>{item.description}</Text> : null}
                 <View style={s.actions}>
-                  {item.phone ? <Text onPress={() => Linking.openURL("tel:" + item.phone)} style={s.link}>Call</Text> : null}
-                  {item.website ? <Text onPress={() => Linking.openURL(item.website!)} style={s.link}>Website</Text> : null}
-                  <Text onPress={() => Linking.openURL("https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent([item.business_name, item.address, item.village, "Gozo Malta"].filter(Boolean).join(" ")))} style={s.link}>Google Maps ↗</Text>
+                  {item.phone && item.phone.replace(/[^+0-9]/g, "").length >= 5 ? <Pressable accessibilityRole="link" accessibilityLabel={`Call ${item.business_name}`} onPress={() => openExternal("tel:" + item.phone!.replace(/[^+0-9]/g, ""), "the phone number")}><Text style={s.link}>Call</Text></Pressable> : null}
+                  {isHttpUrl(item.website) ? <Pressable accessibilityRole="link" accessibilityLabel={`Visit ${item.business_name} website`} onPress={() => openExternal(item.website!.trim(), "the website")}><Text style={s.link}>Website</Text></Pressable> : null}
+                  <Pressable accessibilityRole="link" accessibilityLabel={`Find ${item.business_name} on Google Maps`} onPress={() => openExternal("https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent([item.business_name, item.address, item.village, "Gozo Malta"].filter(Boolean).join(" ")), "Google Maps")}><Text style={s.link}>Google Maps ↗</Text></Pressable>
                 </View>
               </View>
             </View>
