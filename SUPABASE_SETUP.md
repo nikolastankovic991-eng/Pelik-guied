@@ -29,11 +29,13 @@ The connected project has been granted the table privileges required for these R
 
 The public application policy now whitelists the exact 33 categories used by the website and mobile app, so accommodation categories are rejected even if a client bypasses the forms. The public business SELECT policy uses the same whitelist, so private legacy accommodation drafts remain hidden even if an administrator accidentally marks one approved and published. The admin approval actions also refuse to publish categories outside the public whitelist. The public claim-request policy also checks that the submitted business ID and name match an existing approved, published listing. Anonymous users have INSERT-only access to claim requests; authenticated administrators have SELECT and UPDATE access, still restricted by the admin RLS policies.
 
+Business application approval is performed by `public.admin_approve_business_submission(uuid)`. The function uses a row lock and a single database transaction to create the public business and update the application together. It verifies the caller's authenticated UUID against `admin_users`, checks the public category whitelist, rejects already-processed applications, and is executable only by the `authenticated` role. The live project has this function installed. Its reproducible migration is `supabase/migrations/20261126000000_atomic_business_approval.sql`.
+
 ## Website files
 
 - `supabase-config.js`: public project URL and publishable key only.
 - `submit-business.html`: application form inserts pending/unpublished/not-featured rows.
-- `admin.html`: password sign-in, verifies the admin row, then offers approve/reject actions.
+- `admin.html`: password sign-in, verifies the admin row, then offers approve/reject actions. Approval calls the transactional `public.admin_approve_business_submission(uuid)` RPC.
 - `businesses.html`: displays only approved and published businesses from Supabase.
 - `claim-business.html`: creates requests for existing approved and published listings; requests stay pending until an administrator reviews them.
 
@@ -50,7 +52,7 @@ The public application policy now whitelists the exact 33 categories used by the
 2. Add that URL to Supabase Authentication URL Configuration and redirect allow-list.
 3. Confirm the administrator has a working email/password sign-in method.
 4. Submit a test business application.
-5. Sign in at `admin.html`, approve the test record, and confirm it appears on `businesses.html`.
+5. Sign in at `admin.html`, approve the test record through the atomic approval RPC, and confirm it appears on `businesses.html`.
 6. Remove the test listing after verification.
 7. Confirm image ownership/licensing and business details before publishing real listings.
 8. Enable Supabase leaked-password protection for administrator sign-in.
