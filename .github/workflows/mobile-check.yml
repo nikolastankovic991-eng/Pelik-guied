@@ -25,6 +25,8 @@ jobs:
           node-version: "22.13"
       - name: Install dependencies
         run: npm install
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=high
       - name: Validate destination content
         run: npm run validate:content
       - name: TypeScript check
