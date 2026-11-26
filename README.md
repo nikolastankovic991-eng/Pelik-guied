@@ -8,6 +8,9 @@ A free Gozo-first public directory for visitors, residents, places, local busine
 - `businesses.html` — public directory; it loads only approved and published rows from Supabase.
 - `submit-business.html` — public business application form. New applications are inserted as pending, unpublished and not featured.
 - `admin.html` — private administrator sign-in and application review dashboard.
+- `claim-business.html` — public claim, correction and removal request form for approved listings.
+- `manifest.webmanifest` and `service-worker.js` — installable PWA shell with offline page/data caching.
+- `mobile/` — separate Expo/React Native iOS and Android app project.
 - `supabase-config.js` — browser-safe Supabase project URL and publishable key. Never put a service-role key here.
 
 ## Business approval workflow
@@ -28,10 +31,18 @@ The live project currently uses `admin_users`, `business_submissions`, and `busi
 
 Do not run the older draft schema in `supabase/schema.sql` against this live project without reconciling its different table names (`user_roles` and `business_listings`) with the existing live schema.
 
+## Current data state (26 November 2026)
+
+The database contains 53 private draft candidates, zero approved/published public businesses, zero applications and zero claim requests. The public business directory is intentionally empty until the administrator approves and publishes listings. Legacy accommodation drafts remain private and are blocked from public visibility.
+
+## Install the website on iPhone
+
+Open the public website in Safari, tap Share, then choose **Add to Home Screen**. The website includes a home-screen icon and an installable PWA shell. This is a web app shortcut, not the separate native iOS app.
+
 ## Important launch checks
 
 - Configure the production website URL in Supabase Auth redirect settings before testing admin sign-in.
-- Ensure the admin account has a valid sign-in method/password in Supabase Auth.
+- Ensure the admin account has a valid sign-in method/password in Supabase Auth and enable leaked-password protection.
 - Test a business application with a test listing before public launch.
 - Confirm business details and obtain permission for every photo before publishing.
 - Never publish the Supabase service-role key or other secret credentials.
