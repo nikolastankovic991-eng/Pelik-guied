@@ -1,6 +1,8 @@
 import { readFile } from "node:fs/promises";
 
 const places = JSON.parse(await readFile(new URL("../../data/gozo-places.json", import.meta.url), "utf8"));
+const appConfig = JSON.parse(await readFile(new URL("../app.json", import.meta.url), "utf8"));
+const categoriesSource = await readFile(new URL("../data/categories.ts", import.meta.url), "utf8");
 const errors = [];
 
 if (!Array.isArray(places) || places.length === 0) {
@@ -33,9 +35,15 @@ if (!Array.isArray(places) || places.length === 0) {
   }
 }
 
+const iconPath = appConfig.expo?.icon;
+if (iconPath !== "./assets/icon.png") errors.push("Expo app icon must use ./assets/icon.png.");
+try { await readFile(new URL("../assets/icon.png", import.meta.url)); } catch { errors.push("Configured app icon file is missing."); }
+if (!appConfig.expo?.plugins?.some((plugin) => Array.isArray(plugin) && plugin[0] === "expo-splash-screen")) errors.push("Expo splash screen plugin is not configured.");
+if (/accommodation|hotels|airbnb|guesthouses|holiday apartments|holiday rentals|farmhouses/i.test(categoriesSource)) errors.push("Public business categories must not include accommodation.");
+
 if (errors.length) {
   console.error("Destination content validation failed:");
   for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
 }
-console.log(`Validated ${places.length} Gozo destinations: required details, unique names, HTTPS links, Maps links and photo-credit links.`);
+console.log(`Validated ${places.length} Gozo destinations, app icon, splash configuration and public category exclusions.`);
