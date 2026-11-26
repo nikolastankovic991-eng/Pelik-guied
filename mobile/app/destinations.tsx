@@ -41,6 +41,7 @@ export default function Destinations() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [query, setQuery] = useState("");
+  const [selectedTag, setSelectedTag] = useState("");
 
   const loadPlaces = useCallback(async () => {
     setLoading(true);
@@ -66,7 +67,11 @@ export default function Destinations() {
     return <View style={s.center}><ActivityIndicator color="#073D34" size="large" /><Text style={s.desc}>Loading Gozo destinations…</Text></View>;
   }
 
-  const filteredPlaces = places.filter((place) => [place.name, place.description, place.tags || ""].join(" ").toLowerCase().includes(query.trim().toLowerCase()));
+  const filteredPlaces = places.filter((place) => {
+    const matchesSearch = [place.name, place.description, place.tags || ""].join(" ").toLowerCase().includes(query.trim().toLowerCase());
+    const matchesTag = !selectedTag || (place.tags || "").toLowerCase().split(/\\s+/).includes(selectedTag);
+    return matchesSearch && matchesTag;
+  });
 
   if (error && !places.length) {
     return (
@@ -84,8 +89,8 @@ export default function Destinations() {
       data={filteredPlaces}
       keyExtractor={item => item.name}
       refreshControl={<RefreshControl refreshing={loading} onRefresh={loadPlaces} tintColor="#073D34" />}
-      ListHeaderComponent={<View>{error ? <Text accessibilityRole="alert" style={s.refreshNotice}>{error} Showing the last available destinations.</Text> : null}<Text style={s.intro}>Discover Gozo’s beaches, villages, history and natural landmarks. Pull down to refresh.</Text><TextInput value={query} onChangeText={setQuery} placeholder="Search destinations" placeholderTextColor="#87928B" returnKeyType="search" accessibilityLabel="Search Gozo destinations" style={s.search} /></View>}
-      ListEmptyComponent={<View style={s.empty}><Text style={s.emptyTitle}>{places.length ? "No destinations found" : "No destinations available"}</Text><Text style={s.emptyText}>{places.length ? "Try another search term." : "Pull down to refresh or try again later."}</Text>{query ? <Pressable accessibilityRole="button" onPress={() => setQuery("")} style={s.button}><Text style={s.buttonText}>Clear search</Text></Pressable> : null}</View>}
+      ListHeaderComponent={<View>{error ? <Text accessibilityRole="alert" style={s.refreshNotice}>{error} Showing the last available destinations.</Text> : null}<Text style={s.intro}>Discover Gozo’s beaches, villages, history and natural landmarks. Pull down to refresh.</Text><TextInput value={query} onChangeText={setQuery} placeholder="Search destinations" placeholderTextColor="#87928B" returnKeyType="search" accessibilityLabel="Search Gozo destinations" style={s.search} /><View style={s.filters}>{[{label:"All",value:""},{label:"Beaches",value:"beach"},{label:"History",value:"history"},{label:"Nature",value:"nature"}].map((tag) => <Pressable key={tag.label} accessibilityRole="button" accessibilityState={{selected:selectedTag===tag.value}} onPress={() => setSelectedTag(tag.value)} style={[s.filterChip, selectedTag===tag.value && s.filterActive]}><Text style={[s.filterText, selectedTag===tag.value && s.filterTextActive]}>{tag.label}</Text></Pressable>)}</View></View>}
+      ListEmptyComponent={<View style={s.empty}><Text style={s.emptyTitle}>{places.length ? "No destinations found" : "No destinations available"}</Text><Text style={s.emptyText}>{places.length ? "Try another search term." : "Pull down to refresh or try again later."}</Text>{query ? <Pressable accessibilityRole="button" onPress={() => { setQuery(""); setSelectedTag(""); }} style={s.button}><Text style={s.buttonText}>Clear search</Text></Pressable> : null}</View>}
       renderItem={({ item }) => (
         <View style={s.card}>
           <DestinationPhoto place={item} />
@@ -110,6 +115,11 @@ const s = StyleSheet.create({
   center: { flex: 1, alignItems: "center", justifyContent: "center", gap: 10, padding: 28 },
   refreshNotice: { color: "#8A5A16", backgroundColor: "#FFF3D8", borderRadius: 9, padding: 10, marginBottom: 10, fontSize: 12 },
   intro: { color: "#56645C", lineHeight: 21, marginBottom: 14 },
+  filters: { flexDirection: "row", flexWrap: "wrap", gap: 8, marginBottom: 14 },
+  filterChip: { backgroundColor: "#E8E9E1", paddingVertical: 8, paddingHorizontal: 13, borderRadius: 18 },
+  filterActive: { backgroundColor: "#073D34" },
+  filterText: { color: "#073D34", fontWeight: "700", fontSize: 12 },
+  filterTextActive: { color: "#fff" },
   search: { backgroundColor: "#fff", padding: 14, borderRadius: 12, marginBottom: 14, color: "#24332E" },
   empty: { alignItems: "center", padding: 28, gap: 8 },
   emptyTitle: { color: "#073D34", fontWeight: "800", fontSize: 17 },
