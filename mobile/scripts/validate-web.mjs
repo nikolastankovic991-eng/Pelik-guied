@@ -20,6 +20,14 @@ for (const page of pages) {
   }
 }
 
+try {
+  const serviceWorker = await readFile(new URL("../../service-worker.js", import.meta.url), "utf8");
+  new vm.Script(serviceWorker, { filename: "service-worker.js" });
+  checked++;
+} catch (error) {
+  errors.push("service-worker.js: " + error.message);
+}
+
 if (errors.length) {
   console.error("Website JavaScript syntax validation failed:");
   for (const error of errors) console.error("- " + error);
