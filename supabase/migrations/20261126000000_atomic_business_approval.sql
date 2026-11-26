@@ -3,7 +3,7 @@
 create or replace function public.admin_approve_business_submission(p_submission_id uuid)
 returns uuid
 language plpgsql
-security definer
+security invoker
 set search_path = public, pg_temp
 as $$
 declare
