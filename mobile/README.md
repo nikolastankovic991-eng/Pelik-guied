@@ -34,7 +34,8 @@ Use an Expo development build for real-device testing and production work. Store
 
 ## Before public release
 1. Run successful iOS and Android development/release builds and test on physical devices.
-2. Verify the Supabase production policies and test that anonymous applicants cannot approve, publish, feature or edit submissions.\n3. Enable Supabase leaked-password protection for administrator sign-in.
+2. Verify the Supabase production policies and test that anonymous applicants cannot approve, publish, feature or edit submissions.
+3. Enable Supabase leaked-password protection for administrator sign-in.
 4. Confirm that the app's submission form fields match the live Supabase table and policy configuration.
 5. Verify photo permissions/licences for every destination and business image.
 6. Complete the privacy notice with the operator's legal identity, contact details, retention periods and provider/data-transfer details.
