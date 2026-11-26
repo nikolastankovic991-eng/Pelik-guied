@@ -27,7 +27,7 @@ The intended access model is:
 
 The connected project has been granted the table privileges required for these RLS policies to work. The policies remain the row-level security boundary.
 
-The public application policy now whitelists the exact 33 categories used by the website and mobile app, so accommodation categories are rejected even if a client bypasses the forms. The public business SELECT policy uses the same whitelist, so private legacy accommodation drafts remain hidden even if an administrator accidentally marks one approved and published. The public claim-request policy also checks that the submitted business ID and name match an existing approved, published listing. Anonymous users have INSERT-only access to claim requests; authenticated administrators have SELECT and UPDATE access, still restricted by the admin RLS policies.
+The public application policy now whitelists the exact 33 categories used by the website and mobile app, so accommodation categories are rejected even if a client bypasses the forms. The public business SELECT policy uses the same whitelist, so private legacy accommodation drafts remain hidden even if an administrator accidentally marks one approved and published. The admin approval actions also refuse to publish categories outside the public whitelist. The public claim-request policy also checks that the submitted business ID and name match an existing approved, published listing. Anonymous users have INSERT-only access to claim requests; authenticated administrators have SELECT and UPDATE access, still restricted by the admin RLS policies.
 
 ## Website files
 
