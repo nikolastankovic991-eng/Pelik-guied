@@ -93,10 +93,10 @@
     "description": "A richly decorated basilica in Victoria.",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=St%20George%E2%80%99s%20Basilica%20Gozo%20Malta",
     "type": "destination",
-    "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Basilica_of_St_George_Victoria_Gozo.jpg",
+    "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/St_George%27s_Basilica_Victoria_Gozo.jpg",
     "imageAlt": "St George’s Basilica in Victoria, Gozo",
-    "imageCredit": "Photo: BrandyMay · CC BY-SA 4.0",
-    "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Basilica_of_St_George_Victoria_Gozo.jpg"
+    "imageCredit": "Photo: NickGeorge1993 · CC BY-SA 3.0",
+    "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:St_George%27s_Basilica_Victoria_Gozo.jpg"
   },
   {
     "name": "Mixta Cave",
