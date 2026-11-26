@@ -48,4 +48,4 @@ Open the public website in Safari, tap Share, then choose **Add to Home Screen**
 - Confirm business details and obtain permission for every photo before publishing.
 - Never publish the Supabase service-role key or other secret credentials.
 - Confirm hosting/deployment is configured; GitHub commits alone do not guarantee that the live website has updated.
-- Apply and retain the SQL migration `supabase/migrations/20261126000000_atomic_business_approval.sql` in the live database before relying on the updated admin approval button.
+- Apply and retain the SQL migration `supabase/migrations/20261126203940_atomic_business_approval.sql` in the live database before relying on the updated admin approval button.
