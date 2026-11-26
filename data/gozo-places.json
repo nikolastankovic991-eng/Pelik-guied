@@ -116,14 +116,22 @@
     "tags": "nature",
     "description": "Clifftop scenery and walking routes.",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=Sanap%20Cliffs%20Gozo%20Malta",
-    "type": "destination"
+    "type": "destination",
+    "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sanap_Cliffs_-_Gozo_Malta_1.jpg",
+    "imageAlt": "Sanap Cliffs in Gozo",
+    "imageCredit": "Photo: Plutoworld · CC BY-SA 4.0",
+    "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Sanap_Cliffs_-_Gozo_Malta_1.jpg"
   },
   {
     "name": "Wied il-Għasri",
     "tags": "nature beach",
     "description": "A narrow sea inlet framed by high cliffs.",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=Wied%20il-G%C4%A7asri%20Gozo%20Malta",
-    "type": "destination"
+    "type": "destination",
+    "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Wied_il-Ghasri,_Gozo.jpg",
+    "imageAlt": "Wied il-Għasri coastal inlet in Gozo",
+    "imageCredit": "Photo: Marika Caruana · CC BY-SA 4.0",
+    "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Wied_il-Ghasri,_Gozo.jpg"
   },
   {
     "name": "Wied il-Mielaħ",
