@@ -10,6 +10,12 @@
   "orientation": "portrait-primary",
   "icons": [
     {
+      "src": "./icons/gozo-guide.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
       "src": "./icons/gozo-guide.svg",
       "sizes": "any",
       "type": "image/svg+xml",
