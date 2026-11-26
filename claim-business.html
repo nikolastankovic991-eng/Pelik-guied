@@ -19,6 +19,10 @@ button{margin-top:18px;border:0;border-radius:9px;padding:14px 18px;background:v
 .business{padding:12px;background:var(--cream);border-radius:9px;font-weight:bold}
 footer{text-align:center;color:var(--muted);padding:22px}
 </style>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#073d34">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Gozo Guide">
 </head>
 <body>
 <header><div class="logo">GOZO <span>GUIDE</span> BY PELIK</div><a href="businesses.html">Back to directory</a></header>
@@ -63,5 +67,11 @@ form.addEventListener('submit',async event=>{
  form.reset();show('Thank you. Your request has been received and is awaiting review. No change has been made to the public listing yet.');
 });
 init();
+</script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js").catch(error => console.warn("Offline support unavailable:", error)));
+}
 </script>
 </body></html>
