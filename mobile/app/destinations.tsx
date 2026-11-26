@@ -44,8 +44,7 @@ export default function Destinations() {
       if (!Array.isArray(data) || !data.every((item) => item && typeof item === "object" && typeof item.name === "string" && typeof item.description === "string")) throw new Error("Unexpected destination data");
       setPlaces(data as Place[]);
     } catch {
-      setPlaces([]);
-      setError("We couldn't load Gozo destinations. Please check your connection and try again.");
+      setError("We couldn't refresh Gozo destinations. Please check your connection and try again.");
     } finally {
       setLoading(false);
     }
@@ -77,7 +76,7 @@ export default function Destinations() {
       data={places}
       keyExtractor={item => item.name}
       refreshControl={<RefreshControl refreshing={loading} onRefresh={loadPlaces} tintColor="#073D34" />}
-      ListHeaderComponent={<View><Text style={s.intro}>Discover Gozo’s beaches, villages, history and natural landmarks. Pull down to refresh.</Text><TextInput value={query} onChangeText={setQuery} placeholder="Search destinations" placeholderTextColor="#87928B" returnKeyType="search" accessibilityLabel="Search Gozo destinations" style={s.search} /></View>}
+      ListHeaderComponent={<View>{error ? <Text accessibilityRole="alert" style={s.refreshNotice}>{error} Showing the last available destinations.</Text> : null}<Text style={s.intro}>Discover Gozo’s beaches, villages, history and natural landmarks. Pull down to refresh.</Text><TextInput value={query} onChangeText={setQuery} placeholder="Search destinations" placeholderTextColor="#87928B" returnKeyType="search" accessibilityLabel="Search Gozo destinations" style={s.search} /></View>}
       ListEmptyComponent={<View style={s.empty}><Text style={s.emptyTitle}>{places.length ? "No destinations found" : "No destinations available"}</Text><Text style={s.emptyText}>{places.length ? "Try another search term." : "Pull down to refresh or try again later."}</Text>{query ? <Pressable accessibilityRole="button" onPress={() => setQuery("")} style={s.button}><Text style={s.buttonText}>Clear search</Text></Pressable> : null}</View>}
       renderItem={({ item }) => (
         <View style={s.card}>
@@ -101,6 +100,7 @@ export default function Destinations() {
 const s = StyleSheet.create({
   list: { padding: 14, paddingBottom: 30 },
   center: { flex: 1, alignItems: "center", justifyContent: "center", gap: 10, padding: 28 },
+  refreshNotice: { color: "#8A5A16", backgroundColor: "#FFF3D8", borderRadius: 9, padding: 10, marginBottom: 10, fontSize: 12 },
   intro: { color: "#56645C", lineHeight: 21, marginBottom: 14 },
   search: { backgroundColor: "#fff", padding: 14, borderRadius: 12, marginBottom: 14, color: "#24332E" },
   empty: { alignItems: "center", padding: 28, gap: 8 },
