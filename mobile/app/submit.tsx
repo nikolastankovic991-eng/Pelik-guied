@@ -102,7 +102,7 @@ export default function Submit() {
           <Text style={s.group}>{group.emoji}  {group.title}</Text>
           <View style={s.options}>
             {group.items.map(item => (
-              <Pressable key={item} onPress={() => setCategory(item)} style={[s.option, category === item && s.selected]}>
+              <Pressable key={item} onPress={() => setCategory(item)} accessibilityRole="radio" accessibilityState={{ selected: category === item }} style={[s.option, category === item && s.selected]}>
                 <Text style={[s.optionText, category === item && s.selectedText]}>{category === item ? "✓  " : ""}{item}</Text>
               </Pressable>
             ))}
@@ -113,7 +113,7 @@ export default function Submit() {
       <Text style={s.label}>Village *</Text>
       <View style={s.options}>
         {villages.map(item => (
-          <Pressable key={item} onPress={() => setVillage(item)} style={[s.option, village === item && s.selected]}>
+          <Pressable key={item} onPress={() => setVillage(item)} accessibilityRole="radio" accessibilityState={{ selected: village === item }} style={[s.option, village === item && s.selected]}>
             <Text style={[s.optionText, village === item && s.selectedText]}>{village === item ? "✓  " : ""}{item}</Text>
           </Pressable>
         ))}
@@ -128,10 +128,10 @@ export default function Submit() {
 
       <Pressable onPress={() => setConsent(value => !value)} style={s.consentRow} accessibilityRole="checkbox" accessibilityState={{ checked: consent }}>
         <View style={[s.checkbox, consent && s.checkboxChecked]}>{consent ? <Text style={s.check}>✓</Text> : null}</View>
-        <Text style={s.consentText}>I have read the <Text style={s.inlineLink} onPress={() => Linking.openURL(privacyUrl)}>Privacy Notice</Text> and confirm I am authorised to submit these business details and any materials provided.</Text>
+        <Text style={s.consentText}>I have read the <Text style={s.inlineLink} accessibilityRole="link" onPress={() => Linking.openURL(privacyUrl)}>Privacy Notice</Text> and confirm I am authorised to submit these business details and any materials provided.</Text>
       </Pressable>
 
-      <Pressable disabled={busy} onPress={send} style={[s.button, busy && s.buttonDisabled]}>
+      <Pressable disabled={busy} onPress={send} accessibilityRole="button" accessibilityState={{ disabled: busy, busy }} style={[s.button, busy && s.buttonDisabled]}>
         <Text style={s.buttonText}>{busy ? "Submitting…" : "Submit free application"}</Text>
       </Pressable>
       <Text style={s.foot}>Your application starts as pending and unpublished. Only an administrator can approve and publish it. Accommodation listings are not accepted.</Text>
