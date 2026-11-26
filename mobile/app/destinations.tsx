@@ -69,7 +69,7 @@ export default function Destinations() {
 
   const filteredPlaces = places.filter((place) => {
     const matchesSearch = [place.name, place.description, place.tags || ""].join(" ").toLowerCase().includes(query.trim().toLowerCase());
-    const matchesTag = !selectedTag || (place.tags || "").toLowerCase().split(/\\s+/).includes(selectedTag);
+    const matchesTag = !selectedTag || (place.tags || "").toLowerCase().split(/\s+/).includes(selectedTag);
     return matchesSearch && matchesTag;
   });
 
