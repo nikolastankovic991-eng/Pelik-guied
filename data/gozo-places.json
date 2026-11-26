@@ -91,7 +91,11 @@
     "tags": "nature",
     "description": "A scenic cave overlooking Ramla Bay.",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=Mixta%20Cave%20Gozo%20Malta",
-    "type": "destination"
+    "type": "destination",
+    "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Tal-Mixta_Cave_-_Gozo.jpg",
+    "imageAlt": "Tal-Mixta Cave overlooking Ramla Bay, Gozo",
+    "imageCredit": "Photo: Marika Caruana · CC BY-SA 4.0",
+    "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Tal-Mixta_Cave_-_Gozo.jpg"
   },
   {
     "name": "Mġarr ix-Xini",
@@ -133,7 +137,11 @@
     "tags": "history",
     "description": "A traditional windmill museum in Xagħra.",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=Ta%E2%80%99%20Kola%20Windmill%20Gozo%20Malta",
-    "type": "destination"
+    "type": "destination",
+    "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Ta%27_Kola_Windmill.jpg",
+    "imageAlt": "Ta’ Kola Windmill in Xagħra, Gozo",
+    "imageCredit": "Photo: Cassarem · CC BY-SA 4.0",
+    "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Ta%E2%80%99_Kola_Windmill.jpg"
   },
   {
     "name": "Il-Lunzjata Valley",
