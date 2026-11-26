@@ -5,6 +5,15 @@ import { groups } from "../data/categories";
 
 const villages = ["Victoria", "Xagħra", "Nadur", "Qala", "Għajnsielem", "Xewkija", "Żebbuġ", "Għarb", "Għasri", "Munxar", "Fontana", "Kerċem", "San Lawrenz", "Sannat", "Marsalforn", "Xlendi"];
 const privacyUrl = "https://nikolastankovic991-eng.github.io/Pelik-guied/privacy.html";
+function validWebAddress(value: string) {
+  try {
+    const parsed = new URL(value.trim());
+    return (parsed.protocol === "https:" || parsed.protocol === "http:") && !!parsed.hostname && parsed.hostname.includes(".");
+  } catch {
+    return false;
+  }
+}
+
 
 export default function Submit() {
   const [name, setName] = useState("");
@@ -84,7 +93,7 @@ export default function Submit() {
       setName(""); setCategory(""); setVillage(""); setAddress(""); setPhone(""); setEmail(""); setWebsite(""); setImageUrl(""); setDescription(""); setConsent(false);
     } catch (error) {
       const message = error instanceof Error ? error.message : "Please try again later.";
-      Alert.alert("Could not submit", message);
+      Alert.alert("Could not submit", "We could not send your application. Please check your connection and try again.");
     } finally {
       setBusy(false);
     }
@@ -130,7 +139,7 @@ export default function Submit() {
 
       <Pressable onPress={() => setConsent(value => !value)} style={s.consentRow} accessibilityRole="checkbox" accessibilityState={{ checked: consent }}>
         <View style={[s.checkbox, consent && s.checkboxChecked]}>{consent ? <Text style={s.check}>✓</Text> : null}</View>
-        <Text style={s.consentText}>I have read the <Text style={s.inlineLink} accessibilityRole="link" onPress={() => Linking.openURL(privacyUrl)}>Privacy Notice</Text> and confirm I am authorised to submit these business details and any materials provided.</Text>
+        <Text style={s.consentText}>I have read the <Text style={s.inlineLink} accessibilityRole="link" onPress={async () => { try { await Linking.openURL(privacyUrl); } catch { Alert.alert("Could not open privacy notice", "Please try again later."); } }}>Privacy Notice</Text> and confirm I am authorised to submit these business details and any materials provided.</Text>
       </Pressable>
 
       <Pressable disabled={busy} onPress={send} accessibilityRole="button" accessibilityState={{ disabled: busy, busy }} style={[s.button, busy && s.buttonDisabled]}>
