@@ -11,7 +11,11 @@
     "tags": "history",
     "description": "Explore Gozo’s fortified historic centre above Victoria.",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=Cittadella%20Gozo%20Malta",
-    "type": "destination"
+    "type": "destination",
+    "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/The_Cittadella,_Gozo.jpg",
+    "imageAlt": "The Cittadella in Gozo",
+    "imageCredit": "Photo: John Cummings · CC BY-SA 4.0",
+    "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:The_Cittadella,_Gozo.jpg"
   },
   {
     "name": "Ġgantija Temples",
@@ -36,14 +40,22 @@
     "tags": "history",
     "description": "A landmark basilica set in the Gozitan countryside.",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=Ta%E2%80%99%20Pinu%20Sanctuary%20Gozo%20Malta",
-    "type": "destination"
+    "type": "destination",
+    "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Gozo_Ta%27_Pinu.jpg",
+    "imageAlt": "Ta’ Pinu Sanctuary in Gozo",
+    "imageCredit": "Photo: Martin Galea · CC BY-SA 4.0",
+    "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Gozo_Ta%27_Pinu.jpg"
   },
   {
     "name": "Dwejra",
     "tags": "nature",
     "description": "A dramatic coastal area known for its geological features.",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=Dwejra%20Gozo%20Malta",
-    "type": "destination"
+    "type": "destination",
+    "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Dwejra,_Gozo.jpg",
+    "imageAlt": "Dwejra coastal landscape in Gozo",
+    "imageCredit": "Photo: Bellina 09 · CC BY-SA 4.0",
+    "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Dwejra,_Gozo.jpg"
   },
   {
     "name": "Marsalforn",
