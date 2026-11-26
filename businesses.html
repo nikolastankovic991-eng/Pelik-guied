@@ -77,6 +77,10 @@ footer{padding-bottom:35px}
 
 .subcategories{display:flex;flex-wrap:wrap;gap:9px;margin:-14px 0 26px}.subcategories[hidden]{display:none}.subfilter{background:#fff;border:1px solid #d8d8cf;border-radius:22px;padding:9px 14px;color:var(--green);cursor:pointer}.subfilter[aria-pressed=true]{background:var(--green);color:#fff}.category{font:inherit;font-weight:bold;cursor:pointer}
 </style>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#073d34">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Gozo Guide">
 </head>
 <body>
 <header><div class="logo">GOZO <span>GUIDE</span> BY PELIK</div><nav><a href="index.html">Home</a><a href="#directory">Businesses</a><a href="#list-business">List your business</a></nav></header>
@@ -159,5 +163,11 @@ db.from("businesses").select("id,business_name,category,village,address,website,
   const select=document.getElementById("village");villages.forEach(name=>{const o=document.createElement("option");o.value=name;o.textContent=name;select.append(o);});
   render();
  }).catch(error=>{console.error("Directory load failed",error);document.getElementById("count").textContent="Directory temporarily unavailable";document.getElementById("empty").hidden=false;});
+</script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js").catch(error => console.warn("Offline support unavailable:", error)));
+}
 </script>
 </body></html>
