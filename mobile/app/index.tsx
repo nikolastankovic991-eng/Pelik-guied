@@ -9,14 +9,14 @@ export default function Home() {
       <Text style={s.kicker}>DISCOVER GOZO</Text>
       <Text style={s.heroTitle}>Discover Gozo.{"\n"}Experience more.</Text>
       <Text style={s.heroText}>Your free guide to the island's best places, local businesses and experiences.</Text>
-      <Link href="/destinations" asChild><Pressable style={s.goldButton}><Text style={s.goldText}>Explore Gozo  →</Text></Pressable></Link>
+      <Link href="/destinations" asChild><Pressable accessibilityRole="button" accessibilityLabel="Explore Gozo destinations" style={s.goldButton}><Text style={s.goldText}>Explore Gozo  →</Text></Pressable></Link>
     </View>
     <Text style={s.heading}>Explore by category</Text>
-    <View style={s.grid}>{groups.map(g=><Link key={g.title} href={{pathname:"/businesses",params:{group:g.title}}} asChild><Pressable style={s.tile}><Text style={s.emoji}>{g.emoji}</Text><Text style={s.tileTitle}>{g.title}</Text></Pressable></Link>)}</View>
+    <View style={s.grid}>{groups.map(g=><Link key={g.title} href={{pathname:"/businesses",params:{group:g.title}}} asChild><Pressable accessibilityRole="button" accessibilityLabel={`Browse ${g.title} businesses`} style={s.tile}><Text style={s.emoji}>{g.emoji}</Text><Text style={s.tileTitle}>{g.title}</Text></Pressable></Link>)}</View>
     <Text style={s.heading}>Discover the island</Text>
-    <Link href="/destinations" asChild><Pressable style={s.row}><Text style={s.rowEmoji}>📍</Text><View style={{flex:1}}><Text style={s.rowTitle}>Gozo's top destinations</Text><Text style={s.muted}>Beaches, landmarks, nature and villages</Text></View><Text style={s.arrow}>›</Text></Pressable></Link>
-    <Link href="/businesses" asChild><Pressable style={s.row}><Text style={s.rowEmoji}>🏪</Text><View style={{flex:1}}><Text style={s.rowTitle}>Local businesses</Text><Text style={s.muted}>Find services, food, shops and activities</Text></View><Text style={s.arrow}>›</Text></Pressable></Link>
-    <Link href="/submit" asChild><Pressable style={s.cta}><Text style={s.ctaTitle}>Own a business in Gozo?</Text><Text style={s.ctaText}>Apply for a free listing. Every application is reviewed before publication.</Text><Text style={s.goldText}>List your business →</Text></Pressable></Link>
+    <Link href="/destinations" asChild><Pressable accessibilityRole="button" accessibilityLabel="Explore Gozo top destinations" style={s.row}><Text style={s.rowEmoji}>📍</Text><View style={{flex:1}}><Text style={s.rowTitle}>Gozo's top destinations</Text><Text style={s.muted}>Beaches, landmarks, nature and villages</Text></View><Text style={s.arrow}>›</Text></Pressable></Link>
+    <Link href="/businesses" asChild><Pressable accessibilityRole="button" accessibilityLabel="Browse local businesses" style={s.row}><Text style={s.rowEmoji}>🏪</Text><View style={{flex:1}}><Text style={s.rowTitle}>Local businesses</Text><Text style={s.muted}>Find services, food, shops and activities</Text></View><Text style={s.arrow}>›</Text></Pressable></Link>
+    <Link href="/submit" asChild><Pressable accessibilityRole="button" accessibilityLabel="Apply for a free business listing" style={s.cta}><Text style={s.ctaTitle}>Own a business in Gozo?</Text><Text style={s.ctaText}>Apply for a free listing. Every application is reviewed before publication.</Text><Text style={s.goldText}>List your business →</Text></Pressable></Link>
     <Text style={s.footer}>GOZO GUIDE BY PELIK · FREE FOR EVERYONE</Text>
   </ScrollView>;
 }
