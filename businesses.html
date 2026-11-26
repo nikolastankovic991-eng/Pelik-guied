@@ -149,8 +149,16 @@ function render(){
   const request=document.createElement("p"),claim=document.createElement("a");claim.href="claim-business.html?id="+encodeURIComponent(x.id);claim.textContent="Claim or correct this listing";request.append(claim);body.append(request);
   card.append(body);grid.append(card);
  });
- document.getElementById("count").textContent=visible.length+" approved business"+(visible.length===1?"":"es");
- document.getElementById("empty").hidden=visible.length>0;
+ const count=document.getElementById("count");
+ count.textContent=visible.length+" approved business"+(visible.length===1?"":"es")+(activeSubcategory?" in "+activeSubcategory:activeCategory?" in "+activeCategory:"");
+ const empty=document.getElementById("empty");
+ empty.hidden=visible.length>0;
+ if(visible.length===0){
+  const heading=empty.querySelector("h3");
+  const message=empty.querySelector("p");
+  heading.textContent=activeSubcategory?"No approved businesses in this subcategory yet":activeCategory?"No approved businesses in this category yet":"We're building this directory.";
+  message.textContent="Your selection is working. We are preparing business profiles for Gozo. Listings only appear here after they have been checked and approved by Gozo Guide by PELIK. Please check back soon.";
+ }
 }
 document.getElementById("search").addEventListener("input",render);
 document.getElementById("village").addEventListener("change",render);
