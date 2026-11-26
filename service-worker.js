@@ -9,7 +9,8 @@ const APP_SHELL = [
   "./terms.html",
   "./data/gozo-places.json",
   "./manifest.webmanifest",
-  "./icons/gozo-guide.svg"
+  "./icons/gozo-guide.svg",
+  "./icons/gozo-guide.png"
 ];
 
 self.addEventListener("install", event => {
