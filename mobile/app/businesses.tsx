@@ -66,11 +66,13 @@ export default function Businesses() {
         setRows((data || []) as Business[]);
       }
       setLoading(false);
+      setRefreshing(false);
     }
     load().catch(() => {
       if (active) {
         setError("We couldn't load the business directory. Please try again.");
         setLoading(false);
+        setRefreshing(false);
       }
     });
     return () => { active = false; };
@@ -122,6 +124,8 @@ export default function Businesses() {
           <Pressable accessibilityRole="button" onPress={() => setReload(value => value + 1)} style={s.retry}><Text style={s.retryText}>Try again</Text></Pressable>
         </View>
       ) : (
+        <>
+        {error ? <Text accessibilityRole="alert" style={s.refreshNotice}>{error} Showing the last available results.</Text> : null}
         <FlatList
           data={filtered}
           keyExtractor={item => item.id}
@@ -150,6 +154,7 @@ export default function Businesses() {
             </View>
           )}
         />
+        </>
       )}
     </View>
   );
@@ -157,6 +162,7 @@ export default function Businesses() {
 
 const s = StyleSheet.create({
   page: { flex: 1, padding: 14 },
+  refreshNotice: { color: "#8A5A16", backgroundColor: "#FFF3D8", borderRadius: 9, padding: 10, marginBottom: 8, fontSize: 12 },
   search: { backgroundColor: "#fff", padding: 14, borderRadius: 12, marginBottom: 12, color: "#24332E" },
   filters: { flexGrow: 0, maxHeight: 44 },
   chip: { paddingVertical: 9, paddingHorizontal: 13, borderRadius: 20, backgroundColor: "#E8E9E1", marginRight: 8, marginBottom: 10 },
