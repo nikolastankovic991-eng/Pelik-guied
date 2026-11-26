@@ -115,9 +115,9 @@ export default function Businesses() {
           );
         }}
       />
-      {loading ? (
+      {loading && rows.length === 0 ? (
         <View style={s.state}><ActivityIndicator color="#073D34" size="large" /><Text style={s.stateText}>Loading local businesses…</Text></View>
-      ) : error ? (
+      ) : error && rows.length === 0 ? (
         <View style={s.state}>
           <Text style={s.emptyTitle}>Directory temporarily unavailable</Text>
           <Text style={s.stateText}>{error}</Text>
