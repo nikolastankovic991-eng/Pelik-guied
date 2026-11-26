@@ -26,6 +26,14 @@ async function openExternal(url?: string) {
   } catch { Alert.alert("Could not open link", "Please try again or check your device connection."); }
 }
 
+function DestinationPhoto({ place }: { place: Place }) {
+  const [failed, setFailed] = useState(false);
+  if (!isHttpUrl(place.imageUrl) || failed) {
+    return <View style={s.imagePlaceholder}><Text style={s.placeholderText}>GOZO</Text></View>;
+  }
+  return <Image source={{ uri: place.imageUrl }} accessibilityLabel={place.imageAlt || place.name} style={s.image} resizeMode="cover" onError={() => setFailed(true)} />;
+}
+
 const placesUrl = "https://nikolastankovic991-eng.github.io/Pelik-guied/data/gozo-places.json";
 
 export default function Destinations() {
@@ -80,7 +88,7 @@ export default function Destinations() {
       ListEmptyComponent={<View style={s.empty}><Text style={s.emptyTitle}>{places.length ? "No destinations found" : "No destinations available"}</Text><Text style={s.emptyText}>{places.length ? "Try another search term." : "Pull down to refresh or try again later."}</Text>{query ? <Pressable accessibilityRole="button" onPress={() => setQuery("")} style={s.button}><Text style={s.buttonText}>Clear search</Text></Pressable> : null}</View>}
       renderItem={({ item }) => (
         <View style={s.card}>
-          {isHttpUrl(item.imageUrl) ? <Image source={{ uri: item.imageUrl! }} accessibilityLabel={item.imageAlt || item.name} style={s.image} resizeMode="cover" /> : <View style={s.imagePlaceholder}><Text style={s.placeholderText}>GOZO</Text></View>}
+          <DestinationPhoto place={item} />
           <View style={s.body}>
             <Text style={s.title}>{item.name}</Text>
             <Text style={s.desc}>{item.description}</Text>
