@@ -482,6 +482,10 @@ async function loadGozoDirectory() {
 loadGozoDirectory();
 
 
+function normalizeSearchText(value) {
+  return String(value || '').normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').toLowerCase().trim();
+}
+
 function filterPlaces(tag) {
 
   let cards=document.querySelectorAll('.place');
@@ -506,7 +510,7 @@ function filterPlaces(tag) {
 
 function searchPlaces() {
 
-  let query=document.getElementById('searchInput').value.toLowerCase().trim();
+  let query=normalizeSearchText(document.getElementById('searchInput').value);
 
   let cards=document.querySelectorAll('.place');
 
@@ -514,7 +518,7 @@ function searchPlaces() {
 
   cards.forEach(card=>{
 
-    let show=!query || (card.innerText+' '+card.dataset.tags).toLowerCase().includes(query);
+    let show=!query || normalizeSearchText(card.innerText+' '+card.dataset.tags).includes(query);
 
     card.style.display=show?'block':'none';
 
