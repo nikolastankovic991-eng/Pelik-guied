@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { ActivityIndicator, Alert, FlatList, Image, Linking, Pressable, RefreshControl, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, Alert, FlatList, Image, Linking, Pressable, RefreshControl, StyleSheet, Text, TextInput, View } from "react-native";
 
 type Place = {
   name: string;
@@ -31,7 +31,7 @@ const placesUrl = "https://nikolastankovic991-eng.github.io/Pelik-guied/data/goz
 export default function Destinations() {
   const [places, setPlaces] = useState<Place[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [error, setError] = useState("");\n  const [query, setQuery] = useState("");
 
   const loadPlaces = useCallback(async () => {
     setLoading(true);
@@ -58,7 +58,7 @@ export default function Destinations() {
     return <View style={s.center}><ActivityIndicator color="#073D34" size="large" /><Text style={s.desc}>Loading Gozo destinations…</Text></View>;
   }
 
-  if (error && !places.length) {
+  const filteredPlaces = places.filter((place) => [place.name, place.description, place.tags || ""].join(" ").toLowerCase().includes(query.trim().toLowerCase()));\n\n  if (error && !places.length) {
     return (
       <View style={s.center}>
         <Text style={s.title}>Destinations temporarily unavailable</Text>
@@ -74,7 +74,8 @@ export default function Destinations() {
       data={places}
       keyExtractor={item => item.name}
       refreshControl={<RefreshControl refreshing={loading} onRefresh={loadPlaces} tintColor="#073D34" />}
-      ListHeaderComponent={<Text style={s.intro}>Discover Gozo’s beaches, villages, history and natural landmarks. Pull down to refresh.</Text>}
+      ListHeaderComponent={<View><Text style={s.intro}>Discover Gozo’s beaches, villages, history and natural landmarks. Pull down to refresh.</Text><TextInput value={query} onChangeText={setQuery} placeholder="Search destinations" placeholderTextColor="#87928B" returnKeyType="search" accessibilityLabel="Search Gozo destinations" style={s.search} /></View>}
+      ListEmptyComponent={<View style={s.empty}><Text style={s.emptyTitle}>{places.length ? "No destinations found" : "No destinations available"}</Text><Text style={s.emptyText}>{places.length ? "Try another search term." : "Pull down to refresh or try again later."}</Text>{query ? <Pressable accessibilityRole="button" onPress={() => setQuery("")} style={s.button}><Text style={s.buttonText}>Clear search</Text></Pressable> : null}</View>}
       renderItem={({ item }) => (
         <View style={s.card}>
           {isHttpUrl(item.imageUrl) ? <Image source={{ uri: item.imageUrl! }} accessibilityLabel={item.imageAlt || item.name} style={s.image} resizeMode="cover" /> : <View style={s.imagePlaceholder}><Text style={s.placeholderText}>GOZO</Text></View>}
@@ -97,7 +98,7 @@ export default function Destinations() {
 const s = StyleSheet.create({
   list: { padding: 14, paddingBottom: 30 },
   center: { flex: 1, alignItems: "center", justifyContent: "center", gap: 10, padding: 28 },
-  intro: { color: "#56645C", lineHeight: 21, marginBottom: 14 },
+  intro: { color: "#56645C", lineHeight: 21, marginBottom: 14 },\n  search: { backgroundColor: "#fff", padding: 14, borderRadius: 12, marginBottom: 14, color: "#24332E" },\n  empty: { alignItems: "center", padding: 28, gap: 8 },\n  emptyTitle: { color: "#073D34", fontWeight: "800", fontSize: 17 },\n  emptyText: { color: "#65736B", textAlign: "center" },
   card: { backgroundColor: "#fff", borderRadius: 18, overflow: "hidden", marginBottom: 15 },
   image: { width: "100%", height: 190, backgroundColor: "#E4E7E2" },
   imagePlaceholder: { width: "100%", height: 130, backgroundColor: "#073D34", alignItems: "center", justifyContent: "center" },
