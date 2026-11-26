@@ -130,7 +130,7 @@ function renderSubcategories(){
 }
 
 function normalizeSearchText(value){
- return String(value||"").normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLowerCase().trim();
+ return String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
 }
 function render(){
  const q=normalizeSearchText(document.getElementById("search").value),v=document.getElementById("village").value;
