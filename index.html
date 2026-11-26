@@ -376,7 +376,7 @@ footer{padding-bottom:35px}
   </div>
 
   <div class="places" id="placesGrid">
-    <p class="loading-message">Loading verified Gozo destinations...</p>
+    <p class="loading-message">Loading Gozo destinations...</p>
   </div>
 
   <p class="empty" id="emptyMessage">No matching places found yet.</p>
@@ -468,6 +468,12 @@ async function loadGozoDirectory() {
     });
   } catch (error) {
     console.error('Could not load the Gozo directory:', error);
+    grid.replaceChildren();
+    const message = document.createElement('p');
+    message.className = 'empty';
+    message.style.display = 'block';
+    message.textContent = 'Gozo destinations could not load right now. Please check your connection and try again.';
+    grid.append(message);
   }
 }
 loadGozoDirectory();
