@@ -22,7 +22,11 @@
     "tags": "history",
     "description": "Discover Gozo’s prehistoric temple heritage.",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=%C4%A0gantija%20Temples%20Gozo%20Malta",
-    "type": "destination"
+    "type": "destination",
+    "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Templo_de_%C4%A0gantija,_isla_de_Gozo,_Malta,_2021-08-23,_DD_31-34_PAN.jpg",
+    "imageAlt": "Ġgantija prehistoric temples in Gozo",
+    "imageCredit": "Photo: Diego Delso · CC BY-SA 4.0",
+    "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Templo_de_%C4%A0gantija,_isla_de_Gozo,_Malta,_2021-08-23,_DD_31-34_PAN.jpg"
   },
   {
     "name": "Ramla Bay",
@@ -69,7 +73,11 @@
     "tags": "beach cafe",
     "description": "A picturesque bay with waterfront dining.",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=Xlendi%20Gozo%20Malta",
-    "type": "destination"
+    "type": "destination",
+    "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Zaljev_Xlendi,_otok_Gozo.jpg",
+    "imageAlt": "Xlendi Bay in Gozo",
+    "imageCredit": "Photo: August Dominus · CC0 1.0",
+    "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Zaljev_Xlendi,_otok_Gozo.jpg"
   },
   {
     "name": "St George’s Basilica",
@@ -146,7 +154,11 @@
     "tags": "nature",
     "description": "Traditional salt pans along Gozo’s northern coast.",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=Xwejni%20Salt%20Pans%20Gozo%20Malta",
-    "type": "destination"
+    "type": "destination",
+    "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Xwejni_Salt_Pans_01.jpg",
+    "imageAlt": "Xwejni Salt Pans on the coast of Gozo",
+    "imageCredit": "Photo: G. Mannaerts · CC BY-SA 4.0",
+    "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Xwejni_Salt_Pans_01.jpg"
   },
   {
     "name": "Daħlet Qorrot",
