@@ -28,7 +28,7 @@ The live project uses `admin_users`, `business_submissions`, `businesses`, and `
 - anonymous visitors can read only approved and published businesses in the same approved category whitelist;
 - anonymous visitors can submit a claim/correction/removal request only for an existing approved and published business, and cannot read those requests;
 - authenticated admins can check their own admin record, review/update submissions, manage businesses, and review/update claim requests;
-- RLS policies remain the row-level security boundary. The approval RPC is `SECURITY DEFINER`, checks `auth.uid()` against `admin_users`, locks the pending application, enforces the 33-category whitelist, and is executable only by authenticated users.
+- RLS policies remain the row-level security boundary. The approval RPC uses `SECURITY INVOKER` so the caller's existing table grants and RLS policies apply; it also checks `auth.uid()` against `admin_users`, locks the pending application, enforces the 33-category whitelist, and is executable only by authenticated users.
 
 Do not run the older draft schema in `supabase/schema.sql` against this live project without reconciling its different table names (`user_roles` and `business_listings`) with the existing live schema.
 
