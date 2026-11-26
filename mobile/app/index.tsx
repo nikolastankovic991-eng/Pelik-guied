@@ -1,13 +1,17 @@
 import { Link } from "expo-router";
-import { ScrollView, Text, View, StyleSheet, Pressable } from "react-native";
+import { Alert, Linking, ScrollView, Text, View, StyleSheet, Pressable } from "react-native";
 import { groups } from "../data/categories";
 
 const green = "#073D34";
+const privacyUrl = "https://nikolastankovic991-eng.github.io/Pelik-guied/privacy.html";
+const termsUrl = "https://nikolastankovic991-eng.github.io/Pelik-guied/terms.html";
+function openPolicy(url: string) { Linking.openURL(url).catch(() => Alert.alert("Could not open page", "Please try again later.")); }
 export default function Home() {
   return <ScrollView contentContainerStyle={s.page}>
     <View style={s.hero}>
       <Text style={s.kicker}>DISCOVER GOZO</Text>
-      <Text style={s.heroTitle}>Discover Gozo.{"\n"}Experience more.</Text>
+      <Text style={s.heroTitle}>Discover Gozo.{"
+"}Experience more.</Text>
       <Text style={s.heroText}>Your free guide to the island's best places, local businesses and experiences.</Text>
       <Link href="/destinations" asChild><Pressable accessibilityRole="button" accessibilityLabel="Explore Gozo destinations" style={s.goldButton}><Text style={s.goldText}>Explore Gozo  →</Text></Pressable></Link>
     </View>
@@ -18,6 +22,7 @@ export default function Home() {
     <Link href="/businesses" asChild><Pressable accessibilityRole="button" accessibilityLabel="Browse local businesses" style={s.row}><Text style={s.rowEmoji}>🏪</Text><View style={{flex:1}}><Text style={s.rowTitle}>Local businesses</Text><Text style={s.muted}>Find services, food, shops and activities</Text></View><Text style={s.arrow}>›</Text></Pressable></Link>
     <Link href="/submit" asChild><Pressable accessibilityRole="button" accessibilityLabel="Apply for a free business listing" style={s.cta}><Text style={s.ctaTitle}>Own a business in Gozo?</Text><Text style={s.ctaText}>Apply for a free listing. Every application is reviewed before publication.</Text><Text style={s.goldText}>List your business →</Text></Pressable></Link>
     <Text style={s.footer}>GOZO GUIDE BY PELIK · FREE FOR EVERYONE</Text>
+    <View style={s.policyLinks}><Pressable accessibilityRole="link" onPress={() => openPolicy(privacyUrl)}><Text style={s.policyText}>Privacy Notice</Text></Pressable><Text style={s.policyDivider}>·</Text><Pressable accessibilityRole="link" onPress={() => openPolicy(termsUrl)}><Text style={s.policyText}>Terms of Use</Text></Pressable></View>
   </ScrollView>;
 }
-const s=StyleSheet.create({page:{padding:18,paddingBottom:42},hero:{backgroundColor:green,borderRadius:24,padding:24,marginBottom:24},kicker:{color:"#E7C56B",fontSize:12,fontWeight:"800",letterSpacing:2},heroTitle:{color:"#fff",fontSize:34,fontWeight:"800",lineHeight:40,marginTop:12},heroText:{color:"#E8EFEB",fontSize:15,lineHeight:23,marginTop:12},goldButton:{backgroundColor:"#E7C56B",padding:14,borderRadius:12,alignSelf:"flex-start",marginTop:20},goldText:{color:green,fontWeight:"800"},heading:{fontSize:21,fontWeight:"800",color:green,marginTop:14,marginBottom:14},grid:{flexDirection:"row",flexWrap:"wrap",gap:10},tile:{backgroundColor:"#fff",borderRadius:16,padding:14,width:"48%",minHeight:104,justifyContent:"center"},emoji:{fontSize:25},tileTitle:{fontWeight:"700",color:green,marginTop:8},row:{backgroundColor:"#fff",borderRadius:15,padding:15,marginBottom:10,flexDirection:"row",alignItems:"center",gap:12},rowEmoji:{fontSize:26},rowTitle:{fontWeight:"800",color:green},muted:{color:"#69766F",fontSize:12,marginTop:3},arrow:{fontSize:28,color:green},cta:{backgroundColor:"#E9E6D8",padding:20,borderRadius:18,marginTop:18},ctaTitle:{fontSize:19,fontWeight:"800",color:green},ctaText:{color:"#48564F",lineHeight:21,marginVertical:9},footer:{textAlign:"center",color:"#6D776F",fontSize:10,letterSpacing:1.3,marginTop:30}});
+const s=StyleSheet.create({page:{padding:18,paddingBottom:42},hero:{backgroundColor:green,borderRadius:24,padding:24,marginBottom:24},kicker:{color:"#E7C56B",fontSize:12,fontWeight:"800",letterSpacing:2},heroTitle:{color:"#fff",fontSize:34,fontWeight:"800",lineHeight:40,marginTop:12},heroText:{color:"#E8EFEB",fontSize:15,lineHeight:23,marginTop:12},goldButton:{backgroundColor:"#E7C56B",padding:14,borderRadius:12,alignSelf:"flex-start",marginTop:20},goldText:{color:green,fontWeight:"800"},heading:{fontSize:21,fontWeight:"800",color:green,marginTop:14,marginBottom:14},grid:{flexDirection:"row",flexWrap:"wrap",gap:10},tile:{backgroundColor:"#fff",borderRadius:16,padding:14,width:"48%",minHeight:104,justifyContent:"center"},emoji:{fontSize:25},tileTitle:{fontWeight:"700",color:green,marginTop:8},row:{backgroundColor:"#fff",borderRadius:15,padding:15,marginBottom:10,flexDirection:"row",alignItems:"center",gap:12},rowEmoji:{fontSize:26},rowTitle:{fontWeight:"800",color:green},muted:{color:"#69766F",fontSize:12,marginTop:3},arrow:{fontSize:28,color:green},cta:{backgroundColor:"#E9E6D8",padding:20,borderRadius:18,marginTop:18},ctaTitle:{fontSize:19,fontWeight:"800",color:green},ctaText:{color:"#48564F",lineHeight:21,marginVertical:9},footer:{textAlign:"center",color:"#6D776F",fontSize:10,letterSpacing:1.3,marginTop:30},policyLinks:{flexDirection:"row",justifyContent:"center",alignItems:"center",gap:12,marginTop:10},policyText:{color:"#0A6B56",fontSize:12,fontWeight:"700",textDecorationLine:"underline"},policyDivider:{color:"#7A847D"}});
