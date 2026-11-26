@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, Image, Linking, Pressable, RefreshControl, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, Alert, FlatList, Image, Linking, Pressable, RefreshControl, StyleSheet, Text, View } from "react-native";
 
 type Place = {
   name: string;
@@ -12,7 +12,7 @@ type Place = {
   tags?: string;
 };
 
-const placesUrl = "https://nikolastankovic991-eng.github.io/Pelik-guied/data/gozo-places.json";
+function isHttpUrl(value?: string) {\n  if (!value) return false;\n  try { const url = new URL(value); return url.protocol === "https:" || url.protocol === "http:"; } catch { return false; }\n}\n\nasync function openExternal(url?: string) {\n  if (!isHttpUrl(url)) { Alert.alert("Link unavailable", "This link is not valid."); return; }\n  try {\n    const supported = await Linking.canOpenURL(url!);\n    if (!supported) throw new Error("Unsupported link");\n    await Linking.openURL(url!);\n  } catch { Alert.alert("Could not open link", "Please try again or check your device connection."); }\n}\n\nconst placesUrl = "https://nikolastankovic991-eng.github.io/Pelik-guied/data/gozo-places.json";
 
 export default function Destinations() {
   const [places, setPlaces] = useState<Place[]>([]);
@@ -49,7 +49,7 @@ export default function Destinations() {
       <View style={s.center}>
         <Text style={s.title}>Destinations temporarily unavailable</Text>
         <Text style={s.desc}>{error}</Text>
-        <Pressable onPress={loadPlaces} style={s.button}><Text style={s.buttonText}>Try again</Text></Pressable>
+        <Pressable accessibilityRole="button" onPress={loadPlaces} style={s.button}><Text style={s.buttonText}>Try again</Text></Pressable>
       </View>
     );
   }
@@ -63,16 +63,16 @@ export default function Destinations() {
       ListHeaderComponent={<Text style={s.intro}>Discover Gozo’s beaches, villages, history and natural landmarks. Pull down to refresh.</Text>}
       renderItem={({ item }) => (
         <View style={s.card}>
-          {item.imageUrl ? <Image source={{ uri: item.imageUrl }} accessibilityLabel={item.imageAlt || item.name} style={s.image} resizeMode="cover" /> : <View style={s.imagePlaceholder}><Text style={s.placeholderText}>GOZO</Text></View>}
+          {isHttpUrl(item.imageUrl) ? <Image source={{ uri: item.imageUrl! }} accessibilityLabel={item.imageAlt || item.name} style={s.image} resizeMode="cover" /> : <View style={s.imagePlaceholder}><Text style={s.placeholderText}>GOZO</Text></View>}
           <View style={s.body}>
             <Text style={s.title}>{item.name}</Text>
             <Text style={s.desc}>{item.description}</Text>
             {item.imageCredit ? (
               <Text style={s.credit}>
-                {item.imageCredit} · <Text onPress={() => item.imageCreditUrl && Linking.openURL(item.imageCreditUrl)} style={s.link}>Photo source</Text>
+                {item.imageCredit} · <Text accessibilityRole="link" accessibilityLabel={`Photo source for ${item.name}`} onPress={() => openExternal(item.imageCreditUrl)} style={s.link}>Photo source</Text>
               </Text>
             ) : null}
-            {item.mapUrl ? <Pressable onPress={() => Linking.openURL(item.mapUrl!)} style={s.button}><Text style={s.buttonText}>Open in Google Maps ↗</Text></Pressable> : null}
+            {isHttpUrl(item.mapUrl) ? <Pressable accessibilityRole="link" accessibilityLabel={`Open ${item.name} in Google Maps`} onPress={() => openExternal(item.mapUrl)} style={s.button}><Text style={s.buttonText}>Open in Google Maps ↗</Text></Pressable> : null}
           </View>
         </View>
       )}
