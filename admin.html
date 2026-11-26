@@ -171,11 +171,8 @@ async function publishDraft(row){
 async function approveSubmission(row){
  if(!publicCategories.has(row.category)){say('This category is not approved for the public directory. The application cannot be published.');return;}
  if(!confirm('Approve and publish '+row.business_name+'? This will make the listing visible in the public directory.'))return;
- const business={business_name:row.business_name,category:row.category,village:row.village,address:row.address,phone:row.phone,email:row.email,website:row.website,description:row.description,image_url:row.image_url,status:'approved',published:true,featured:false};
- const {error:insertError}=await db.from('businesses').insert(business);
- if(insertError){say('Could not publish listing: '+insertError.message);return;}
- const {error:updateError}=await db.from('business_submissions').update({status:'approved',published:true}).eq('id',row.id);
- if(updateError){say('The listing was published, but the application status could not be updated. Please contact support. '+updateError.message);return;}
+ const {data:businessId,error}=await db.rpc('admin_approve_business_submission',{p_submission_id:row.id});
+ if(error){say('Could not approve this application: '+error.message);return;}
  say(row.business_name+' approved and published.');await loadSubmissions();
 }
 async function rejectSubmission(row){
