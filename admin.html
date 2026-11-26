@@ -103,14 +103,17 @@ async function saveDraftEdits(row,form){
  ['business_name','category','village','address','phone','email','website','description','image_url','verification_source','verification_url','verification_notes'].forEach(k=>payload[k]=form.elements[k].value.trim()||null);
  if(!payload.business_name||!payload.category){say('Business name and category are required.');return;}
  payload.updated_at=new Date().toISOString();
+ // Any edit invalidates the previous verification: the saved details must be checked again.
+ payload.verified_at=null;payload.verified_by=null;
  const {error}=await db.from('businesses').update(payload).eq('id',row.id).eq('status','draft').eq('published',false);
  if(error){say('Could not save changes: '+error.message);return;}
  say(row.business_name+' details updated.');await loadDrafts();
 }
 async function verifyDraft(row,form){
- const source=(form?.elements.verification_source?.value||row.verification_source||'').trim();
- const sourceUrl=(form?.elements.verification_url?.value||row.verification_url||'').trim();
- const notes=(form?.elements.verification_notes?.value||row.verification_notes||'').trim();
+ if(form){say('Save your edits first. Then verify the saved business details so the verification matches what will be published.');return;}
+ const source=(row.verification_source||'').trim();
+ const sourceUrl=(row.verification_url||'').trim();
+ const notes=(row.verification_notes||'').trim();
  if(!source){say('Enter the source used to check this business before marking it verified.');return;}
  if(!sourceUrl){say('Add the direct source URL used to verify this business.');return;}
  if(!notes){say('Add verification notes describing what you checked, such as address, phone number and current operation.');return;}
