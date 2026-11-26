@@ -13,7 +13,8 @@
     "android": {
       "package": "com.pelik.gozoguide",
       "adaptiveIcon": {
-        "backgroundColor": "#073D34"
+        "backgroundColor": "#073D34",
+        "foregroundImage": "./assets/icon.png"
       }
     },
     "plugins": [
@@ -26,6 +27,12 @@
       "eas": {
         "projectId": "ff324573-c635-4d04-8176-02ea6aa052be"
       }
+    },
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#073D34"
     }
   }
 }
