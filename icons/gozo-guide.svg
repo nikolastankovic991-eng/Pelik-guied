@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<rect width="512" height="512" rx="112" fill="#073d34"/>
+<path d="M64 322c55-49 99-62 144-38 40 22 73 19 116-12 37-27 74-34 124-10v106H64z" fill="#d6ad68"/>
+<path d="M64 374c57-24 98-25 145-4 43 19 82 16 123-4 43-21 76-19 116-3v85H64z" fill="#f6f3eb"/>
+<path d="M256 82c-43 0-78 35-78 78 0 59 78 145 78 145s78-86 78-145c0-43-35-78-78-78zm0 108a31 31 0 1 1 0-62 31 31 0 0 1 0 62z" fill="#d6ad68"/>
+<text x="256" y="458" text-anchor="middle" font-family="Arial,sans-serif" font-size="32" font-weight="700" fill="#073d34">PELIK</text>
+</svg>
