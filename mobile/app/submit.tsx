@@ -1,17 +1,160 @@
 import { useState } from "react";
-import { Alert, ScrollView, StyleSheet, Text, TextInput, Pressable } from "react-native";
+import { Alert, Linking, ScrollView, StyleSheet, Text, TextInput, Pressable, View } from "react-native";
 import { supabase } from "../lib/supabase";
 import { groups } from "../data/categories";
-const villages=["Victoria","Xagħra","Nadur","Qala","Għajnsielem","Xewkija","Żebbuġ","Għarb","Għasri","Munxar","Fontana","Kerċem","San Lawrenz","Sannat","Marsalforn","Xlendi"];
-export default function Submit(){
- const [name,setName]=useState(""),[category,setCategory]=useState(""),[village,setVillage]=useState(""),[address,setAddress]=useState(""),[phone,setPhone]=useState(""),[email,setEmail]=useState(""),[website,setWebsite]=useState(""),[description,setDescription]=useState(""),[busy,setBusy]=useState(false);
- const field=(label:string,value:string,set:(v:string)=>void,placeholder="")=><><Text style={s.label}>{label}</Text><TextInput value={value} onChangeText={set} placeholder={placeholder} style={s.input}/></>;
- async function send(){if(!name.trim()||!category||!village){Alert.alert("Missing information","Business name, category and village are required.");return;}if(!supabase){Alert.alert("Not configured","The app connection is not configured yet.");return;}setBusy(true);const {error}=await supabase.from("business_submissions").insert({business_name:name.trim(),category,village,address:address||null,phone:phone||null,email:email||null,website:website||null,description:description||null,status:"pending",published:false,featured:false});setBusy(false);if(error){Alert.alert("Could not submit",error.message);return;}Alert.alert("Application received","Your free application is pending administrator review. It will not appear publicly until approved.");setName("");setCategory("");setVillage("");setAddress("");setPhone("");setEmail("");setWebsite("");setDescription("");}
- return <ScrollView contentContainerStyle={s.page}><Text style={s.intro}>Business listings are free. Every application is reviewed before it can appear in the guide.</Text>
- {field("Business name *",name,setName)}<Text style={s.label}>Category *</Text>{groups.map(g=><><Text style={s.group}>{g.emoji} {g.title}</Text>{g.items.map(item=><Text onPress={()=>setCategory(item)} style={[s.option,category===item?s.selected:null]}>{category===item?"✓ ":""}{item}</Text>)}</>)}
- <Text style={s.label}>Village *</Text>{villages.map(v=><Text onPress={()=>setVillage(v)} style={[s.option,village===v?s.selected:null]}>{village===v?"✓ ":""}{v}</Text>)}
- {field("Address",address,setAddress)}{field("Phone",phone,setPhone)}{field("Email",email,setEmail)}{field("Website",website,setWebsite,"https://")}{field("Description",description,setDescription)}
- <Pressable disabled={busy} onPress={send} style={s.button}><Text style={s.buttonText}>{busy?"Submitting…":"Submit free application"}</Text></Pressable>
- <Text style={s.foot}>By submitting, you confirm you are authorised to provide this business information and any photos or materials.</Text></ScrollView>;
+
+const villages = ["Victoria", "Xagħra", "Nadur", "Qala", "Għajnsielem", "Xewkija", "Żebbuġ", "Għarb", "Għasri", "Munxar", "Fontana", "Kerċem", "San Lawrenz", "Sannat", "Marsalforn", "Xlendi"];
+const privacyUrl = "https://nikolastankovic991-eng.github.io/Pelik-guied/privacy.html";
+
+export default function Submit() {
+  const [name, setName] = useState("");
+  const [category, setCategory] = useState("");
+  const [village, setVillage] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [website, setWebsite] = useState("");
+  const [description, setDescription] = useState("");
+  const [consent, setConsent] = useState(false);
+  const [busy, setBusy] = useState(false);
+
+  const field = (label: string, value: string, set: (v: string) => void, placeholder = "", multiline = false) => (
+    <View>
+      <Text style={s.label}>{label}</Text>
+      <TextInput
+        value={value}
+        onChangeText={set}
+        placeholder={placeholder}
+        style={[s.input, multiline && s.multiline]}
+        multiline={multiline}
+        textAlignVertical={multiline ? "top" : "center"}
+        autoCapitalize={label === "Email" ? "none" : "sentences"}
+        keyboardType={label === "Email" ? "email-address" : label === "Phone" ? "phone-pad" : "default"}
+      />
+    </View>
+  );
+
+  async function send() {
+    if (!name.trim() || !category || !village) {
+      Alert.alert("Missing information", "Business name, category and village are required.");
+      return;
+    }
+    if (email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      Alert.alert("Check email", "Please enter a valid email address.");
+      return;
+    }
+    if (website.trim() && !/^https?:\/\//i.test(website.trim())) {
+      Alert.alert("Check website", "Please include https:// or http:// at the beginning of the website address.");
+      return;
+    }
+    if (!consent) {
+      Alert.alert("Consent required", "Please confirm that you have read the privacy notice before submitting.");
+      return;
+    }
+    if (!supabase) {
+      Alert.alert("Not configured", "The app connection is not configured yet.");
+      return;
+    }
+
+    setBusy(true);
+    try {
+      const { error } = await supabase.from("business_submissions").insert({
+        business_name: name.trim(),
+        category,
+        village,
+        address: address.trim() || null,
+        phone: phone.trim() || null,
+        email: email.trim() || null,
+        website: website.trim() || null,
+        description: description.trim() || null,
+        status: "pending",
+        published: false,
+        featured: false
+      });
+      if (error) throw error;
+      Alert.alert("Application received", "Your free application is pending administrator review. It will not appear publicly unless it is approved and published.");
+      setName(""); setCategory(""); setVillage(""); setAddress(""); setPhone(""); setEmail(""); setWebsite(""); setDescription(""); setConsent(false);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Please try again later.";
+      Alert.alert("Could not submit", message);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <ScrollView contentContainerStyle={s.page} keyboardShouldPersistTaps="handled">
+      <View style={s.intro}>
+        <Text style={s.introTitle}>List your business for free</Text>
+        <Text style={s.introText}>There are no listing fees or subscriptions. Every application is checked by the Gozo Guide team before anything can appear publicly.</Text>
+      </View>
+
+      {field("Business name *", name, setName, "Your business name")}
+      <Text style={s.label}>Category *</Text>
+      {groups.map(group => (
+        <View key={group.title} style={s.categoryGroup}>
+          <Text style={s.group}>{group.emoji}  {group.title}</Text>
+          <View style={s.options}>
+            {group.items.map(item => (
+              <Pressable key={item} onPress={() => setCategory(item)} style={[s.option, category === item && s.selected]}>
+                <Text style={[s.optionText, category === item && s.selectedText]}>{category === item ? "✓  " : ""}{item}</Text>
+              </Pressable>
+            ))}
+          </View>
+        </View>
+      ))}
+
+      <Text style={s.label}>Village *</Text>
+      <View style={s.options}>
+        {villages.map(item => (
+          <Pressable key={item} onPress={() => setVillage(item)} style={[s.option, village === item && s.selected]}>
+            <Text style={[s.optionText, village === item && s.selectedText]}>{village === item ? "✓  " : ""}{item}</Text>
+          </Pressable>
+        ))}
+      </View>
+
+      {field("Address", address, setAddress, "Street and locality")}
+      {field("Phone", phone, setPhone, "Business phone number")}
+      {field("Email", email, setEmail, "Business email")}
+      {field("Website", website, setWebsite, "https://")}
+      {field("Description", description, setDescription, "Tell visitors about your business", true)}
+
+      <Pressable onPress={() => setConsent(value => !value)} style={s.consentRow} accessibilityRole="checkbox" accessibilityState={{ checked: consent }}>
+        <View style={[s.checkbox, consent && s.checkboxChecked]}>{consent ? <Text style={s.check}>✓</Text> : null}</View>
+        <Text style={s.consentText}>I have read the <Text style={s.inlineLink} onPress={() => Linking.openURL(privacyUrl)}>Privacy Notice</Text> and confirm I am authorised to submit these business details and any materials provided.</Text>
+      </Pressable>
+
+      <Pressable disabled={busy} onPress={send} style={[s.button, busy && s.buttonDisabled]}>
+        <Text style={s.buttonText}>{busy ? "Submitting…" : "Submit free application"}</Text>
+      </Pressable>
+      <Text style={s.foot}>Your application starts as pending and unpublished. Only an administrator can approve and publish it. Accommodation listings are not accepted.</Text>
+    </ScrollView>
+  );
 }
-const s=StyleSheet.create({page:{padding:18,paddingBottom:45},intro:{backgroundColor:"#e9e6d8",padding:14,borderRadius:12,color:"#25463B",lineHeight:21,marginBottom:18},label:{fontWeight:"800",color:"#073D34",marginTop:14,marginBottom:6},input:{backgroundColor:"#fff",borderRadius:10,padding:13,borderWidth:1,borderColor:"#e1e4dd"},group:{fontWeight:"800",color:"#073D34",marginTop:12},option:{backgroundColor:"#fff",padding:11,borderRadius:9,marginTop:5,color:"#3f5148"},selected:{backgroundColor:"#dcebe3",fontWeight:"800",color:"#073D34"},button:{backgroundColor:"#073D34",padding:16,borderRadius:12,marginTop:24,alignItems:"center"},buttonText:{color:"#fff",fontWeight:"800"},foot:{color:"#778078",fontSize:11,lineHeight:17,marginTop:14}});
+
+const s = StyleSheet.create({
+  page: { padding: 18, paddingBottom: 48 },
+  intro: { backgroundColor: "#073D34", padding: 18, borderRadius: 16, marginBottom: 8 },
+  introTitle: { color: "#E7C56B", fontSize: 19, fontWeight: "800" },
+  introText: { color: "#F0F4F1", lineHeight: 21, marginTop: 8 },
+  label: { fontWeight: "800", color: "#073D34", marginTop: 16, marginBottom: 7 },
+  input: { backgroundColor: "#fff", borderRadius: 11, padding: 14, borderWidth: 1, borderColor: "#e1e4dd", color: "#24332e" },
+  multiline: { minHeight: 110, paddingTop: 13 },
+  categoryGroup: { marginTop: 8 },
+  group: { fontWeight: "800", color: "#073D34", marginBottom: 7 },
+  options: { flexDirection: "row", flexWrap: "wrap", gap: 7 },
+  option: { backgroundColor: "#fff", paddingVertical: 10, paddingHorizontal: 12, borderRadius: 10, borderWidth: 1, borderColor: "#e5e8e1" },
+  optionText: { color: "#3f5148", fontSize: 13 },
+  selected: { backgroundColor: "#dcebe3", borderColor: "#0A6B56" },
+  selectedText: { fontWeight: "800", color: "#073D34" },
+  consentRow: { flexDirection: "row", alignItems: "flex-start", gap: 10, marginTop: 22 },
+  checkbox: { width: 22, height: 22, borderWidth: 1.5, borderColor: "#839087", borderRadius: 5, backgroundColor: "#fff", alignItems: "center", justifyContent: "center", marginTop: 1 },
+  checkboxChecked: { backgroundColor: "#073D34", borderColor: "#073D34" },
+  check: { color: "#fff", fontWeight: "900" },
+  consentText: { flex: 1, color: "#46544D", fontSize: 13, lineHeight: 19 },
+  inlineLink: { color: "#0A6B56", fontWeight: "800", textDecorationLine: "underline" },
+  button: { backgroundColor: "#073D34", padding: 16, borderRadius: 12, marginTop: 24, alignItems: "center" },
+  buttonDisabled: { opacity: 0.6 },
+  buttonText: { color: "#fff", fontWeight: "800" },
+  foot: { color: "#778078", fontSize: 11, lineHeight: 17, marginTop: 14 }
+});
