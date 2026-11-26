@@ -55,11 +55,11 @@ export default function Submit() {
       Alert.alert("Check email", "Please enter a valid email address.");
       return;
     }
-    if (website.trim() && !/^https?:\/\//i.test(website.trim())) {
+    if (website.trim() && !validWebAddress(website)) {
       Alert.alert("Check website", "Please include https:// or http:// at the beginning of the website address.");
       return;
     }
-    if (imageUrl.trim() && !/^https?:\/\//i.test(imageUrl.trim())) {
+    if (imageUrl.trim() && !validWebAddress(imageUrl)) {
       Alert.alert("Check photo link", "Please enter a photo URL beginning with https:// or http://.");
       return;
     }
@@ -92,7 +92,7 @@ export default function Submit() {
       Alert.alert("Application received", "Your free application is pending administrator review. It will not appear publicly unless it is approved and published.");
       setName(""); setCategory(""); setVillage(""); setAddress(""); setPhone(""); setEmail(""); setWebsite(""); setImageUrl(""); setDescription(""); setConsent(false);
     } catch (error) {
-      const message = error instanceof Error ? error.message : "Please try again later.";
+
       Alert.alert("Could not submit", "We could not send your application. Please check your connection and try again.");
     } finally {
       setBusy(false);
