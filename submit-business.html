@@ -17,6 +17,10 @@ button{margin-top:20px;background:var(--gold);border:0;border-radius:8px;padding
 button:disabled{opacity:.6;cursor:wait}#message{margin-top:15px;padding:12px;border-radius:8px;display:none}#message.ok{display:block;background:#e7f3e9;color:#17532b}#message.err{display:block;background:#fae9e7;color:#8a231b}
 small{color:#66736d}@media(max-width:560px){.grid{grid-template-columns:1fr}.panel{padding:20px}}
 </style>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#073d34">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Gozo Guide">
 </head>
 <body>
 <header><div class="logo">GOZO <span>GUIDE</span> BY PELIK</div><a href="index.html">← Back to guide</a></header>
@@ -62,4 +66,10 @@ form.addEventListener('submit',async e=>{
  else{msg.className='ok';msg.textContent='Thank you! Your application has been received and is pending administrator review. It is not public yet.';form.reset();subCategory.replaceChildren();const prompt=document.createElement('option');prompt.value='';prompt.textContent='Choose main category first';subCategory.append(prompt);subCategory.disabled=true;}
  msg.style.display='block';btn.disabled=false;btn.textContent='Submit for review';
 });
-</script></body></html>
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js").catch(error => console.warn("Offline support unavailable:", error)));
+}
+</script>
+</body></html>
