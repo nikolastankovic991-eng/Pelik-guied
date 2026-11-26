@@ -1,6 +1,6 @@
 # Gozo Guide by PELIK
 
-A Gozo-first public directory for places, local businesses and services, designed to expand across Malta. Accommodation listings are retained privately for a future development phase and are not currently accepted or shown publicly.
+A free Gozo-first public directory for visitors, residents, places, local businesses and services, designed to expand across Malta. Browsing and business listing applications are free; there are no subscriptions, paywalls or paid placements. Accommodation listings are retained privately for a future development phase and are not currently accepted or shown publicly.
 
 ## Current website pages
 
