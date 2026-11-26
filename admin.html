@@ -155,6 +155,7 @@ async function loadDrafts(){
  });
 }
 async function publishDraft(row){
+ if(!publicCategories.has(row.category)){say('This category is not approved for the public directory. Keep this record private and choose an allowed category only if it accurately describes the business.');return;}
  if(!row.verified_at||!row.verification_source||!row.verification_url||!row.verification_notes){
   say('This candidate is not ready to publish. First verify it with a direct source URL and notes about the details checked.');
   return;
@@ -165,6 +166,7 @@ async function publishDraft(row){
  say(row.business_name+' approved and published.');await loadDrafts();
 }
 async function approveSubmission(row){
+ if(!publicCategories.has(row.category)){say('This category is not approved for the public directory. The application cannot be published.');return;}
  if(!confirm('Approve and publish '+row.business_name+'? This will make the listing visible in the public directory.'))return;
  const business={business_name:row.business_name,category:row.category,village:row.village,address:row.address,phone:row.phone,email:row.email,website:row.website,description:row.description,image_url:row.image_url,status:'approved',published:true,featured:false};
  const {error:insertError}=await db.from('businesses').insert(business);
