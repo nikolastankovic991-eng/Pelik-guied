@@ -88,7 +88,11 @@
     "tags": "history",
     "description": "A richly decorated basilica in Victoria.",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=St%20George%E2%80%99s%20Basilica%20Gozo%20Malta",
-    "type": "destination"
+    "type": "destination",
+    "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Basilica_of_St_George_Victoria_Gozo.jpg",
+    "imageAlt": "St George’s Basilica in Victoria, Gozo",
+    "imageCredit": "Photo: BrandyMay · CC BY-SA 4.0",
+    "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Basilica_of_St_George_Victoria_Gozo.jpg"
   },
   {
     "name": "Mixta Cave",
@@ -172,7 +176,11 @@
     "tags": "nature",
     "description": "A green valley and countryside walking area.",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=Il-Lunzjata%20Valley%20Gozo%20Malta",
-    "type": "destination"
+    "type": "destination",
+    "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Lunzjata_Valley_in_Kercem.jpg",
+    "imageAlt": "Il-Lunzjata Valley in Gozo",
+    "imageCredit": "Photo: AntonellaVella · CC BY-SA 4.0",
+    "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Lunzjata_Valley_in_Kercem.jpg"
   },
   {
     "name": "Tas-Salvatur Hill",
