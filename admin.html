@@ -8,7 +8,11 @@ main{max-width:1050px;margin:30px auto;padding:0 16px 50px}.panel{background:whi
 h1,h2{color:var(--green)}label{display:block;font-weight:bold;margin:12px 0 6px}input{width:100%;padding:13px;border:1px solid #ccc;border-radius:8px;font-size:16px}
 button{border:0;border-radius:7px;padding:11px 15px;font-weight:bold;cursor:pointer;margin:4px}.primary{background:var(--gold)}.approve{background:#dcefe0;color:#17532b}.reject{background:#f8e1df;color:#8a231b}.secondary{background:#e9eee9;color:#234b3c}
 #notice{padding:12px;border-radius:8px;background:#edf2ed;display:none;margin:12px 0}.submission{border:1px solid #e5e2d9;border-radius:10px;padding:16px;margin:12px 0}.submission h3{margin:0 0 8px;color:var(--green)}.group-heading{font-size:19px;margin:24px 0 8px;padding-bottom:8px;border-bottom:2px solid #e5e2d9}.edit-form input,.edit-form textarea{font-size:16px}.meta{color:#68756f;font-size:14px;line-height:1.5}.actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}.hidden{display:none}.pill{display:inline-block;background:#f3eee2;padding:4px 9px;border-radius:20px;font-size:12px}
-</style></head><body>
+</style>  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#073d34">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Gozo Guide">
+</head><body>
 <header><div class="logo">GOZO <span>GUIDE</span> BY PELIK · ADMIN</div><a href="index.html">View public site</a></header>
 <main>
 <div id="notice" role="status"></div>
@@ -167,4 +171,10 @@ document.getElementById('loginForm').addEventListener('submit',async e=>{
 });
 document.getElementById('signOut').addEventListener('click',async()=>{await db.auth.signOut();dashboard.classList.add('hidden');loginPanel.classList.remove('hidden');});
 checkSession();
-</script></body></html>
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js").catch(error => console.warn("Offline support unavailable:", error)));
+}
+</script>
+</body></html>
