@@ -73,7 +73,7 @@ export default function Destinations() {
   return (
     <FlatList
       contentContainerStyle={s.list}
-      data={places}
+      data={filteredPlaces}
       keyExtractor={item => item.name}
       refreshControl={<RefreshControl refreshing={loading} onRefresh={loadPlaces} tintColor="#073D34" />}
       ListHeaderComponent={<View>{error ? <Text accessibilityRole="alert" style={s.refreshNotice}>{error} Showing the last available destinations.</Text> : null}<Text style={s.intro}>Discover Gozo’s beaches, villages, history and natural landmarks. Pull down to refresh.</Text><TextInput value={query} onChangeText={setQuery} placeholder="Search destinations" placeholderTextColor="#87928B" returnKeyType="search" accessibilityLabel="Search Gozo destinations" style={s.search} /></View>}
