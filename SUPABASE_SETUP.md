@@ -23,6 +23,8 @@ The intended access model is:
 
 The connected project has been granted the table privileges required for these RLS policies to work. The policies remain the row-level security boundary.
 
+The public application policy now whitelists the exact 33 categories used by the website and mobile app, so accommodation categories are rejected even if a client bypasses the forms. The public claim-request policy also checks that the submitted business ID and name match an existing approved, published listing. Anonymous users have INSERT-only access to claim requests; authenticated administrators have SELECT and UPDATE access, still restricted by the admin RLS policies.
+
 ## Website files
 
 - `supabase-config.js`: public project URL and publishable key only.
