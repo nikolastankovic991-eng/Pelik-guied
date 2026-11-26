@@ -38,7 +38,7 @@ Use an Expo development build for real-device testing and production work. Store
 2. Verify the Supabase production policies and test that anonymous applicants cannot approve, publish, feature or edit submissions.
 3. Enable Supabase leaked-password protection for administrator sign-in.
 4. Confirm that the app's submission form fields match the live Supabase table and policy configuration.
-5. Verify photo permissions/licences for every destination and business image.
+5. Preserve the verified Wikimedia attribution for all 21 destination photos; confirm permission for every business-submitted image before publication.
 6. Complete the privacy notice with the operator's legal identity, contact details, retention periods and provider/data-transfer details.
 7. Confirm the final app icon and splash assets, store screenshots and store listing text.
 8. Complete accessibility, device-size, offline/error-state and security testing.
