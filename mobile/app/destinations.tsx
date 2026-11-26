@@ -63,7 +63,7 @@ export default function Destinations() {
       <View style={s.center}>
         <Text style={s.title}>Destinations temporarily unavailable</Text>
         <Text style={s.desc}>{error}</Text>
-        <Pressable accessibilityRole="button" onPress={loadPlaces} style={s.button}><Text style={s.buttonText}>Try again</Text></Pressable>
+        <Pressable accessibilityRole="button" accessibilityLabel="Retry loading Gozo destinations" onPress={loadPlaces} style={s.button}><Text style={s.buttonText}>Try again</Text></Pressable>
       </View>
     );
   }
@@ -83,7 +83,7 @@ export default function Destinations() {
             <Text style={s.desc}>{item.description}</Text>
             {item.imageCredit ? (
               <Text style={s.credit}>
-                {item.imageCredit} · <Text accessibilityRole="link" accessibilityLabel={`Photo source for ${item.name}`} onPress={() => openExternal(item.imageCreditUrl)} style={s.link}>Photo source</Text>
+                {item.imageCredit}{isHttpUrl(item.imageCreditUrl) ? <> · <Text accessibilityRole="link" accessibilityLabel={`Photo source for ${item.name}`} onPress={() => openExternal(item.imageCreditUrl)} style={s.link}>Photo source</Text></> : null}
               </Text>
             ) : null}
             {isHttpUrl(item.mapUrl) ? <Pressable accessibilityRole="link" accessibilityLabel={`Open ${item.name} in Google Maps`} onPress={() => openExternal(item.mapUrl)} style={s.button}><Text style={s.buttonText}>Open in Google Maps ↗</Text></Pressable> : null}
@@ -104,7 +104,7 @@ const s = StyleSheet.create({
   placeholderText: { color: "#E7C56B", fontWeight: "900", letterSpacing: 4, fontSize: 18 },
   body: { padding: 16 },
   title: { fontSize: 19, fontWeight: "800", color: "#073D34" },
-  desc: { color: "#46544D", lineHeight: 21, marginTop: 6, textAlign: "center" },
+  desc: { color: "#46544D", lineHeight: 21, marginTop: 6 },
   credit: { fontSize: 10, color: "#68736D", marginTop: 9 },
   link: { color: "#0C6754", textDecorationLine: "underline" },
   button: { backgroundColor: "#073D34", padding: 12, borderRadius: 10, alignSelf: "flex-start", marginTop: 13 },
