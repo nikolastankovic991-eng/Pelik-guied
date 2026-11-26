@@ -9,7 +9,7 @@ The connected Supabase project currently uses these public tables:
 - `businesses`: directory records, including private drafts.
 - `business_claim_requests`: public claim, correction and removal requests.
 
-RLS is enabled on all three tables. The live website uses these tables and their existing columns.
+RLS is enabled on all four tables. The live website uses these tables and their existing columns.
 
 ## Public and administrator permissions
 
