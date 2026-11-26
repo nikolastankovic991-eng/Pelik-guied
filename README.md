@@ -18,7 +18,7 @@ A free Gozo-first public directory for visitors, residents, places, local busine
 1. A business submits the form.
 2. The application is stored in `public.business_submissions` with `status = 'pending'`, `published = false`, and `featured = false`.
 3. The administrator signs in at `admin.html`. The dashboard checks the signed-in user's ID against `public.admin_users`.
-4. Approval creates a row in `public.businesses` with `status = 'approved'` and `published = true`, then marks the submission approved.
+4. The admin dashboard calls `public.admin_approve_business_submission(uuid)`. This database function locks the pending application and, in one transaction, creates the approved/published business row and marks the application approved. If either operation fails, both are rolled back.
 5. The public directory reads only rows where status is approved and published is true.
 
 ## Supabase security
@@ -28,7 +28,7 @@ The live project uses `admin_users`, `business_submissions`, `businesses`, and `
 - anonymous visitors can read only approved and published businesses in the same approved category whitelist;
 - anonymous visitors can submit a claim/correction/removal request only for an existing approved and published business, and cannot read those requests;
 - authenticated admins can check their own admin record, review/update submissions, manage businesses, and review/update claim requests;
-- RLS policies remain the row-level security boundary.
+- RLS policies remain the row-level security boundary. The approval RPC is `SECURITY DEFINER`, checks `auth.uid()` against `admin_users`, locks the pending application, enforces the 33-category whitelist, and is executable only by authenticated users.
 
 Do not run the older draft schema in `supabase/schema.sql` against this live project without reconciling its different table names (`user_roles` and `business_listings`) with the existing live schema.
 
@@ -48,3 +48,4 @@ Open the public website in Safari, tap Share, then choose **Add to Home Screen**
 - Confirm business details and obtain permission for every photo before publishing.
 - Never publish the Supabase service-role key or other secret credentials.
 - Confirm hosting/deployment is configured; GitHub commits alone do not guarantee that the live website has updated.
+- Apply and retain the SQL migration `supabase/migrations/20261126000000_atomic_business_approval.sql` in the live database before relying on the updated admin approval button.
