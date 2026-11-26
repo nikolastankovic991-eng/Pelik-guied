@@ -103,7 +103,9 @@ async function verifyDraft(row,form){
  const sourceUrl=(form?.elements.verification_url?.value||row.verification_url||'').trim();
  const notes=(form?.elements.verification_notes?.value||row.verification_notes||'').trim();
  if(!source){say('Enter the source used to check this business before marking it verified.');return;}
- if(sourceUrl){try{const parsed=new URL(sourceUrl);if(!['http:','https:'].includes(parsed.protocol))throw new Error('Invalid protocol');}catch{say('Enter a valid source URL beginning with http:// or https://.');return;}}
+ if(!sourceUrl){say('Add the direct source URL used to verify this business.');return;}
+ if(!notes){say('Add verification notes describing what you checked, such as address, phone number and current operation.');return;}
+ try{const parsed=new URL(sourceUrl);if(!['http:','https:'].includes(parsed.protocol))throw new Error('Invalid protocol');}catch{say('Enter a valid source URL beginning with http:// or https://.');return;}
  const {error}=await db.from('businesses').update({verification_source:source,verification_url:sourceUrl||null,verification_notes:notes||null,verified_at:new Date().toISOString(),verified_by:currentAdminId,updated_at:new Date().toISOString()}).eq('id',row.id).eq('status','draft').eq('published',false);
  if(error){say('Could not record verification: '+error.message);return;}
  say(row.business_name+' marked as verified. It is still private.');await loadDrafts();
@@ -144,6 +146,10 @@ async function loadDrafts(){
  });
 }
 async function publishDraft(row){
+ if(!row.verified_at||!row.verification_source||!row.verification_url||!row.verification_notes){
+  say('This candidate is not ready to publish. First verify it with a direct source URL and notes about the details checked.');
+  return;
+ }
  if(!confirm('Approve and publish '+row.business_name+'? It will become visible in the public directory.'))return;
  const {error}=await db.from('businesses').update({status:'approved',published:true}).eq('id',row.id).eq('status','draft').eq('published',false);
  if(error){say('Could not publish candidate: '+error.message);return;}
