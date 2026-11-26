@@ -23,11 +23,12 @@ A free Gozo-first public directory for visitors, residents, places, local busine
 
 ## Supabase security
 
-The live project currently uses `admin_users`, `business_submissions`, and `businesses`. RLS is enabled on all three tables. Table grants are limited so:
-- anonymous visitors can insert applications and read public businesses;
-- anonymous visitors cannot read private submissions;
-- authenticated admins can check their own admin record, review/update submissions, and manage business listings;
-- RLS policies still determine which rows each role may access.
+The live project uses `admin_users`, `business_submissions`, `businesses`, and `business_claim_requests`. RLS is enabled on all four tables. Table grants are limited so:
+- anonymous visitors can submit applications only in the 33 approved non-accommodation categories, always pending, unpublished and unfeatured;
+- anonymous visitors can read only approved and published businesses in the same approved category whitelist;
+- anonymous visitors can submit a claim/correction/removal request only for an existing approved and published business, and cannot read those requests;
+- authenticated admins can check their own admin record, review/update submissions, manage businesses, and review/update claim requests;
+- RLS policies remain the row-level security boundary.
 
 Do not run the older draft schema in `supabase/schema.sql` against this live project without reconciling its different table names (`user_roles` and `business_listings`) with the existing live schema.
 
