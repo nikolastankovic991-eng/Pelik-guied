@@ -166,5 +166,16 @@
     "description": "A quiet coastal inlet near Nadur.",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=Da%C4%A7let%20Qorrot%20Gozo%20Malta",
     "type": "destination"
+  },
+  {
+    "name": "San Blas Bay",
+    "tags": "beach nature",
+    "description": "A quiet red-sand beach on Gozo’s northeastern coast.",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=San+Blas+Bay+Gozo+Malta",
+    "type": "destination",
+    "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/The_EXOTIC_San_Blas_Bay.jpg",
+    "imageAlt": "San Blas Bay on Gozo",
+    "imageCredit": "Photo: Noel.Pardi · CC BY-SA 4.0",
+    "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:The_EXOTIC_San_Blas_Bay.jpg"
   }
 ]
