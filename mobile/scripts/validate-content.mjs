@@ -31,7 +31,8 @@ if (!Array.isArray(places) || places.length === 0) {
         }
       }
     }
-    if (place.mapUrl && !place.mapUrl.includes("google.com/maps")) errors.push(`${place.name}: mapUrl must point to Google Maps.`);
+    if (place.imageUrl && (!place.imageUrl.includes("upload.wikimedia.org/wikipedia/commons/thumb/") || !place.imageUrl.includes("/800px-"))) errors.push(`${place.name}: imageUrl must use an optimized 800px Wikimedia thumbnail.`);
+    if (place.mapUrl && !place.mapUrl.includes("google.com/maps")) errors.push(`${place.name}: mapUrl must point to Google Maps.`)
     if (place.imageCreditUrl && !place.imageCreditUrl.includes("commons.wikimedia.org")) errors.push(`${place.name}: photo credit link must point to Wikimedia Commons.`);
   }
 }
