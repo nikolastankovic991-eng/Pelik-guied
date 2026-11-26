@@ -7,7 +7,7 @@ const errors = [];
 
 for (const page of pages) {
   const html = await readFile(new URL("../../" + page, import.meta.url), "utf8");
-  const blocks = [...html.matchAll(/<script\\b[^>]*>([\\s\\S]*?)<\\/script>/gi)];
+  const blocks = [...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)];
   for (const [index, match] of blocks.entries()) {
     const source = match[1].trim();
     if (!source) continue;
