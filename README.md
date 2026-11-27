@@ -34,7 +34,7 @@ Do not run the older draft schema in `supabase/schema.sql` against this live pro
 
 ## Current data state (26 November 2026)
 
-The database contains 53 private draft candidates, zero approved/published public businesses, zero applications and zero claim requests. The public business directory is intentionally empty until the administrator approves and publishes listings. Legacy accommodation drafts remain private and are blocked from public visibility.
+As of 28 November 2026, the live database contains 75 approved and published Gozo businesses, 14 rejected business records, zero pending applications and zero claim requests. The public directory displays only the 75 approved/published records. A check of the published records found no hotel or accommodation categories. The 21 destination records are maintained separately in data/gozo-places.json.
 
 ## Install the website on iPhone
 
@@ -48,4 +48,4 @@ Open the public website in Safari, tap Share, then choose **Add to Home Screen**
 - Confirm business details and obtain permission for every photo before publishing.
 - Never publish the Supabase service-role key or other secret credentials.
 - Confirm hosting/deployment is configured; GitHub commits alone do not guarantee that the live website has updated.
-- Apply and retain the SQL migration `supabase/migrations/20261126203940_atomic_business_approval.sql` in the live database before relying on the updated admin approval button.
+- The atomic approval migration `20261126203940_atomic_business_approval` is recorded as applied in the live Supabase project.
