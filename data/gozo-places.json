@@ -133,7 +133,7 @@
   },
   {
     "name": "Sanap Cliffs",
-    "tags": "nature",
+    "tags": "nature hiking",
     "description": "Clifftop scenery and walking routes.",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=Sanap%20Cliffs%20Gozo%20Malta",
     "type": "destination",
@@ -144,7 +144,7 @@
   },
   {
     "name": "Wied il-Għasri",
-    "tags": "nature beach",
+    "tags": "nature beach hiking",
     "description": "A narrow sea inlet framed by high cliffs.",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=Wied%20il-G%C4%A7asri%20Gozo%20Malta",
     "type": "destination",
@@ -155,7 +155,7 @@
   },
   {
     "name": "Wied il-Mielaħ",
-    "tags": "nature",
+    "tags": "nature hiking",
     "description": "A striking natural coastal arch.",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=Wied%20il-Miela%C4%A7%20Gozo%20Malta",
     "type": "destination",
@@ -177,7 +177,7 @@
   },
   {
     "name": "Il-Lunzjata Valley",
-    "tags": "nature",
+    "tags": "nature hiking",
     "description": "A green valley and countryside walking area.",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=Il-Lunzjata%20Valley%20Gozo%20Malta",
     "type": "destination",
@@ -188,7 +188,7 @@
   },
   {
     "name": "Tas-Salvatur Hill",
-    "tags": "nature",
+    "tags": "nature hiking",
     "description": "A prominent hill above Marsalforn.",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=Tas-Salvatur%20Hill%20Gozo%20Malta",
     "type": "destination",
